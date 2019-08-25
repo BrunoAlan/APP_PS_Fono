@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -42,6 +43,7 @@ public class DiasSemana extends AppCompatActivity {
         final MaterialButton btn3 = findViewById(R.id.opcion3);
         final TextView puntaje = findViewById(R.id.puntaje);
         ImageButton btnPlay = findViewById(R.id.imageButton);
+        final Switch switchRuido = findViewById(R.id.switchRuido);
         final ArrayList tresOpciones = obtenerNumero();//genero 3 numeros aleatorios para poner los dias en los botones
         setTexts(btn1,btn2,btn3,tresOpciones);
         System.out.println("randoms asd"+tresOpciones);
@@ -52,8 +54,31 @@ public class DiasSemana extends AppCompatActivity {
         btnPlay.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if(activarRuido(switchRuido)){
+                    MediaPlayer mpRuido= MediaPlayer.create(getBaseContext(),R.raw.ruidopersonas);
+                    //NIVEL DE RUIDO
+                    //BAJO
+                    //mpRuido.setVolume((float)0.1,(float)0.1);
+                    //MEDIO
+                    mpRuido.setVolume((float)0.5,(float)0.5);
+                    //ALTO
+                    //mpRuido.setVolume((float)1,(float)1);
+                    mpRuido.start();
+                    MediaPlayer mp = MediaPlayer.create(getBaseContext(),dias.get((Integer) tresOpciones.get(opcionCorrecta)).getRuta());
+                    mp.start();
+
+                    //Agrego un delay para que que terminen ambos sonidos al mismo tiempo
+                    try {
+                        Thread.sleep(mp.getDuration()+200);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                    mpRuido.stop();
+                }else {
                 MediaPlayer mp = MediaPlayer.create(getBaseContext(),dias.get((Integer) tresOpciones.get(opcionCorrecta)).getRuta());
-                mp.start();
+                mp.start();}
+
+
             }
         });
 
@@ -142,5 +167,12 @@ public class DiasSemana extends AppCompatActivity {
         puntaje.setText(points);
 
     }
+
+    Boolean activarRuido(Switch switchRuido){
+        if (switchRuido.isChecked()){
+            return true;
+        }else return false;
+    }
+
 
 }
