@@ -12,6 +12,7 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
+import com.example.myapplication.datos.ListaSonidos;
 import com.example.myapplication.datos.Sonido;
 
 import java.util.ArrayList;
@@ -28,8 +29,8 @@ public class Numeros_completar extends AppCompatActivity {
         setContentView(R.layout.activity_numeros);
         setTitle("Números");
 
-        cargarNumeros();
-
+        //cargarNumeros();
+        numeros = new ListaSonidos().listaNumeros();
         setup(obtenerNumero());
     }
 
@@ -67,16 +68,5 @@ public class Numeros_completar extends AppCompatActivity {
     int obtenerNumero(){
         int random = ThreadLocalRandom.current().nextInt(0, numeros.size());
         return random;
-    }
-
-
-    void cargarNumeros(){
-        numeros = new ArrayList<Sonido>(0);
-        numeros.add(new Sonido("uno",R.raw.uno));
-        numeros.add(new Sonido("dos",R.raw.dos));
-        numeros.add(new Sonido("tres", R.raw.tres));
-        numeros.add(new Sonido("cuatro",R.raw.cuatro));
-        numeros.add(new Sonido("cinco",R.raw.cinco));
-
     }
 }

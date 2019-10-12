@@ -9,7 +9,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Numeros_completar"></activity>
+        <activity android:name=".Numeros_completar" />
         <activity android:name=".DiasSemana" />
         <activity android:name=".MainActivity">
             <intent-filter>

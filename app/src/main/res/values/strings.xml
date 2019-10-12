@@ -1,4 +1,16 @@
 <resources>
     <string name="app_name">Fono APP</string>
     <string name="title_activity_numeros">Numeros</string>
+    <string name="title_activity_main2">Main2Activity</string>
+    <string name="tab_text_1">Pŕactica</string>
+    <string name="tab_text_2">Ejercitación</string>
+    <string name="tab_text_3">Evaluación</string>
+    <string name="consigna_practica">En esta sección podrá practicar con todos los sonidos de la aplicacion.
+    </string>
+    <string name="consigna_ejercitacion">Configure que categoría desea practicar, el tipo de ejercicio y el ruido.
+    No se te evaluará en esta sección</string>
+    <string name="consigna_evaluacion">Realice una evaluación. Configure que categoría desea evaluar,
+    seleccione el tipo de "Ruido" y su intencidad. Los resultados serán almacenados para que pueda
+    ver su progreso</string>
+    <!-- TODO: Remove or change this placeholder text -->
 </resources>
