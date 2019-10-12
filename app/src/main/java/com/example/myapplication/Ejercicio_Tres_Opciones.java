@@ -13,26 +13,30 @@ import android.widget.Toast;
 import com.example.myapplication.datos.ListaSonidos;
 import com.example.myapplication.datos.Sonido;
 
-import java.io.Console;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.concurrent.ThreadLocalRandom;
 
 
-public class DiasSemana extends AppCompatActivity {
-    ArrayList<Sonido> dias;
+public class Ejercicio_Tres_Opciones extends AppCompatActivity {
+    ArrayList<Sonido> listaSonidos;
     int puntos;
     int cantEjercicios;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.dias_semana);
+        setContentView(R.layout.ejercicio_tres_opciones);
         setTitle("Días de la Semana");
         puntos=0;
         cantEjercicios =0;
-        dias = new ListaSonidos().listaDias();
+        String value= getIntent().getStringExtra("tipoEjercicio");
+        if(value.equals("numeros")){
+            listaSonidos = new ListaSonidos().listaNumeros();
+        }
+        if(value.equals("diasSemana")){
+            listaSonidos = new ListaSonidos().listaDias();
+        }
         setup();
 
     }
@@ -65,7 +69,7 @@ public class DiasSemana extends AppCompatActivity {
                         //ALTO
                         //mpRuido.setVolume((float)1,(float)1);
                         mpRuido.start();
-                        MediaPlayer mp = MediaPlayer.create(getBaseContext(),dias.get((Integer) tresOpciones.get(opcionCorrecta)).getRuta());
+                        MediaPlayer mp = MediaPlayer.create(getBaseContext(),listaSonidos.get((Integer) tresOpciones.get(opcionCorrecta)).getRuta());
                         mp.start();
 
                         //Agrego un delay para que que terminen ambos sonidos al mismo tiempo
@@ -76,7 +80,7 @@ public class DiasSemana extends AppCompatActivity {
                         }
                         mpRuido.stop();
                     }else {
-                        MediaPlayer mp = MediaPlayer.create(getBaseContext(),dias.get((Integer) tresOpciones.get(opcionCorrecta)).getRuta());
+                        MediaPlayer mp = MediaPlayer.create(getBaseContext(),listaSonidos.get((Integer) tresOpciones.get(opcionCorrecta)).getRuta());
                         mp.start();}
 
 
@@ -87,7 +91,7 @@ public class DiasSemana extends AppCompatActivity {
                 @Override
                 public void onClick(View v) {
                     cantEjercicios++;
-                    if(dias.get((Integer) tresOpciones.get(opcionCorrecta)).getNombre()== btn1.getText()){
+                    if(listaSonidos.get((Integer) tresOpciones.get(opcionCorrecta)).getNombre()== btn1.getText()){
                         Toast.makeText(getApplicationContext(),"Correcto",Toast.LENGTH_SHORT).show();
                         modificarPuntaje(puntaje);
                         setup();
@@ -101,7 +105,7 @@ public class DiasSemana extends AppCompatActivity {
                 @Override
                 public void onClick(View v) {
                     cantEjercicios++;
-                    if(dias.get((Integer) tresOpciones.get(opcionCorrecta)).getNombre()== btn2.getText()){
+                    if(listaSonidos.get((Integer) tresOpciones.get(opcionCorrecta)).getNombre()== btn2.getText()){
                         Toast.makeText(getApplicationContext(),"Correcto",Toast.LENGTH_SHORT).show();
                         modificarPuntaje(puntaje);
                         setup();
@@ -116,8 +120,8 @@ public class DiasSemana extends AppCompatActivity {
                 @Override
                 public void onClick(View v) {
                     cantEjercicios++;
-                    System.out.println(btn3.getText() + dias.get(opcionCorrecta).getNombre());
-                    if(dias.get((Integer) tresOpciones.get(opcionCorrecta)).getNombre()== btn3.getText()){
+                    System.out.println(btn3.getText() + listaSonidos.get(opcionCorrecta).getNombre());
+                    if(listaSonidos.get((Integer) tresOpciones.get(opcionCorrecta)).getNombre()== btn3.getText()){
                         Toast.makeText(getApplicationContext(),"Correcto",Toast.LENGTH_SHORT).show();
                         modificarPuntaje(puntaje);
                         setup();
@@ -137,15 +141,15 @@ public class DiasSemana extends AppCompatActivity {
 
     void setTexts(MaterialButton btn1,MaterialButton btn2, MaterialButton btn3,ArrayList tresOpciones) {
 
-        btn1.setText(dias.get((Integer) tresOpciones.get(0)).getNombre());
-        btn2.setText(dias.get((Integer) tresOpciones.get(1)).getNombre());
-        btn3.setText(dias.get((Integer) tresOpciones.get(2)).getNombre());
+        btn1.setText(listaSonidos.get((Integer) tresOpciones.get(0)).getNombre());
+        btn2.setText(listaSonidos.get((Integer) tresOpciones.get(1)).getNombre());
+        btn3.setText(listaSonidos.get((Integer) tresOpciones.get(2)).getNombre());
     }
 
 
     ArrayList obtenerNumero(){
         ArrayList randoms = new ArrayList<>();
-        for(int i=0; i<dias.size();i++){
+        for(int i=0; i<listaSonidos.size();i++){
             randoms.add(i);
         }
         Collections.shuffle(randoms);

@@ -9,7 +9,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
-import com.example.myapplication.DiasSemana;
+import com.example.myapplication.Ejercicio_Tres_Opciones;
+import com.example.myapplication.Practica;
 import com.example.myapplication.R;
 
 /**
@@ -24,7 +25,7 @@ public class PracticaFragment extends Fragment implements View.OnClickListener{
 
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(final LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_practica, container, false);
@@ -33,18 +34,12 @@ public class PracticaFragment extends Fragment implements View.OnClickListener{
             @Override
             public void onClick(View v) {
                 //Toast.makeText(getApplicationContext(),"palabra",Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(getContext(), DiasSemana.class);
+                Intent intent = new Intent(getActivity(), Practica.class);
+                intent.putExtra("tipoEjercicio","diasSemana");
                 startActivity(intent);
             }
         });
-        return view;
-
-
-
-
-
-
-    }
+        return view;    }
 
     @Override
     public void onClick(View v) {

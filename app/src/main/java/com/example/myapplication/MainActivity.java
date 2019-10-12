@@ -66,7 +66,7 @@ public class MainActivity extends AppCompatActivity {
 //        btnFonema.setOnClickListener(new View.OnClickListener() {
 //            @Override
 //            public void onClick(View v) {
-//               Intent intent = new Intent(getBaseContext(), Numeros_completar.class);
+//               Intent intent = new Intent(getBaseContext(), Ejercicio_Completar.class);
 //               startActivity(intent);
 //            }
 //        });

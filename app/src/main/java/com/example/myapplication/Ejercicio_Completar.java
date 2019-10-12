@@ -3,10 +3,7 @@ package com.example.myapplication;
 import android.media.MediaPlayer;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.view.View;
-import android.view.textservice.TextInfo;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -18,7 +15,7 @@ import com.example.myapplication.datos.Sonido;
 import java.util.ArrayList;
 import java.util.concurrent.ThreadLocalRandom;
 
-public class Numeros_completar extends AppCompatActivity {
+public class Ejercicio_Completar extends AppCompatActivity {
 
     ArrayList<Sonido> numeros;
 
@@ -26,7 +23,7 @@ public class Numeros_completar extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_numeros);
+        setContentView(R.layout.ejercicio_completar);
         setTitle("Números");
 
         //cargarNumeros();
