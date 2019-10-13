@@ -9,7 +9,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
-import com.example.myapplication.Ejercicio_Tres_Opciones;
 import com.example.myapplication.Practica;
 import com.example.myapplication.R;
 
@@ -17,8 +16,6 @@ import com.example.myapplication.R;
  * A simple {@link Fragment} subclass.
  */
 public class PracticaFragment extends Fragment implements View.OnClickListener{
-
-
     public PracticaFragment() {
 
     }
@@ -39,7 +36,8 @@ public class PracticaFragment extends Fragment implements View.OnClickListener{
                 startActivity(intent);
             }
         });
-        return view;    }
+        return view;
+    }
 
     @Override
     public void onClick(View v) {

@@ -12,5 +12,6 @@
     <string name="consigna_evaluacion">Realice una evaluación. Configure que categoría desea evaluar,
     seleccione el tipo de "Ruido" y su intencidad. Los resultados serán almacenados para que pueda
     ver su progreso</string>
+    <string name="title_activity_configuracion">Configuracion</string>
     <!-- TODO: Remove or change this placeholder text -->
 </resources>
