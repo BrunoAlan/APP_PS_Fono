@@ -22,6 +22,7 @@ public class Ejercicio_Tres_Opciones extends AppCompatActivity {
     ArrayList<Sonido> listaSonidos;
     int puntos;
     int cantEjercicios;
+    String ruido;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,11 +31,14 @@ public class Ejercicio_Tres_Opciones extends AppCompatActivity {
         setTitle("Días de la Semana");
         puntos=0;
         cantEjercicios =0;
-        String value= getIntent().getStringExtra("tipoEjercicio");
-        if(value.equals("numeros")){
+        String subdato= getIntent().getStringExtra("subDato");
+        ruido = getIntent().getStringExtra("tipoRuido");
+        System.out.println(ruido);
+
+        if(subdato.equals("Numeros")){
             listaSonidos = new ListaSonidos().listaNumeros();
         }
-        if(value.equals("diasSemana")){
+        if(subdato.equals("Dias de la Semana")){
             listaSonidos = new ListaSonidos().listaDias();
         }
         setup();
@@ -48,7 +52,7 @@ public class Ejercicio_Tres_Opciones extends AppCompatActivity {
             final MaterialButton btn3 = findViewById(R.id.opcion3);
             final TextView puntaje = findViewById(R.id.puntaje);
             ImageButton btnPlay = findViewById(R.id.imageButton);
-            final Switch switchRuido = findViewById(R.id.switchRuido);
+
             final ArrayList tresOpciones = obtenerNumero();//genero 3 numeros aleatorios para poner los dias en los botones
             setTexts(btn1,btn2,btn3,tresOpciones);
             System.out.println("randoms asd"+tresOpciones);
@@ -59,8 +63,8 @@ public class Ejercicio_Tres_Opciones extends AppCompatActivity {
             btnPlay.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    if(activarRuido(switchRuido)){
-                        MediaPlayer mpRuido= MediaPlayer.create(getBaseContext(),R.raw.ruidopersonas);
+                    if(activarSonido()){
+                        MediaPlayer mpRuido= MediaPlayer.create(getBaseContext(), R.raw.ruido_personas);
                         //NIVEL DE RUIDO
                         //BAJO
                         //mpRuido.setVolume((float)0.1,(float)0.1);
@@ -167,10 +171,12 @@ public class Ejercicio_Tres_Opciones extends AppCompatActivity {
         puntaje.setText(points);
     }
 
-    Boolean activarRuido(Switch switchRuido){
-        if (switchRuido.isChecked()){
+    boolean activarSonido(){
+        if (ruido.equals("Sin Ruido")){
+            return false;
+        }else{
             return true;
-        }else return false;
+        }
     }
 
 

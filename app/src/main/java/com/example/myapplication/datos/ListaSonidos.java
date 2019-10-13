@@ -35,5 +35,13 @@ public class ListaSonidos {
         return arr2;
     }
 
+    public ArrayList<Sonido> ruidos(){
+        ArrayList<Sonido> ruidos = new ArrayList<>();
+        ruidos.add(new Sonido("Multitud de gente", R.raw.ruido_personas));
+        ruidos.add(new Sonido("Tráfico intenso", R.raw.ruido_trafico));
+        ruidos.add(new Sonido("Recreo de niños", R.raw.ruido_recreo));
+        ruidos.add(new Sonido("Ambulancia", R.raw.ruido_ambulancia));
+        return ruidos;
+    }
 }
 
