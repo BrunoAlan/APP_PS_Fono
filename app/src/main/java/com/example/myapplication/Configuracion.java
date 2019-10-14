@@ -13,7 +13,9 @@ import android.widget.SeekBar;
 import android.widget.Spinner;
 import android.widget.Switch;
 import android.widget.TextView;
-import android.widget.Toast;
+
+import com.example.myapplication.logica.Ejercicio_Completar;
+import com.example.myapplication.logica.Ejercicio_Tres_Opciones;
 
 public class Configuracion extends AppCompatActivity
         implements AdapterView.OnItemSelectedListener{
@@ -149,7 +151,7 @@ public class Configuracion extends AppCompatActivity
 
                 switch (confTipoEjercio){
                     case "Identificar entre 3 opciones":
-                        Intent intent = new Intent(getApplicationContext(),Ejercicio_Tres_Opciones.class);
+                        Intent intent = new Intent(getApplicationContext(), Ejercicio_Tres_Opciones.class);
                         if(!switchRuido.isChecked()){
                             confRuido="Sin Ruido";
                         }
@@ -158,7 +160,7 @@ public class Configuracion extends AppCompatActivity
                         startActivity(intent);
                         break;
                     case "Escribir lo que oyó":
-                        Intent intent2 = new Intent(getApplicationContext(),Ejercicio_Completar.class);
+                        Intent intent2 = new Intent(getApplicationContext(), Ejercicio_Completar.class);
                         if(!switchRuido.isChecked()){
                             confRuido="Sin Ruido";
                         }

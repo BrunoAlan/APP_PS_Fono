@@ -1,4 +1,4 @@
-package com.example.myapplication;
+package com.example.myapplication.logica;
 
 import android.media.MediaPlayer;
 import android.support.v7.app.AppCompatActivity;
@@ -9,6 +9,7 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
+import com.example.myapplication.R;
 import com.example.myapplication.datos.ListaSonidos;
 import com.example.myapplication.datos.Sonido;
 

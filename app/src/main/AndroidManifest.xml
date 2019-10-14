@@ -10,9 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".Configuracion"></activity>
-        <activity android:name=".Practica" />
-        <activity android:name=".Ejercicio_Completar" />
-        <activity android:name=".Ejercicio_Tres_Opciones" />
+        <activity android:name=".logica.Practica" />
+        <activity android:name=".logica.Ejercicio_Completar" />
+        <activity android:name=".logica.Ejercicio_Tres_Opciones" />
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

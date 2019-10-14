@@ -9,7 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
-import com.example.myapplication.Practica;
+import com.example.myapplication.logica.Practica;
 import com.example.myapplication.R;
 
 /**

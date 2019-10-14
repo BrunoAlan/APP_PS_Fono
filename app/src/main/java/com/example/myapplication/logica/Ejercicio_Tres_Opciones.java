@@ -1,4 +1,4 @@
-package com.example.myapplication;
+package com.example.myapplication.logica;
 
 import android.media.MediaPlayer;
 import android.support.design.button.MaterialButton;
@@ -10,6 +10,7 @@ import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.myapplication.R;
 import com.example.myapplication.datos.ListaSonidos;
 import com.example.myapplication.datos.Sonido;
 
