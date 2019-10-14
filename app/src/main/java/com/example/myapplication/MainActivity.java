@@ -8,8 +8,7 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
-import android.view.View;
-import android.widget.Button;
+
 
 public class MainActivity extends AppCompatActivity {
 
@@ -33,11 +32,6 @@ public class MainActivity extends AppCompatActivity {
         pageAdapter = new PageAdapter(getSupportFragmentManager(),tabLayout.getTabCount());
         viewPager.setAdapter(pageAdapter);
 
-
-
-
-
-
         tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
@@ -59,20 +53,4 @@ public class MainActivity extends AppCompatActivity {
 
 
     }
-
-
-//        Button btnPalabra = findViewById(R.id.btnDias);
-//
-//        btnFonema.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//               Intent intent = new Intent(getBaseContext(), Ejercicio_Completar.class);
-//               startActivity(intent);
-//            }
-//        });
-//
-
-   // }
-
-
 }

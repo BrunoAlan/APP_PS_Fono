@@ -61,7 +61,7 @@
             android:layout_height="wrap_content"
             android:ems="10"
             android:hint="Complete con lo que oyó"
-            android:inputType="text"
+            android:inputType="textCapSentences"
             android:singleLine="true" />
     </android.support.design.widget.TextInputLayout>
 
