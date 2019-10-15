@@ -13,5 +13,7 @@
     seleccione el tipo de "Ruido" y su intencidad. Los resultados serán almacenados para que pueda
     ver su progreso</string>
     <string name="title_activity_configuracion">Configuracion</string>
-    <!-- TODO: Remove or change this placeholder text -->
+
+    <string name="open">Open</string>
+    <string name="close">Close</string>
 </resources>

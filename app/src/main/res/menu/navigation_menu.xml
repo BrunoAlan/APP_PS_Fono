@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+
+    <item android:title="Sección Profesional">
+        <menu>
+        <item android:id="@+id/consultarResultado"
+            android:title="Consultar Resultado"
+            android:icon="@drawable/ic_reporte">
+        </item>
+        </menu>
+    </item>
+
+
+    <item android:title="Personalizar App">
+        <menu>
+            <item android:id="@+id/añadirSonido"
+                android:title="Añadir nuevo sonido"
+                android:icon="@drawable/ic_agregar_sonido">
+            </item>
+        </menu>
+    </item>
+
+
+
+
+
+
+
+
+</menu>

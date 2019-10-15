@@ -1,29 +1,43 @@
 package com.example.myapplication;
 
-import android.content.Intent;
+
 import android.support.design.widget.TabItem;
 import android.support.design.widget.TabLayout;
-import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.view.MenuItem;
 
 
 public class MainActivity extends AppCompatActivity {
 
-    PageAdapter pageAdapter;
+    private PageAdapter pageAdapter;
+    private DrawerLayout miDrawerLayout;
+    private ActionBarDrawerToggle mToggle;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-    setup();
+        setup();
     }
 
     void setup(){
-        final Toolbar toolbar = findViewById(R.id.toolbar);
+
+        miDrawerLayout = findViewById(R.id.drower_layout);
+        mToggle = new ActionBarDrawerToggle(this,miDrawerLayout,R.string.close,R.string.open);
+        miDrawerLayout.addDrawerListener(mToggle);
+        mToggle.getDrawerArrowDrawable().setColor(getColor(R.color.colorWhite));
+        Toolbar toolbar = findViewById(R.id.toolbar);
         toolbar.setTitle(getResources().getString(R.string.app_name));
+        setSupportActionBar(toolbar);
+        mToggle.syncState();
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setHomeButtonEnabled(true);
+
         final TabLayout tabLayout = findViewById(R.id.tablayout);
         TabItem tabChats = findViewById(R.id.tabChats);
         TabItem tabStatus = findViewById(R.id.tabStatus);
@@ -53,4 +67,13 @@ public class MainActivity extends AppCompatActivity {
 
 
     }
+
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if(mToggle.onOptionsItemSelected(item)) {
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
 }
+
+
