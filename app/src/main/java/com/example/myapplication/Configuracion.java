@@ -18,17 +18,20 @@ import com.example.myapplication.logica.Ejercicio_Completar;
 import com.example.myapplication.logica.Ejercicio_Tres_Opciones;
 
 public class Configuracion extends AppCompatActivity
-        implements AdapterView.OnItemSelectedListener{
+        implements AdapterView.OnItemSelectedListener {
 
-        String[] tipoDato = {"Fonema", "Palabra", "Oraciones", "Canciones","Instrumentos","Estilos Musicales", "Voces Familiares"};
-        String[] tipoDataPalabra = {"Animales","Colores","Comidas","Dias de la Semana", "Meses", "Nombres", "Numeros", };
-        String [] ruido = {"Ambulancia","Tráfico", "Multitud de gente", "Recreo de niños" };
-        String [] tipoEjercicio = {"Identificar entre 3 opciones", "Identificar entre 5 opciones", "Escribir lo que oyó"};
+    String[] tipoDato = {"Fonema", "Palabra", "Oraciones", "Canciones","Instrumentos","Estilos Musicales", "Voces Familiares"};
+    String[] tipoDataPalabra = {"Animales","Colores","Comidas","Dias de la Semana", "Meses", "Nombres", "Numeros" };
+    String [] ruido = {"Ambulancia","Tráfico", "Multitud de gente", "Recreo de niños" };
+    String [] tipoEjercicio = {"Identificar entre 3 opciones", "Identificar entre 5 opciones", "Escribir lo que oyó"};
 
     String confTipoDato;
     String confSubDato;
     String confTipoEjercio;
     String confRuido;
+    Spinner spinnerCategoria, spinnerSubCategoria,spinnerRuido,spinnerEjercicio;
+    ArrayAdapter<String> adapterTipoDato,adapterRuido, adapterSubTipoDato,adapterEjercicio;
+
 
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
@@ -37,33 +40,34 @@ public class Configuracion extends AppCompatActivity
         final Toolbar toolbar = findViewById(R.id.toolbar_configuracion);
         toolbar.setTitle("Configuracion");
 
-        final Spinner spinnerDato = findViewById(R.id.spinner_tipoDato);
-        final Spinner spinnerSubDato = findViewById(R.id.spinner_subTipoDato);
-        final Spinner spinnerRuido = findViewById(R.id.spinner_tipoRuido);
-        final Spinner spinnerEjercicio = findViewById(R.id.spinner_TipoEjercicio);
-        //spinnerDato.setOnItemSelectedListener(this);
+        spinnerCategoria = findViewById(R.id.spinner_categoria);
+        spinnerSubCategoria  = findViewById(R.id.spinner_subCategoria);
+        spinnerRuido = findViewById(R.id.spinner_tipoRuido);
+        spinnerEjercicio = findViewById(R.id.spinner_TipoEjercicio);
 
-        ArrayAdapter adapter = new ArrayAdapter(this,android.R.layout.simple_spinner_item,tipoDato);
-        adapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
-        spinnerDato.setAdapter(adapter);
 
-        final ArrayAdapter adapeterRuido = new ArrayAdapter(this,android.R.layout.simple_spinner_item,ruido);
-        adapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
-        spinnerRuido.setAdapter(adapeterRuido);
+        adapterTipoDato = new ArrayAdapter(this,android.R.layout.simple_spinner_item,tipoDato);
+        adapterTipoDato.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
+        spinnerCategoria.setAdapter(adapterTipoDato);
 
-        ArrayAdapter adapterEjercicio = new ArrayAdapter(this,android.R.layout.simple_spinner_item,tipoEjercicio);
+        adapterRuido = new ArrayAdapter(this,android.R.layout.simple_spinner_item,ruido);
+        adapterRuido.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
+        spinnerRuido.setAdapter(adapterRuido);
+
+        adapterEjercicio = new ArrayAdapter(this,android.R.layout.simple_spinner_item,tipoEjercicio);
         adapterEjercicio.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
         spinnerEjercicio.setAdapter(adapterEjercicio);
-        //Toast.makeText(this, spinnerDato.getSelectedItem().toString(), Toast.LENGTH_SHORT).show();
 
-        spinnerDato.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+
+        spinnerCategoria.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                String opcion = spinnerDato.getSelectedItem().toString();
+                String opcion = spinnerCategoria.getSelectedItem().toString();
                 confTipoDato = opcion;
                 if(opcion.equals("Palabra")){
                     ArrayAdapter adapter2 = new ArrayAdapter(getApplicationContext(),android.R.layout.simple_spinner_item,tipoDataPalabra);
-                    spinnerSubDato.setAdapter(adapter2);
+                    adapter2.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
+                    spinnerSubCategoria.setAdapter(adapter2);
                 }
             }
             @Override
@@ -72,10 +76,10 @@ public class Configuracion extends AppCompatActivity
             }
         });
 
-        spinnerSubDato.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        spinnerSubCategoria.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                String opcion = spinnerSubDato.getSelectedItem().toString();
+                String opcion = spinnerSubCategoria.getSelectedItem().toString();
                 confSubDato = opcion;
             }
 
@@ -143,11 +147,9 @@ public class Configuracion extends AppCompatActivity
 
         //FINALIZADA LA CONFIGURACIÓN INICIO LA EJERCITACIÓN
 
-
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
 
                 switch (confTipoEjercio){
                     case "Identificar entre 3 opciones":
@@ -167,18 +169,13 @@ public class Configuracion extends AppCompatActivity
                         intent2.putExtra("subDato", confSubDato);
                         intent2.putExtra("tipoRuido", confRuido);
                         startActivity(intent2);
-                }
-
-
-
-            }
+                }            }
         });
     }
 
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
     }
-
     @Override
     public void onNothingSelected(AdapterView<?> parent) {
     }

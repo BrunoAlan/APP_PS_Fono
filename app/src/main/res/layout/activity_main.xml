@@ -28,7 +28,9 @@ android:layout_height="match_parent"
             app:layout_constraintTop_toBottomOf="@+id/toolbar"
             app:tabSelectedTextColor="@android:color/white"
             app:tabTextColor="@android:color/darker_gray"
-            tools:layout_editor_absoluteX="0dp">
+            app:tabIndicatorColor="@color/colorWhite"
+            tools:layout_editor_absoluteX="0dp"
+            >
 
             <android.support.design.widget.TabItem
                 android:id="@+id/tabChats"
@@ -59,11 +61,8 @@ android:layout_height="match_parent"
             android:theme="?attr/actionBarTheme"
             app:layout_constraintTop_toTopOf="parent"
             app:popupTheme="@style/ThemeOverlay.AppCompat.Dark"
-            app:theme="@style/ThemeOverlay.AppCompat.Dark" />
-
-
-
-
+            app:theme="@style/ThemeOverlay.AppCompat.Dark"
+            />
     </android.support.constraint.ConstraintLayout>
 
     <android.support.design.widget.NavigationView
