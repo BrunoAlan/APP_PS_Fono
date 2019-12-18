@@ -1,12 +1,11 @@
 package com.example.myapplication.logica;
 
 import android.media.MediaPlayer;
-import android.support.design.button.MaterialButton;
-import android.support.v7.app.AppCompatActivity;
+import com.google.android.material.button.MaterialButton;
+import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
-import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
