@@ -16,7 +16,7 @@ public interface SoundDao {
     @Query("SELECT * FROM sonidos WHERE categoria_sonido='numeros'")
     LiveData<List<Sound>> getListOfNumeros();
 
-    @Query("SELECT * FROM sonidos WHERE categoria_sonido='dias'")
+    @Query("SELECT * FROM sonidos WHERE categoria_sonido= 'Días'")
     LiveData<List<Sound>> getListOfDias();
 
     @Query("SELECT * FROM sonidos WHERE categoria_sonido='meses'")
@@ -30,6 +30,6 @@ public interface SoundDao {
 
     @Delete
     void eliminarSonido(Sound sonido);
-    }
+}
 
 

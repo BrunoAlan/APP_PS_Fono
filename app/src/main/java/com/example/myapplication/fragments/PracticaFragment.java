@@ -1,18 +1,22 @@
 package com.example.myapplication.fragments;
+
 import android.content.Intent;
 import android.os.Bundle;
-import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
-import com.example.myapplication.logica.Practica;
+import androidx.fragment.app.Fragment;
+
 import com.example.myapplication.R;
-public class PracticaFragment extends Fragment implements View.OnClickListener{
+import com.example.myapplication.logica.Practica;
+
+public class PracticaFragment extends Fragment implements View.OnClickListener {
     public PracticaFragment() {
 
     }
+
     @Override
     public View onCreateView(final LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -22,9 +26,8 @@ public class PracticaFragment extends Fragment implements View.OnClickListener{
         btnFonema.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //Toast.makeText(getApplicationContext(),"palabra",Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(getActivity(), Practica.class);
-                intent.putExtra("tipoEjercicio","diasSemana");
+                intent.putExtra("tipoEjercicio", "diasSemana");
                 startActivity(intent);
             }
         });

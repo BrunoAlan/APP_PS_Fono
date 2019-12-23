@@ -1,30 +1,24 @@
 package com.example.myapplication;
 
 
-import android.app.Application;
+import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.MenuItem;
-import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
-import androidx.lifecycle.LiveData;
-import androidx.lifecycle.Observer;
 import androidx.viewpager.widget.ViewPager;
 
-import com.example.myapplication.room_database.Sound;
-import com.example.myapplication.room_database.SoundDatabase;
-import com.example.myapplication.room_database.SoundRepository;
+import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.tabs.TabItem;
 import com.google.android.material.tabs.TabLayout;
 
-import java.util.List;
 
-
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     private PageAdapter pageAdapter;
     private DrawerLayout miDrawerLayout;
@@ -37,10 +31,10 @@ public class MainActivity extends AppCompatActivity {
         setup();
     }
 
-    void setup(){
+    void setup() {
 
         miDrawerLayout = findViewById(R.id.drower_layout);
-        mToggle = new ActionBarDrawerToggle(this,miDrawerLayout,R.string.close,R.string.open);
+        mToggle = new ActionBarDrawerToggle(this, miDrawerLayout, R.string.close, R.string.open);
         miDrawerLayout.addDrawerListener(mToggle);
         mToggle.getDrawerArrowDrawable().setColor(getColor(R.color.colorWhite));
         Toolbar toolbar = findViewById(R.id.toolbar);
@@ -55,8 +49,11 @@ public class MainActivity extends AppCompatActivity {
         TabItem tabStatus = findViewById(R.id.tabStatus);
         TabItem tabCalls = findViewById(R.id.tabCalls);
         final ViewPager viewPager = findViewById(R.id.viewPager);
-        pageAdapter = new PageAdapter(getSupportFragmentManager(),tabLayout.getTabCount());
+        pageAdapter = new PageAdapter(getSupportFragmentManager(), tabLayout.getTabCount());
         viewPager.setAdapter(pageAdapter);
+        NavigationView navigationView = findViewById(R.id.navigation_view);
+        navigationView.setNavigationItemSelectedListener(this);
+
 
         tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
@@ -76,15 +73,25 @@ public class MainActivity extends AppCompatActivity {
         });
 
         viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
-
-
     }
 
     public boolean onOptionsItemSelected(MenuItem item) {
-        if(mToggle.onOptionsItemSelected(item)) {
+        if (mToggle.onOptionsItemSelected(item)) {
             return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+        int id = menuItem.getItemId();
+        if (id == R.id.añadirSonido) {
+            Intent intent = new Intent(getApplicationContext(), AgregrarSonido.class);
+            miDrawerLayout.closeDrawer(GravityCompat.START);
+            startActivity(intent);
+        }
+        return false;
     }
 }
 

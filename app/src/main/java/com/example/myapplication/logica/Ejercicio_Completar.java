@@ -8,15 +8,12 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Toast;
-
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
-
 import com.example.myapplication.R;
 import com.example.myapplication.datos.Sonido;
 import com.example.myapplication.room_database.Sound;
 import com.example.myapplication.room_database.SoundRepository;
-
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -42,15 +39,14 @@ public class Ejercicio_Completar extends AppCompatActivity {
                 asd = sounds;
                 int a = asd.size();
                 String size = Integer.toString(a);
-                Log.d("Tamaño",size);
+                Log.d("Tamaño", size);
                 setup(obtenerNumero());
             }
         });
 
-
     }
 
-    void setup( int rand){
+    void setup(int rand) {
         ImageButton btnPlay = findViewById(R.id.imageButton);
         final Button aceptar = findViewById(R.id.aceptar);
         final EditText etNombre = findViewById(R.id.campo_nombre);
@@ -58,29 +54,28 @@ public class Ejercicio_Completar extends AppCompatActivity {
         btnPlay.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               startSound(asd.get(random).getRuta_sonido());
+                startSound(asd.get(random).getRuta_sonido());
             }
         });
 
         aceptar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(etNombre.getText().toString().equals(asd.get(random).getNombre_sonido())){
-                    Toast.makeText(getApplicationContext(),"Correcto",Toast.LENGTH_SHORT).show();
+                if (etNombre.getText().toString().equals(asd.get(random).getNombre_sonido())) {
+                    Toast.makeText(getApplicationContext(), "Correcto", Toast.LENGTH_SHORT).show();
                     etNombre.setText("");
                     setup(obtenerNumero());
-                }
-                else{
-                    Toast.makeText(getApplicationContext(),"Incorrecto",Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(getApplicationContext(), "Incorrecto", Toast.LENGTH_SHORT).show();
                     etNombre.setText("");
                 }
 
             }
         });
-        }
+    }
 
 
-    int obtenerNumero(){
+    int obtenerNumero() {
         int random = ThreadLocalRandom.current().nextInt(0, asd.size());
         return random;
     }

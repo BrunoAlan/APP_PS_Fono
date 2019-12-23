@@ -2,8 +2,6 @@ package com.example.myapplication;
 
 import android.content.Intent;
 import android.os.Bundle;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -14,23 +12,26 @@ import android.widget.Spinner;
 import android.widget.Switch;
 import android.widget.TextView;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+
 import com.example.myapplication.logica.Ejercicio_Completar;
 import com.example.myapplication.logica.Ejercicio_Tres_Opciones;
 
 public class Configuracion extends AppCompatActivity
         implements AdapterView.OnItemSelectedListener {
 
-    String[] tipoDato = {"Fonema", "Palabra", "Oraciones", "Canciones","Instrumentos","Estilos Musicales", "Voces Familiares"};
-    String[] tipoDataPalabra = {"Animales","Colores","Comidas","Dias de la Semana", "Meses", "Nombres", "Numeros" };
-    String [] ruido = {"Ambulancia","Tráfico", "Multitud de gente", "Recreo de niños" };
-    String [] tipoEjercicio = {"Identificar entre 3 opciones", "Identificar entre 5 opciones", "Escribir lo que oyó"};
+    String[] tipoDato = {"Fonema", "Palabra", "Oraciones", "Canciones", "Instrumentos", "Estilos Musicales", "Voces Familiares"};
+    String[] tipoDataPalabra = {"Animales", "Colores", "Comidas", "Dias de la Semana", "Meses", "Nombres", "Numeros"};
+    String[] ruido = {"Ambulancia", "Tráfico", "Multitud de gente", "Recreo de niños"};
+    String[] tipoEjercicio = {"Identificar entre 3 opciones", "Identificar entre 5 opciones", "Escribir lo que oyó"};
 
     String confTipoDato;
     String confSubDato;
     String confTipoEjercio;
     String confRuido;
-    Spinner spinnerCategoria, spinnerSubCategoria,spinnerRuido,spinnerEjercicio;
-    ArrayAdapter<String> adapterTipoDato,adapterRuido, adapterSubTipoDato,adapterEjercicio;
+    Spinner spinnerCategoria, spinnerSubCategoria, spinnerRuido, spinnerEjercicio;
+    ArrayAdapter<String> adapterTipoDato, adapterRuido, adapterSubTipoDato, adapterEjercicio;
 
 
     @Override
@@ -41,20 +42,20 @@ public class Configuracion extends AppCompatActivity
         toolbar.setTitle("Configuracion");
 
         spinnerCategoria = findViewById(R.id.spinner_categoria);
-        spinnerSubCategoria  = findViewById(R.id.spinner_subCategoria);
+        spinnerSubCategoria = findViewById(R.id.spinner_subCategoria);
         spinnerRuido = findViewById(R.id.spinner_tipoRuido);
         spinnerEjercicio = findViewById(R.id.spinner_TipoEjercicio);
 
 
-        adapterTipoDato = new ArrayAdapter(this,android.R.layout.simple_spinner_item,tipoDato);
+        adapterTipoDato = new ArrayAdapter(this, android.R.layout.simple_spinner_item, tipoDato);
         adapterTipoDato.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
         spinnerCategoria.setAdapter(adapterTipoDato);
 
-        adapterRuido = new ArrayAdapter(this,android.R.layout.simple_spinner_item,ruido);
+        adapterRuido = new ArrayAdapter(this, android.R.layout.simple_spinner_item, ruido);
         adapterRuido.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
         spinnerRuido.setAdapter(adapterRuido);
 
-        adapterEjercicio = new ArrayAdapter(this,android.R.layout.simple_spinner_item,tipoEjercicio);
+        adapterEjercicio = new ArrayAdapter(this, android.R.layout.simple_spinner_item, tipoEjercicio);
         adapterEjercicio.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
         spinnerEjercicio.setAdapter(adapterEjercicio);
 
@@ -64,12 +65,13 @@ public class Configuracion extends AppCompatActivity
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 String opcion = spinnerCategoria.getSelectedItem().toString();
                 confTipoDato = opcion;
-                if(opcion.equals("Palabra")){
-                    ArrayAdapter adapter2 = new ArrayAdapter(getApplicationContext(),android.R.layout.simple_spinner_item,tipoDataPalabra);
+                if (opcion.equals("Palabra")) {
+                    ArrayAdapter adapter2 = new ArrayAdapter(getApplicationContext(), android.R.layout.simple_spinner_item, tipoDataPalabra);
                     adapter2.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
                     spinnerSubCategoria.setAdapter(adapter2);
                 }
             }
+
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
 
@@ -118,7 +120,6 @@ public class Configuracion extends AppCompatActivity
         });
 
 
-
         //RUIDO
 
         final Button btn = findViewById(R.id.btn_ejercicio);
@@ -131,11 +132,11 @@ public class Configuracion extends AppCompatActivity
         switchRuido.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if(isChecked){
+                if (isChecked) {
                     spinnerRuido.setVisibility(View.VISIBLE);
                     tvIntensidad.setVisibility(View.VISIBLE);
                     seekBarIntensidad.setVisibility(View.VISIBLE);
-                }else{
+                } else {
                     spinnerRuido.setVisibility(View.INVISIBLE);
                     tvIntensidad.setVisibility(View.INVISIBLE);
                     seekBarIntensidad.setVisibility(View.INVISIBLE);
@@ -144,18 +145,17 @@ public class Configuracion extends AppCompatActivity
         });
 
 
-
         //FINALIZADA LA CONFIGURACIÓN INICIO LA EJERCITACIÓN
 
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                switch (confTipoEjercio){
+                switch (confTipoEjercio) {
                     case "Identificar entre 3 opciones":
-                        Intent intent = new Intent(getApplicationContext(),Ejercicio_Completar.class);
-                        if(!switchRuido.isChecked()){
-                            confRuido="Sin Ruido";
+                        Intent intent = new Intent(getApplicationContext(), Ejercicio_Tres_Opciones.class);
+                        if (!switchRuido.isChecked()) {
+                            confRuido = "Sin Ruido";
                         }
                         intent.putExtra("subDato", confSubDato);
                         intent.putExtra("tipoRuido", confRuido);
@@ -163,19 +163,21 @@ public class Configuracion extends AppCompatActivity
                         break;
                     case "Escribir lo que oyó":
                         Intent intent2 = new Intent(getApplicationContext(), Ejercicio_Completar.class);
-                        if(!switchRuido.isChecked()){
-                            confRuido="Sin Ruido";
+                        if (!switchRuido.isChecked()) {
+                            confRuido = "Sin Ruido";
                         }
                         intent2.putExtra("subDato", confSubDato);
                         intent2.putExtra("tipoRuido", confRuido);
                         startActivity(intent2);
-                }            }
+                }
+            }
         });
     }
 
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
     }
+
     @Override
     public void onNothingSelected(AdapterView<?> parent) {
     }

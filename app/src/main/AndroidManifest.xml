@@ -12,6 +12,7 @@
         <activity android:name=".Configuracion" />
         <activity android:name=".logica.Practica" />
         <activity android:name=".logica.Ejercicio_Completar" />
+        <activity android:name=".AgregrarSonido"/>
         <activity android:name=".logica.Ejercicio_Tres_Opciones" />
         <activity android:name=".MainActivity">
             <intent-filter>
