@@ -1,5 +1,4 @@
 package com.example.myapplication.logica;
-
 import android.content.res.AssetFileDescriptor;
 import android.media.MediaPlayer;
 import android.os.Bundle;
@@ -7,22 +6,18 @@ import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
-
-import com.example.myapplication.R;
 import com.example.myapplication.Cotrollers.ReproductorDeAudioController;
+import com.example.myapplication.R;
 import com.example.myapplication.room_database.Sound;
 import com.example.myapplication.room_database.SoundRepository;
 import com.google.android.material.button.MaterialButton;
-
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Random;
-
 
 public class Ejercicio_Tres_Opciones extends AppCompatActivity {
     List<Sound> listaSonidos;
@@ -30,7 +25,6 @@ public class Ejercicio_Tres_Opciones extends AppCompatActivity {
     int cantEjercicios;
     int opcionCorrecta;
     String ruido;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,11 +37,11 @@ public class Ejercicio_Tres_Opciones extends AppCompatActivity {
         ruido = getIntent().getStringExtra("tipoRuido");
         System.out.println(ruido);
 
-        if (subdato.equals("Numeros")) {
+        if (subdato.equals("Números")) {
             SoundRepository sr = new SoundRepository(getApplication());
             listaSonidos = sr.getDiasSounds().getValue();
         }
-        if (subdato.equals("Dias de la Semana")) {
+        if (subdato.equals("Días de la Semana")) {
             SoundRepository sr = new SoundRepository(getApplication());
             sr.getDiasSounds().observe(this, new Observer<List<Sound>>() {
                 @Override
@@ -80,8 +74,8 @@ public class Ejercicio_Tres_Opciones extends AppCompatActivity {
                 @Override
                 public void onClick(View v) {
                     if (activarSonido()) {
-                       ReproductorDeAudioController rp = new ReproductorDeAudioController();
-                       rp.startSoundWithNoise(listaSonidos.get((Integer) tresOpciones.get(opcionCorrecta)).getRuta_sonido(),R.raw.ruido_personas,getApplicationContext());
+                        ReproductorDeAudioController rp = new ReproductorDeAudioController();
+                        rp.startSoundWithNoise(listaSonidos.get((Integer) tresOpciones.get(opcionCorrecta)).getRuta_sonido(), R.raw.ruido_personas, getApplicationContext());
                     } else {
                         ReproductorDeAudioController rp = new ReproductorDeAudioController();
                         rp.startSpundNoNoise(listaSonidos.get((Integer) tresOpciones.get(opcionCorrecta)).getRuta_sonido(), getApplicationContext());

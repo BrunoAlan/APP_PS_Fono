@@ -87,7 +87,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
         int id = menuItem.getItemId();
         if (id == R.id.añadirSonido) {
-            Intent intent = new Intent(getApplicationContext(), AgregrarSonido.class);
+            Intent intent = new Intent(getApplicationContext(), ConfiguracionAgregarSonido.class);
             miDrawerLayout.closeDrawer(GravityCompat.START);
             startActivity(intent);
         }
