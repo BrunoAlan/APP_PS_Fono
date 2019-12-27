@@ -11,12 +11,13 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.io.File;
 import java.io.IOException;
 
 public class AgregarSonido extends AppCompatActivity {
-    private MediaRecorder mAudioRecorder;
     String outputFile;
     Button grabar, pausar, play;
+    private MediaRecorder mAudioRecorder;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,34 +30,36 @@ public class AgregarSonido extends AppCompatActivity {
 
         pausar.setEnabled(false);
         play.setEnabled(false);
-        outputFile = Environment.getExternalStorageDirectory().getAbsolutePath() + "/archivo.3gp";
+        checkFolder();
+        outputFile = Environment.getExternalStorageDirectory().getAbsolutePath() + "/carpetovich/archivo.3gp";
 
-        Log.d("ruta" , outputFile);
-        mAudioRecorder = new MediaRecorder();
-        mAudioRecorder.setAudioSource(MediaRecorder.AudioSource.MIC);
-        mAudioRecorder.setOutputFormat(MediaRecorder.OutputFormat.THREE_GPP);
-        mAudioRecorder.setAudioEncoder(MediaRecorder.OutputFormat.AMR_NB);
-        mAudioRecorder.setOutputFile(outputFile);
+        Log.d("ruta", outputFile);
 
         grabar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                mAudioRecorder = new MediaRecorder();
+                mAudioRecorder.setAudioSource(MediaRecorder.AudioSource.MIC);
+                mAudioRecorder.setOutputFormat(MediaRecorder.OutputFormat.MPEG_4);
+                mAudioRecorder.setAudioEncoder(MediaRecorder.AudioEncoder.AAC);
+                mAudioRecorder.setAudioEncodingBitRate(128000);
+                mAudioRecorder.setAudioSamplingRate(96000);
+                mAudioRecorder.setOutputFile(outputFile);
                 try {
                     mAudioRecorder.prepare();
                     mAudioRecorder.start();
 
                 } catch (IOException e) {
                     e.printStackTrace();
-                }catch (IllegalStateException e){
+                } catch (IllegalStateException e) {
                     e.printStackTrace();
                 }
-
                 grabar.setEnabled(false);
                 pausar.setEnabled(true);
                 Toast.makeText(AgregarSonido.this, "Grabando Audio", Toast.LENGTH_SHORT).show();
+
             }
         });
-
 
         pausar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -84,5 +87,19 @@ public class AgregarSonido extends AppCompatActivity {
                 }
             }
         });
+    }
+
+
+    public void checkFolder() {
+        String path = Environment.getExternalStorageDirectory().getAbsolutePath() + "/FonoApp_Sonidos/";
+        File dir = new File(path);
+        boolean isDirectoryCreated = dir.exists();
+        if (!isDirectoryCreated) {
+            isDirectoryCreated = dir.mkdir();
+        }
+        if (isDirectoryCreated) {
+            // do something\
+            Log.d("Folder", "Already Created");
+        }
     }
 }

@@ -10,6 +10,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
 import com.example.myapplication.Cotrollers.ReproductorDeAudioController;
 import com.example.myapplication.R;
+import com.example.myapplication.datos.Constantes;
 import com.example.myapplication.room_database.Sound;
 import com.example.myapplication.room_database.SoundRepository;
 import com.google.android.material.button.MaterialButton;
@@ -37,11 +38,11 @@ public class Ejercicio_Tres_Opciones extends AppCompatActivity {
         ruido = getIntent().getStringExtra("tipoRuido");
         System.out.println(ruido);
 
-        if (subdato.equals("Números")) {
+        if (subdato.equals(Constantes.NUMEROS)) {
             SoundRepository sr = new SoundRepository(getApplication());
             listaSonidos = sr.getDiasSounds().getValue();
         }
-        if (subdato.equals("Días de la Semana")) {
+        if (subdato.equals(Constantes.DIAS_SEMANA)) {
             SoundRepository sr = new SoundRepository(getApplication());
             sr.getDiasSounds().observe(this, new Observer<List<Sound>>() {
                 @Override

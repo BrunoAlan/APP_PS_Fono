@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -8,21 +9,24 @@
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar_configuracion"
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/colorPrimary"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:titleTextColor="@android:color/white" />
+        app:title="Configuración"
+        app:titleTextColor="@color/colorWhite" />
 
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/textInput_subcategoria"
+        android:layout_marginHorizontal="6dp"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="8dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -39,11 +43,12 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
+        android:layout_marginHorizontal="6dp"
         android:id="@+id/textInput_categoria"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="8dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -60,11 +65,12 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
+        android:layout_marginHorizontal="6dp"
         android:id="@+id/textInput_tipoEjercicio"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="8dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -80,22 +86,27 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
+        android:layout_marginHorizontal="6dp"
         android:id="@+id/textInput_ruido"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="49dp"
+        android:layout_marginTop="32dp"
+        android:visibility="invisible"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/switchRuido"
-        android:visibility="invisible">
+        app:layout_constraintTop_toBottomOf="@+id/switchRuido">
 
         <androidx.appcompat.widget.AppCompatAutoCompleteTextView
             android:id="@+id/ruido"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Ruido"></androidx.appcompat.widget.AppCompatAutoCompleteTextView>
+            android:editable="false"
+            android:hint="Ruido"
+            android:visibility="invisible">
+
+        </androidx.appcompat.widget.AppCompatAutoCompleteTextView>
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -109,6 +120,7 @@
         app:layout_constraintEnd_toEndOf="parent" />
 
     <Button
+        android:layout_marginHorizontal="6dp"
         android:id="@+id/btn_ejercicio"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -120,10 +132,11 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
+        android:layout_marginHorizontal="6dp"
         android:id="@+id/tvRuido"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="48dp"
+        android:layout_marginTop="32dp"
         android:text="Ruido"
         android:textSize="18dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -132,6 +145,7 @@
         app:layout_constraintTop_toBottomOf="@+id/textInput_tipoEjercicio" />
 
     <TextView
+        android:layout_marginHorizontal="6dp"
         android:id="@+id/tvIntensidad"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -145,6 +159,7 @@
         app:layout_constraintTop_toBottomOf="@+id/textInput_ruido" />
 
     <SeekBar
+        android:layout_marginHorizontal="6dp"
         android:id="@+id/seekBar"
         style="@style/Widget.AppCompat.SeekBar"
         android:layout_width="0dp"
@@ -153,6 +168,7 @@
         android:max="100"
         android:progress="1"
         android:visibility="invisible"
+        app:layout_constraintBottom_toTopOf="@+id/btn_ejercicio"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"

@@ -4,7 +4,7 @@ android {
     compileSdkVersion 28
     defaultConfig {
         applicationId "com.example.myapplication"
-        minSdkVersion 27
+        minSdkVersion 21
         targetSdkVersion 28
         versionCode 1
         versionName "1.0"
@@ -19,7 +19,8 @@ android {
 }
 
 dependencies {
-    def room_version = "2.2.1"
+    implementation 'pub.devrel:easypermissions:3.0.0'
+    def room_version = "2.2.3"
     implementation "androidx.room:room-runtime:$room_version"
     implementation 'androidx.appcompat:appcompat:1.1.0'
     annotationProcessor "androidx.room:room-compiler:$room_version"
@@ -30,8 +31,8 @@ dependencies {
     implementation 'com.android.support:design:28.0.0'
     implementation 'androidx.lifecycle:lifecycle-extensions:2.1.0'
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
-    implementation 'androidx.navigation:navigation-fragment:2.2.0-rc03'
-    implementation 'androidx.navigation:navigation-ui:2.2.0-rc03'
+    implementation 'androidx.navigation:navigation-fragment:2.2.0-rc04'
+    implementation 'androidx.navigation:navigation-ui:2.2.0-rc04'
     testImplementation 'junit:junit:4.12'
     implementation 'androidx.recyclerview:recyclerview:1.1.0'
     androidTestImplementation 'androidx.test:runner:1.2.0'

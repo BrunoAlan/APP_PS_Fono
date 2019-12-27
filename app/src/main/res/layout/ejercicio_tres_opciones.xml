@@ -93,6 +93,7 @@
         android:layout_width="190dp"
         android:layout_height="190dp"
         android:background="?android:selectableItemBackground"
+        android:elevation="2dp"
         android:scaleType="fitXY"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
