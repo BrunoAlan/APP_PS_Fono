@@ -8,18 +8,22 @@ import androidx.room.Query;
 
 import java.util.List;
 
+
 @Dao
 public interface SoundDao {
+
+
     @Query("SELECT * FROM sonidos")
     LiveData<List<Sound>> getSoundList();
 
-    @Query("SELECT * FROM sonidos WHERE categoria_sonido='numeros'")
+
+    @Query("SELECT * FROM sonidos WHERE categoria_sonido= 'Números' ")
     LiveData<List<Sound>> getListOfNumeros();
 
-    @Query("SELECT * FROM sonidos WHERE categoria_sonido= 'Días'")
+    @Query("SELECT * FROM sonidos WHERE categoria_sonido= 'Días de la Semana'")
     LiveData<List<Sound>> getListOfDias();
 
-    @Query("SELECT * FROM sonidos WHERE categoria_sonido='meses'")
+    @Query("SELECT * FROM sonidos WHERE categoria_sonido='Meses'")
     LiveData<List<Sound>> getListOfMeses();
 
     @Query("DELETE FROM sonidos")
@@ -31,5 +35,7 @@ public interface SoundDao {
     @Delete
     void eliminarSonido(Sound sonido);
 }
+
+
 
 

@@ -2,6 +2,9 @@ package com.example.myapplication.datos;
 
 public abstract class Constantes {
 
+    public static final String PERSONALIZADO = "Personalizado";
+    public static final String NO_PERSONALIZADO = "No Personalizado";
+
     //CATEGORIAS
     public static final String FONEMA = "Fonema";
     public static final String PALABRA = "Palabra";
@@ -28,8 +31,9 @@ public abstract class Constantes {
     public static final String ROPA = "Ropa";
     public static final String COMIDA = "Comida";
     public static final String LUGARES = "Lugares";
+    public static final String MESES = "Meses";
 
-    public static final String [] SUBCATEGORIAS = {DIAS_SEMANA,NUMEROS,COLORES,ANIMALES,NOMBRES,ROPA,COMIDA,LUGARES};
+    public static final String [] SUBCATEGORIAS = {DIAS_SEMANA,NUMEROS,COLORES,ANIMALES,NOMBRES,ROPA,COMIDA,LUGARES,MESES};
 
 
 

@@ -11,7 +11,7 @@ import java.io.IOException;
 
 public class ReproductorDeAudioController {
 
-    public void startSpundNoNoise(String filename, Context context) {
+    public void startSoundNoNoise(String filename, Context context) {
         AssetFileDescriptor afd = null;
         try {
             afd = context.getResources().getAssets().openFd(filename);
@@ -35,7 +35,7 @@ public class ReproductorDeAudioController {
 
 
 
-    public void startSoundWithNoise(String filename, int noise, Context context){
+    public void startSoundWithNoise(String filename, int noise,float intensidad, Context context){
         AssetFileDescriptor afd = null;
         try {
             afd = context.getResources().getAssets().openFd(filename);
@@ -44,6 +44,7 @@ public class ReproductorDeAudioController {
         }
         MediaPlayer mpSound = new MediaPlayer();
         MediaPlayer mpRuido = MediaPlayer.create(context, R.raw.ruido_personas);
+        mpRuido.setVolume(intensidad,intensidad);
         mpRuido.start();
         try {
             assert afd != null;

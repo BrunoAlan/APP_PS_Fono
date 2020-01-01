@@ -1,5 +1,5 @@
 package com.example.myapplication;
-import android.content.Intent;
+
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -10,13 +10,13 @@ import android.widget.CompoundButton;
 import android.widget.SeekBar;
 import android.widget.Switch;
 import android.widget.TextView;
+import android.widget.Toast;
+
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import com.example.myapplication.datos.Constantes;
-import com.example.myapplication.logica.Ejercicio_Completar;
-import com.example.myapplication.logica.Ejercicio_Tres_Opciones;
 import com.google.android.material.textfield.TextInputLayout;
 
 public class Configuracion extends AppCompatActivity {
@@ -24,10 +24,11 @@ public class Configuracion extends AppCompatActivity {
 
 
     AutoCompleteTextView spinnerCategoria, spinnerSubCategoria, spinnerRuido, spinnerTipoEjercicio;
-    TextInputLayout textInputRuido;
+    TextInputLayout textInputCategoria, textInputSubcategoria, textInputTipoEjercicio, textInputRuido;
     String confSubDato;
     String confTipoEjercio;
     String confRuido;
+    float confIntensidad = 0;
 
     ArrayAdapter<String> adapterCategoria, adapterRuido, adapterSubCategoria, adapterEjercicio;
 
@@ -45,14 +46,13 @@ public class Configuracion extends AppCompatActivity {
         spinnerTipoEjercicio = findViewById(R.id.tipoEjercicio);
         spinnerRuido = findViewById(R.id.ruido);
         textInputRuido = findViewById(R.id.textInput_ruido);
-
-
-
+        textInputCategoria = findViewById(R.id.textInput_categoria);
+        textInputSubcategoria = findViewById(R.id.textInput_subcategoria);
+        textInputTipoEjercicio = findViewById(R.id.textInput_tipoEjercicio);
         adapterCategoria = new ArrayAdapter<>(getApplicationContext(), R.layout.dropdown_menu_popup_item, Constantes.CATEGORIAS);
         adapterSubCategoria = new ArrayAdapter<>(getApplicationContext(), R.layout.dropdown_menu_popup_item, Constantes.SUBCATEGORIAS);
         adapterEjercicio = new ArrayAdapter<>(getApplicationContext(), R.layout.dropdown_menu_popup_item, Constantes.TIPOS_EJERCICIOS);
         adapterRuido = new ArrayAdapter<>(getApplicationContext(), R.layout.dropdown_menu_popup_item, ruido);
-
         spinnerCategoria.setAdapter(adapterCategoria);
         spinnerTipoEjercicio.setAdapter(adapterEjercicio);
         spinnerRuido.setAdapter(adapterRuido);
@@ -117,13 +117,39 @@ public class Configuracion extends AppCompatActivity {
                 }
             }
         });
+
+        seekBarIntensidad.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            private float getConverted(int intVal) {
+                float floatVal = 0;
+                floatVal = .1f * intVal;
+                return floatVal;
+            }
+
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                //Toast.makeText(Configuracion.this, "Valor"+getConverted(progress), Toast.LENGTH_SHORT).show();
+                confIntensidad = getConverted(progress);
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+
+            }
+        });
+
         //FINALIZADA LA CONFIGURACIÓN INICIO LA EJERCITACIÓN
 
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                validate();
 
-                switch (confTipoEjercio) {
+ /*               switch (confTipoEjercio) {
                     case Constantes.IDENTIFICAR_TRES_OPCIONES:
                         Intent intent = new Intent(getApplicationContext(), Ejercicio_Tres_Opciones.class);
                         if (!switchRuido.isChecked()) {
@@ -131,6 +157,7 @@ public class Configuracion extends AppCompatActivity {
                         }
                         intent.putExtra("subDato", confSubDato);
                         intent.putExtra("tipoRuido", confRuido);
+                        intent.putExtra("intensidad",confIntensidad);
                         startActivity(intent);
                         break;
                     case Constantes.ESCRIBIR_LO_QUE_OYO:
@@ -140,14 +167,48 @@ public class Configuracion extends AppCompatActivity {
                         }
                         intent2.putExtra("subDato", confSubDato);
                         intent2.putExtra("tipoRuido", confRuido);
+                        intent2.putExtra("intensidad",confIntensidad);
                         startActivity(intent2);
-                }
+                        break;
+                        default:
+                            ConstraintLayout ly = findViewById(R.id.layout_config);
+                            Snackbar snackbar = Snackbar.make(ly,"asdasd",Snackbar.LENGTH_SHORT);
+                            snackbar.show();
+                }*/
+
             }
         });
     }
+
     @Override
     public boolean onSupportNavigateUp() {
         onBackPressed();
         return true;
+    }
+
+    private void validate() {
+        boolean isValid = true;
+        if (spinnerCategoria.getText().toString().isEmpty()) {
+            textInputCategoria.setError("Seleccione una categoría");
+            isValid = false;
+        } else {
+            textInputCategoria.setErrorEnabled(false);
+        }
+
+        if (spinnerSubCategoria.getText().toString().isEmpty()) {
+            textInputSubcategoria.setError("Seleccione una subcategoría");
+        } else {
+            textInputSubcategoria.setErrorEnabled(false);
+        }
+
+        if (spinnerTipoEjercicio.getText().toString().isEmpty()) {
+            textInputTipoEjercicio.setError("Seleccione un ejercicio");
+            isValid = false;
+        } else {
+            textInputTipoEjercicio.setErrorEnabled(false);
+        }
+        if (isValid) {
+            Toast.makeText(this, "Correcto", Toast.LENGTH_SHORT).show();
+        }
     }
 }

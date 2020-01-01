@@ -4,8 +4,11 @@ import android.media.MediaPlayer;
 import android.media.MediaRecorder;
 import android.os.Bundle;
 import android.os.Environment;
+import android.util.DisplayMetrics;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.Toast;
 
@@ -23,6 +26,18 @@ public class AgregarSonido extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_agregar_sonido);
+
+        DisplayMetrics displayMetrics = new DisplayMetrics();
+        getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
+        int with = displayMetrics.widthPixels;
+        int hight = displayMetrics.heightPixels;
+        getWindow().setLayout((int)(with*.8),(int)(hight*.7));
+
+        WindowManager.LayoutParams params = getWindow().getAttributes();
+        params.gravity = Gravity.CENTER;
+        params.x=0;
+        params.y=-20;
+        getWindow().setAttributes(params);
 
         grabar = findViewById(R.id.btn_grabar);
         pausar = findViewById(R.id.btn_parar);

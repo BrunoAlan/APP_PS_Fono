@@ -29,16 +29,15 @@ public class Ejercicio_Completar extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.ejercicio_completar);
-        setTitle("Números");
-        //numeros = new ListaSonidos().listaNumeros();
+
+
         SoundRepository sr = new SoundRepository(getApplication());
         sr.getAllSounds().observe(this, new Observer<List<Sound>>() {
             @Override
             public void onChanged(List<Sound> sounds) {
                 asd = sounds;
                 int a = asd.size();
-                String size = Integer.toString(a);
-                Log.d("Tamaño", size);
+
                 setup(obtenerNumero());
             }
         });
@@ -53,7 +52,7 @@ public class Ejercicio_Completar extends AppCompatActivity {
         btnPlay.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                reproductorDeAudioController.startSpundNoNoise(asd.get(rand).getRuta_sonido(), getApplicationContext());
+                reproductorDeAudioController.startSoundNoNoise(asd.get(rand).getRuta_sonido(), getApplicationContext());
             }
         });
 
@@ -75,7 +74,6 @@ public class Ejercicio_Completar extends AppCompatActivity {
 
 
     int obtenerNumero() {
-        int random = ThreadLocalRandom.current().nextInt(0, asd.size());
-        return random;
+        return ThreadLocalRandom.current().nextInt(0, asd.size());
     }
 }

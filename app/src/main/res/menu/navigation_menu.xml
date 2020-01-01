@@ -6,7 +6,7 @@
             <item
                 android:id="@+id/consultarResultado"
                 android:icon="@drawable/ic_reporte"
-                android:title="Consultar Resultado"></item>
+                android:title="Consultar Resultado" />
         </menu>
     </item>
     <item android:title="Personalizar App">
@@ -14,7 +14,11 @@
             <item
                 android:id="@+id/añadirSonido"
                 android:icon="@drawable/ic_agregar_sonido"
-                android:title="Añadir nuevo sonido"></item>
+                android:title="Añadir nuevo sonido" />
+            <item
+                android:id="@+id/administrarSonidos"
+                android:icon="@drawable/ic_agregar_sonido"
+                android:title="Administrar Sonidos" />
         </menu>
     </item>
 

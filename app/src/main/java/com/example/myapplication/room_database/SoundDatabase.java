@@ -9,6 +9,8 @@ import androidx.room.Room;
 import androidx.room.RoomDatabase;
 import androidx.sqlite.db.SupportSQLiteDatabase;
 
+import com.example.myapplication.datos.Constantes;
+
 @Database(entities = {Sound.class}, exportSchema = false,version = 1)
 public abstract class SoundDatabase  extends RoomDatabase {
     private static final String DB_NAME = "app_db";
@@ -40,14 +42,21 @@ public abstract class SoundDatabase  extends RoomDatabase {
         }
         @Override
         protected Void doInBackground(Void... voids) {
+            soundDao.agregarSonido(new Sound("Lunes",Constantes.DIAS_SEMANA,"lunes.mp3", Constantes.NO_PERSONALIZADO));
+            soundDao.agregarSonido(new Sound("Martes",Constantes.DIAS_SEMANA,"martes.mp3",Constantes.NO_PERSONALIZADO));
+            soundDao.agregarSonido(new Sound("Miércoles",Constantes.DIAS_SEMANA,"miercoles.mp3",Constantes.NO_PERSONALIZADO));
+            soundDao.agregarSonido(new Sound("Jueves",Constantes.DIAS_SEMANA,"jueves.mp3",Constantes.NO_PERSONALIZADO));
+            soundDao.agregarSonido(new Sound("Viernes",Constantes.DIAS_SEMANA,"viernes.mp3",Constantes.NO_PERSONALIZADO));
+            soundDao.agregarSonido(new Sound("Sábado",Constantes.DIAS_SEMANA,"sabado.mp3",Constantes.NO_PERSONALIZADO));
+            soundDao.agregarSonido(new Sound("Domingo",Constantes.DIAS_SEMANA,"domingo.mp3",Constantes.NO_PERSONALIZADO));
 
-            soundDao.agregarSonido(new Sound("Lunes","Días","lunes.mp3","no"));
-            soundDao.agregarSonido(new Sound("Martes","Días","martes.mp3","no"));
-            soundDao.agregarSonido(new Sound("Miércoles","Días","miercoles.mp3","no"));
-            soundDao.agregarSonido(new Sound("Jueves","Días","jueves.mp3","no"));
-            soundDao.agregarSonido(new Sound("Viernes","Días","viernes.mp3","no"));
-            soundDao.agregarSonido(new Sound("Sábado","Días","sabado.mp3","no"));
-            soundDao.agregarSonido(new Sound("Domingo","Días","domingo.mp3","no"));
+            soundDao.agregarSonido(new Sound("Uno",Constantes.NUMEROS,"uno.mp3", Constantes.NO_PERSONALIZADO));
+            soundDao.agregarSonido(new Sound("Dos",Constantes.NUMEROS,"dos.mp3",Constantes.NO_PERSONALIZADO));
+            soundDao.agregarSonido(new Sound("Tres",Constantes.NUMEROS,"tres.mp3",Constantes.NO_PERSONALIZADO));
+            soundDao.agregarSonido(new Sound("Cuatro",Constantes.NUMEROS,"cuatro.mp3",Constantes.NO_PERSONALIZADO));
+            soundDao.agregarSonido(new Sound("Cinco",Constantes.NUMEROS,"cinco.mp3",Constantes.NO_PERSONALIZADO));
+            soundDao.agregarSonido(new Sound("Seis",Constantes.NUMEROS,"seis.mp3",Constantes.NO_PERSONALIZADO));
+
             return null;
         }
     }

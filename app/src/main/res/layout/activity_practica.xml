@@ -28,7 +28,8 @@
         android:id="@+id/recyclerSonidos"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:listitem="@layout/practica_item" />
+        tools:listitem="@layout/practica_item"
+        />
 
 
 </LinearLayout>

@@ -36,7 +36,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         miDrawerLayout = findViewById(R.id.drower_layout);
         mToggle = new ActionBarDrawerToggle(this, miDrawerLayout, R.string.close, R.string.open);
         miDrawerLayout.addDrawerListener(mToggle);
-        mToggle.getDrawerArrowDrawable().setColor(getColor(R.color.colorWhite));
         Toolbar toolbar = findViewById(R.id.toolbar);
         toolbar.setTitle(getResources().getString(R.string.app_name));
         setSupportActionBar(toolbar);
@@ -89,6 +88,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         if (id == R.id.añadirSonido) {
             Intent intent = new Intent(getApplicationContext(), ConfiguracionAgregarSonido.class);
             miDrawerLayout.closeDrawer(GravityCompat.START);
+            startActivity(intent);
+        }
+        if(id== R.id.administrarSonidos){
+            Intent intent = new Intent(getApplicationContext(),AdminitrarSonidos.class);
             startActivity(intent);
         }
         return false;

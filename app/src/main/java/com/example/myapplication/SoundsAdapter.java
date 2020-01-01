@@ -1,18 +1,19 @@
 package com.example.myapplication;
 
-import androidx.annotation.NonNull;
-import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.myapplication.room_database.Sound;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class SoundsAdapter extends RecyclerView.Adapter<SoundsAdapter.SoundHolder>{
+public class SoundsAdapter extends RecyclerView.Adapter<SoundsAdapter.SoundHolder> {
     private List<Sound> sound = new ArrayList<>();
     private OnItemClickListener listener;
 
@@ -20,7 +21,7 @@ public class SoundsAdapter extends RecyclerView.Adapter<SoundsAdapter.SoundHolde
     @Override
     public SoundHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.practica_item,parent,false);
+                .inflate(R.layout.practica_item, parent, false);
         return new SoundHolder(itemView);
     }
 
@@ -35,13 +36,24 @@ public class SoundsAdapter extends RecyclerView.Adapter<SoundsAdapter.SoundHolde
         return sound.size();
     }
 
-    public void setSound(List<Sound>sound){
+    public void setSound(List<Sound> sound) {
         this.sound = sound;
         notifyDataSetChanged();
     }
 
+    public Sound getSoundAt(int position){
+        return sound.get(position);
+    }
 
-    class SoundHolder extends RecyclerView.ViewHolder{
+    public void setOnItemClickListener(OnItemClickListener listener) {
+        this.listener = listener;
+    }
+
+    public interface OnItemClickListener {
+        void onItemClick(Sound sound);
+    }
+
+    class SoundHolder extends RecyclerView.ViewHolder {
         private TextView textViewNombre;
 
         public SoundHolder(@NonNull View itemView) {
@@ -51,19 +63,11 @@ public class SoundsAdapter extends RecyclerView.Adapter<SoundsAdapter.SoundHolde
                 @Override
                 public void onClick(View v) {
                     int position = getAdapterPosition();
-                    if(listener != null  && position != RecyclerView.NO_POSITION){
+                    if (listener != null && position != RecyclerView.NO_POSITION) {
                         listener.onItemClick(sound.get(position));
                     }
                 }
             });
         }
-    }
-
-    public interface OnItemClickListener{
-        void onItemClick(Sound sound);
-    }
-
-    public void setOnItemClickListener(OnItemClickListener listener){
-        this.listener = listener;
     }
 }
