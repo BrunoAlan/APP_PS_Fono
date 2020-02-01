@@ -1,4 +1,4 @@
-package com.example.myapplication.room_database;
+package com.example.myapplication.room_database.palabras;
 
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;

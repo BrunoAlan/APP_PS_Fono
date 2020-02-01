@@ -1,4 +1,4 @@
-package com.example.myapplication.room_database;
+package com.example.myapplication.room_database.palabras;
 
 import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
@@ -25,6 +25,9 @@ public interface SoundDao {
 
     @Query("SELECT * FROM sonidos WHERE categoria_sonido='Meses'")
     LiveData<List<Sound>> getListOfMeses();
+
+    @Query("SELECT * FROM sonidos WHERE categoria_sonido='Colores'")
+    LiveData<List<Sound>> getListOfColores();
 
     @Query("DELETE FROM sonidos")
     void borrarTodos();

@@ -1,5 +1,6 @@
 package com.example.myapplication;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -15,8 +16,12 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.constraintlayout.widget.ConstraintLayout;
 
 import com.example.myapplication.datos.Constantes;
+import com.example.myapplication.logica.Ejercicio_Completar;
+import com.example.myapplication.logica.Ejercicio_Tres_Opciones;
+import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.textfield.TextInputLayout;
 
 public class Configuracion extends AppCompatActivity {
@@ -65,6 +70,7 @@ public class Configuracion extends AppCompatActivity {
 
                     //FONEMA, PALABRA, ORACIONES, CANCIONES, INSTRUMENTOS, ESTILOS_MUSICALES, VOCES_FAMILIARES
                     case (Constantes.PALABRA):
+
                         spinnerSubCategoria.setAdapter(adapterSubCategoria);
                         break;
                 }
@@ -147,38 +153,38 @@ public class Configuracion extends AppCompatActivity {
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                validate();
+                if (validate()){
+                    switch (confTipoEjercio) {
+                        case Constantes.IDENTIFICAR_TRES_OPCIONES:
+                            Intent intent = new Intent(getApplicationContext(), Ejercicio_Tres_Opciones.class);
+                            if (!switchRuido.isChecked()) {
+                                confRuido = "Sin Ruido";
+                            }
+                            intent.putExtra("subDato", confSubDato);
+                            intent.putExtra("tipoRuido", confRuido);
+                            intent.putExtra("intensidad",confIntensidad);
+                            startActivity(intent);
+                            break;
+                        case Constantes.ESCRIBIR_LO_QUE_OYO:
+                            Intent intent2 = new Intent(getApplicationContext(), Ejercicio_Completar.class);
+                            if (!switchRuido.isChecked()) {
+                                confRuido = "Sin Ruido";
+                            }
+                            intent2.putExtra("subDato", confSubDato);
+                            intent2.putExtra("tipoRuido", confRuido);
+                            intent2.putExtra("intensidad",confIntensidad);
+                            startActivity(intent2);
+                            break;
 
- /*               switch (confTipoEjercio) {
-                    case Constantes.IDENTIFICAR_TRES_OPCIONES:
-                        Intent intent = new Intent(getApplicationContext(), Ejercicio_Tres_Opciones.class);
-                        if (!switchRuido.isChecked()) {
-                            confRuido = "Sin Ruido";
-                        }
-                        intent.putExtra("subDato", confSubDato);
-                        intent.putExtra("tipoRuido", confRuido);
-                        intent.putExtra("intensidad",confIntensidad);
-                        startActivity(intent);
-                        break;
-                    case Constantes.ESCRIBIR_LO_QUE_OYO:
-                        Intent intent2 = new Intent(getApplicationContext(), Ejercicio_Completar.class);
-                        if (!switchRuido.isChecked()) {
-                            confRuido = "Sin Ruido";
-                        }
-                        intent2.putExtra("subDato", confSubDato);
-                        intent2.putExtra("tipoRuido", confRuido);
-                        intent2.putExtra("intensidad",confIntensidad);
-                        startActivity(intent2);
-                        break;
-                        default:
-                            ConstraintLayout ly = findViewById(R.id.layout_config);
-                            Snackbar snackbar = Snackbar.make(ly,"asdasd",Snackbar.LENGTH_SHORT);
-                            snackbar.show();
-                }*/
+                    }
+                }
+
+
 
             }
         });
     }
+
 
     @Override
     public boolean onSupportNavigateUp() {
@@ -186,7 +192,7 @@ public class Configuracion extends AppCompatActivity {
         return true;
     }
 
-    private void validate() {
+    private boolean validate() {
         boolean isValid = true;
         if (spinnerCategoria.getText().toString().isEmpty()) {
             textInputCategoria.setError("Seleccione una categoría");
@@ -207,8 +213,7 @@ public class Configuracion extends AppCompatActivity {
         } else {
             textInputTipoEjercicio.setErrorEnabled(false);
         }
-        if (isValid) {
-            Toast.makeText(this, "Correcto", Toast.LENGTH_SHORT).show();
-        }
+
+        return isValid;
     }
 }

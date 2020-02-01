@@ -1,4 +1,4 @@
-package com.example.myapplication.room_database;
+package com.example.myapplication.room_database.palabras;
 
 import android.content.Context;
 import android.os.AsyncTask;
@@ -57,6 +57,32 @@ public abstract class SoundDatabase  extends RoomDatabase {
             soundDao.agregarSonido(new Sound("Cinco",Constantes.NUMEROS,"cinco.mp3",Constantes.NO_PERSONALIZADO));
             soundDao.agregarSonido(new Sound("Seis",Constantes.NUMEROS,"seis.mp3",Constantes.NO_PERSONALIZADO));
 
+
+            soundDao.agregarSonido(new Sound("Enero",Constantes.MESES,"enero.mp3", Constantes.NO_PERSONALIZADO));
+            soundDao.agregarSonido(new Sound("Febrero",Constantes.MESES,"febrero.mp3", Constantes.NO_PERSONALIZADO));
+            soundDao.agregarSonido(new Sound("Marzo",Constantes.MESES,"marzo.mp3", Constantes.NO_PERSONALIZADO));
+            soundDao.agregarSonido(new Sound("Abril",Constantes.MESES,"abril.mp3", Constantes.NO_PERSONALIZADO));
+            soundDao.agregarSonido(new Sound("Mayo",Constantes.MESES,"mayo.mp3", Constantes.NO_PERSONALIZADO));
+            soundDao.agregarSonido(new Sound("Junio",Constantes.MESES,"junio.mp3", Constantes.NO_PERSONALIZADO));
+            soundDao.agregarSonido(new Sound("Julio",Constantes.MESES,"julio.mp3", Constantes.NO_PERSONALIZADO));
+            soundDao.agregarSonido(new Sound("Agosto",Constantes.MESES,"agosto.mp3", Constantes.NO_PERSONALIZADO));
+            soundDao.agregarSonido(new Sound("Septiembre",Constantes.MESES,"septiembre.mp3", Constantes.NO_PERSONALIZADO));
+            soundDao.agregarSonido(new Sound("Octubre",Constantes.MESES,"octubre.mp3", Constantes.NO_PERSONALIZADO));
+            soundDao.agregarSonido(new Sound("Noviembre",Constantes.MESES,"noviembre.mp3", Constantes.NO_PERSONALIZADO));
+            soundDao.agregarSonido(new Sound("Diciembre",Constantes.MESES,"diciembre.mp3", Constantes.NO_PERSONALIZADO));
+
+
+
+            soundDao.agregarSonido(new Sound("Negro",Constantes.COLORES,"negro.mp3", Constantes.NO_PERSONALIZADO));
+            soundDao.agregarSonido(new Sound("Azul",Constantes.COLORES,"azul.mp3", Constantes.NO_PERSONALIZADO));
+            soundDao.agregarSonido(new Sound("Blanco",Constantes.COLORES,"blanco.mp3", Constantes.NO_PERSONALIZADO));
+            soundDao.agregarSonido(new Sound("Marrón",Constantes.COLORES,"marron.mp3", Constantes.NO_PERSONALIZADO));
+            soundDao.agregarSonido(new Sound("Amarillo",Constantes.COLORES,"amarillo.mp3", Constantes.NO_PERSONALIZADO));
+            soundDao.agregarSonido(new Sound("Rojo",Constantes.COLORES,"rojo.mp3", Constantes.NO_PERSONALIZADO));
+            soundDao.agregarSonido(new Sound("Rosa",Constantes.COLORES,"rosa.mp3", Constantes.NO_PERSONALIZADO));
+            soundDao.agregarSonido(new Sound("Verde",Constantes.COLORES,"verde.mp3", Constantes.NO_PERSONALIZADO));
+            soundDao.agregarSonido(new Sound("Violeta",Constantes.COLORES,"violeta.mp3", Constantes.NO_PERSONALIZADO));
+            soundDao.agregarSonido(new Sound("Naranja",Constantes.COLORES,"naranja.mp3", Constantes.NO_PERSONALIZADO));
             return null;
         }
     }

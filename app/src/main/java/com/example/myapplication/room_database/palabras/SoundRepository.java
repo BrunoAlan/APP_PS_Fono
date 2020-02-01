@@ -1,4 +1,4 @@
-package com.example.myapplication.room_database;
+package com.example.myapplication.room_database.palabras;
 
 import android.app.Application;
 import android.os.AsyncTask;
@@ -14,6 +14,7 @@ public class SoundRepository {
     private LiveData<List<Sound>> diasSounds;
     private LiveData<List<Sound>> numerosSounds;
     private LiveData<List<Sound>> mesesSounds;
+    private LiveData<List<Sound>> coloresSounds;
 
 
     public SoundRepository(Application application) {
@@ -23,11 +24,12 @@ public class SoundRepository {
         diasSounds = soundDao.getListOfDias();
         numerosSounds = soundDao.getListOfNumeros();
         mesesSounds = soundDao.getListOfMeses();
+        coloresSounds = soundDao.getListOfColores();
 
     }
 
     public void agregarSonido(Sound sound) {
-        new agregarSonidoAsyncTask(soundDao).execute(sound);
+        new agregarSonidoAsynkTask(soundDao).execute(sound);
     }
 
     public void eliminarSonido(Sound sound) {
@@ -50,20 +52,9 @@ public class SoundRepository {
         return numerosSounds;
     }
 
-    private static class agregarSonidoAsyncTask extends AsyncTask<Sound, Void, Void> {
-        private SoundDao soundDao;
-
-        private agregarSonidoAsyncTask(SoundDao soundDao) {
-            this.soundDao = soundDao;
-        }
-
-        @Override
-        protected Void doInBackground(Sound... sounds) {
-            soundDao.agregarSonido(sounds[0]);
-            return null;
-        }
+    public LiveData<List<Sound>> getColoresSounds() {
+        return coloresSounds;
     }
-
 
     private static class eliminarSonidoAsynkTask extends AsyncTask<Sound, Void, Void> {
         private SoundDao soundDao;

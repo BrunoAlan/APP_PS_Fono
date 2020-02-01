@@ -1,5 +1,4 @@
 package com.example.myapplication;
-
 import android.media.MediaPlayer;
 import android.media.MediaRecorder;
 import android.os.Bundle;
@@ -13,6 +12,14 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.ViewModelProviders;
+
+import com.example.myapplication.datos.Constantes;
+import com.example.myapplication.room_database.palabras.Sound;
+import com.example.myapplication.room_database.palabras.SoundDao;
+import com.example.myapplication.room_database.palabras.SoundViewModel;
+
+import org.json.JSONObject;
 
 import java.io.File;
 import java.io.IOException;
@@ -21,11 +28,14 @@ public class AgregarSonido extends AppCompatActivity {
     String outputFile;
     Button grabar, pausar, play;
     private MediaRecorder mAudioRecorder;
+    SoundViewModel soundViewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_agregar_sonido);
+
+        soundViewModel = ViewModelProviders.of(this).get(SoundViewModel.class);
 
         DisplayMetrics displayMetrics = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
@@ -46,7 +56,7 @@ public class AgregarSonido extends AppCompatActivity {
         pausar.setEnabled(false);
         play.setEnabled(false);
         checkFolder();
-        outputFile = Environment.getExternalStorageDirectory().getAbsolutePath() + "/carpetovich/archivo.3gp";
+        outputFile = Environment.getExternalStorageDirectory().getAbsolutePath() + "/FonoApp_Sonidos/archivo.3gp";
 
         Log.d("ruta", outputFile);
 
@@ -64,9 +74,7 @@ public class AgregarSonido extends AppCompatActivity {
                     mAudioRecorder.prepare();
                     mAudioRecorder.start();
 
-                } catch (IOException e) {
-                    e.printStackTrace();
-                } catch (IllegalStateException e) {
+                } catch (IOException | IllegalStateException e) {
                     e.printStackTrace();
                 }
                 grabar.setEnabled(false);
@@ -86,7 +94,12 @@ public class AgregarSonido extends AppCompatActivity {
                 pausar.setEnabled(false);
                 play.setEnabled(true);
                 Toast.makeText(AgregarSonido.this, "Audio grabado correctamente", Toast.LENGTH_SHORT).show();
+                Sound mSound = new Sound("test", Constantes.DIAS_SEMANA,outputFile,Constantes.PERSONALIZADO);
+                soundViewModel.agregarSonido(mSound);
             }
+
+
+
         });
 
         play.setOnClickListener(new View.OnClickListener() {

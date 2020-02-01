@@ -13,15 +13,15 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.myapplication.datos.Constantes;
-import com.example.myapplication.room_database.Sound;
-import com.example.myapplication.room_database.SoundViewModel;
+import com.example.myapplication.room_database.palabras.Sound;
+import com.example.myapplication.room_database.palabras.SoundViewModel;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.List;
 
 public class AdminitrarSonidos extends AppCompatActivity {
 
-    final SoundsAdapter soundsAdapter = new SoundsAdapter();
+
     private SoundViewModel soundViewModel;
 
     @Override
@@ -33,12 +33,13 @@ public class AdminitrarSonidos extends AppCompatActivity {
         RecyclerView mRecyclerView = findViewById(R.id.recyclerAdministrar);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         mRecyclerView.setHasFixedSize(true);
+        final SoundsAdapter soundsAdapter = new SoundsAdapter();
         mRecyclerView.setAdapter(soundsAdapter);
         soundViewModel = ViewModelProviders.of(this).get(SoundViewModel.class);
         soundViewModel.getAllSounds().observe(this, new Observer<List<Sound>>() {
             @Override
             public void onChanged(List<Sound> sounds) {
-                soundsAdapter.setSound(sounds);
+                soundsAdapter.submitList(sounds);
             }
         });
 
@@ -51,7 +52,7 @@ public class AdminitrarSonidos extends AppCompatActivity {
 
             @Override
             public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
-                if (soundsAdapter.getSoundAt(viewHolder.getAdapterPosition()).getPersonalizado().equals(Constantes.NO_PERSONALIZADO)) {
+                if (soundsAdapter.getSoundAt(viewHolder.getAdapterPosition()).getPersonalizado().equals("dfksldfhñslfa"/*Constantes.NO_PERSONALIZADO*/ )) {
                     Toast.makeText(AdminitrarSonidos.this, "Ese sonido no se puede eliminar", Toast.LENGTH_SHORT).show();
                     soundsAdapter.notifyDataSetChanged();
                 } else {
@@ -60,7 +61,7 @@ public class AdminitrarSonidos extends AppCompatActivity {
             }
         }).attachToRecyclerView(mRecyclerView);
 
-        soundsAdapter.setOnItemClickListener(new SoundsAdapter.OnItemClickListener() {
+        soundsAdapter.setOnItemClickListener( new SoundsAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(Sound sound) {
                 Toast.makeText(AdminitrarSonidos.this, sound.getNombre_sonido(), Toast.LENGTH_SHORT).show();

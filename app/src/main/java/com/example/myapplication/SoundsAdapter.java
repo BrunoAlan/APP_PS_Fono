@@ -6,16 +6,33 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.DiffUtil;
+import androidx.recyclerview.widget.ListAdapter;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.myapplication.room_database.Sound;
+import com.example.myapplication.room_database.palabras.Sound;
 
-import java.util.ArrayList;
-import java.util.List;
 
-public class SoundsAdapter extends RecyclerView.Adapter<SoundsAdapter.SoundHolder> {
-    private List<Sound> sound = new ArrayList<>();
+public class SoundsAdapter extends ListAdapter<Sound, SoundsAdapter.SoundHolder> {
+
     private OnItemClickListener listener;
+
+    public SoundsAdapter() {
+        super(DIFF_CALLBACK);
+    }
+    private static final DiffUtil.ItemCallback<Sound> DIFF_CALLBACK = new DiffUtil.ItemCallback<Sound>() {
+        @Override
+        public boolean areItemsTheSame(@NonNull Sound oldItem, @NonNull Sound newItem) {
+            return oldItem.getId() == newItem.getId();        }
+
+        @Override
+        public boolean areContentsTheSame(@NonNull Sound oldItem, @NonNull Sound newItem) {
+            return oldItem.getNombre_sonido().equals(newItem.getNombre_sonido()) &&
+                    oldItem.getCategoria_sonido().equals(newItem.getCategoria_sonido()) &&
+                    oldItem.getPersonalizado().equals(newItem.getPersonalizado()) &&
+                    oldItem.getRuta_sonido().equals(newItem.getRuta_sonido());
+        }
+    };
 
     @NonNull
     @Override
@@ -27,22 +44,15 @@ public class SoundsAdapter extends RecyclerView.Adapter<SoundsAdapter.SoundHolde
 
     @Override
     public void onBindViewHolder(@NonNull SoundHolder holder, int position) {
-        Sound currentSound = sound.get(position);
+        Sound currentSound =getItem(position);
         holder.textViewNombre.setText(currentSound.getNombre_sonido());
     }
 
-    @Override
-    public int getItemCount() {
-        return sound.size();
-    }
 
-    public void setSound(List<Sound> sound) {
-        this.sound = sound;
-        notifyDataSetChanged();
-    }
 
-    public Sound getSoundAt(int position){
-        return sound.get(position);
+
+    public Sound getSoundAt(int position) {
+        return getItem(position);
     }
 
     public void setOnItemClickListener(OnItemClickListener listener) {
@@ -64,7 +74,7 @@ public class SoundsAdapter extends RecyclerView.Adapter<SoundsAdapter.SoundHolde
                 public void onClick(View v) {
                     int position = getAdapterPosition();
                     if (listener != null && position != RecyclerView.NO_POSITION) {
-                        listener.onItemClick(sound.get(position));
+                        listener.onItemClick(getItem(position));
                     }
                 }
             });

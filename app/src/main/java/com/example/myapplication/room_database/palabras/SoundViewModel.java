@@ -1,4 +1,4 @@
-package com.example.myapplication.room_database;
+package com.example.myapplication.room_database.palabras;
 
 import android.app.Application;
 
@@ -14,6 +14,8 @@ public class SoundViewModel extends AndroidViewModel {
     private LiveData<List<Sound>> allSounds;
     private LiveData<List<Sound>> diasSounds;
     private LiveData<List<Sound>> numerosSounds;
+    private LiveData<List<Sound>> mesesSounds;
+    private LiveData<List<Sound>> coloresSounds;
 
 
     public SoundViewModel(@NonNull Application application) {
@@ -22,6 +24,8 @@ public class SoundViewModel extends AndroidViewModel {
         allSounds = repository.getAllSounds();
         diasSounds = repository.getDiasSounds();
         numerosSounds = repository.getNumerosSounds();
+        mesesSounds = repository.getMesesSounds();
+        coloresSounds = repository.getColoresSounds();
     }
 
     public void agregarSonido(Sound sound) {
@@ -44,4 +48,11 @@ public class SoundViewModel extends AndroidViewModel {
     public LiveData<List<Sound>> getNumerosSounds() {
         return numerosSounds;
     }
+
+    public LiveData<List<Sound>> getMesesSounds() { return mesesSounds; }
+
+    public LiveData<List<Sound>> getColoresSounds() { return coloresSounds; }
+
+
+
 }

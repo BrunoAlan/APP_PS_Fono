@@ -1,7 +1,6 @@
 package com.example.myapplication.logica;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -13,8 +12,8 @@ import androidx.lifecycle.Observer;
 
 import com.example.myapplication.Cotrollers.ReproductorDeAudioController;
 import com.example.myapplication.R;
-import com.example.myapplication.room_database.Sound;
-import com.example.myapplication.room_database.SoundRepository;
+import com.example.myapplication.room_database.palabras.Sound;
+import com.example.myapplication.room_database.palabras.SoundRepository;
 
 import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
@@ -59,7 +58,7 @@ public class Ejercicio_Completar extends AppCompatActivity {
         aceptar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (etNombre.getText().toString().equals(asd.get(random).getNombre_sonido())) {
+                if (etNombre.getText().toString().toLowerCase().equals(asd.get(random).getNombre_sonido().toLowerCase()))   {
                     Toast.makeText(getApplicationContext(), "Correcto", Toast.LENGTH_SHORT).show();
                     etNombre.setText("");
                     setup(obtenerNumero());
@@ -69,8 +68,7 @@ public class Ejercicio_Completar extends AppCompatActivity {
                 }
 
             }
-        });
-    }
+        });    }
 
 
     int obtenerNumero() {

@@ -13,8 +13,8 @@ import androidx.lifecycle.Observer;
 import com.example.myapplication.Cotrollers.ReproductorDeAudioController;
 import com.example.myapplication.R;
 import com.example.myapplication.datos.Constantes;
-import com.example.myapplication.room_database.Sound;
-import com.example.myapplication.room_database.SoundRepository;
+import com.example.myapplication.room_database.palabras.Sound;
+import com.example.myapplication.room_database.palabras.SoundRepository;
 import com.google.android.material.button.MaterialButton;
 
 import java.util.ArrayList;
@@ -23,6 +23,7 @@ import java.util.List;
 import java.util.Random;
 
 public class Ejercicio_Tres_Opciones extends AppCompatActivity {
+    public SoundRepository sr;
     List<Sound> listaSonidos;
     int puntos;
     int cantEjercicios;
@@ -41,19 +42,36 @@ public class Ejercicio_Tres_Opciones extends AppCompatActivity {
         intensidad = getIntent().getFloatExtra("intensidad", .1f);
         System.out.println(ruido);
 
-        if (subdato.equals(Constantes.NUMEROS)) {
-            SoundRepository sr = new SoundRepository(getApplication());
-            listaSonidos = sr.getDiasSounds().getValue();
-        }
-        if (subdato.equals(Constantes.DIAS_SEMANA)) {
-            SoundRepository sr = new SoundRepository(getApplication());
-            sr.getDiasSounds().observe(this, new Observer<List<Sound>>() {
-                @Override
-                public void onChanged(List<Sound> sounds) {
-                    listaSonidos = sounds;
-                    setup();
-                }
-            });
+
+        sr = new SoundRepository(getApplication());
+        switch (subdato){
+            case Constantes.DIAS_SEMANA:
+                sr.getDiasSounds().observe(this, new Observer<List<Sound>>() {
+                    @Override
+                    public void onChanged(List<Sound> sounds) {
+                        listaSonidos= sounds;
+                        setup();
+                    }
+                });
+                break;
+            case Constantes.NUMEROS:
+                sr.getNumerosSounds().observe(this, new Observer<List<Sound>>() {
+                    @Override
+                    public void onChanged(List<Sound> sounds) {
+                        listaSonidos = sounds;
+                        setup();
+                    }
+                });
+                break;
+            case Constantes.MESES:
+                sr.getMesesSounds().observe(this, new Observer<List<Sound>>() {
+                    @Override
+                    public void onChanged(List<Sound> sounds) {
+                        listaSonidos = sounds;
+                        setup();
+                    }
+                });
+                break;
         }
     }
 

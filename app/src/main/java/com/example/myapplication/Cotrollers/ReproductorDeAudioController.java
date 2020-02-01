@@ -66,4 +66,16 @@ public class ReproductorDeAudioController {
         mpRuido.stop();
 
     }
+
+
+    public void playSonidoPersonalizado(String ruta){
+        MediaPlayer mMediaPlayer = new MediaPlayer();
+        try {
+            mMediaPlayer.setDataSource(ruta);
+            mMediaPlayer.prepare();
+            mMediaPlayer.start();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 }

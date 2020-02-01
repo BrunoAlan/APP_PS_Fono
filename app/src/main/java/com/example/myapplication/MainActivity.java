@@ -37,7 +37,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         mToggle = new ActionBarDrawerToggle(this, miDrawerLayout, R.string.close, R.string.open);
         miDrawerLayout.addDrawerListener(mToggle);
         Toolbar toolbar = findViewById(R.id.toolbar);
-        toolbar.setTitle(getResources().getString(R.string.app_name));
         setSupportActionBar(toolbar);
         mToggle.syncState();
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
