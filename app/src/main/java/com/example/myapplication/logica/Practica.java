@@ -77,6 +77,7 @@ public class Practica extends AppCompatActivity implements LifecycleOwner {
                                     @Override
                                     public void onChanged(List<Sound> sounds) {
                                         adapter.submitList(sounds);
+                                        
                                     }
                                 }
                         );
