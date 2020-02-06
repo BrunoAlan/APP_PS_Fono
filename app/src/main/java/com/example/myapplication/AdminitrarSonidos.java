@@ -1,5 +1,6 @@
 package com.example.myapplication;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
@@ -12,7 +13,6 @@ import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.myapplication.datos.Constantes;
 import com.example.myapplication.room_database.palabras.Sound;
 import com.example.myapplication.room_database.palabras.SoundViewModel;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -20,6 +20,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import java.util.List;
 
 public class AdminitrarSonidos extends AppCompatActivity {
+
 
 
     private SoundViewModel soundViewModel;
@@ -71,12 +72,12 @@ public class AdminitrarSonidos extends AppCompatActivity {
         agregarSonido.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Sound mSound = new Sound("sonido Personalizado", Constantes.DIAS_SEMANA, "asdas", Constantes.PERSONALIZADO);
-                soundViewModel.agregarSonido(mSound);
-                Sound mSound2 = new Sound("sonido no personalizado", Constantes.DIAS_SEMANA, "asdas", Constantes.NO_PERSONALIZADO);
-                soundViewModel.agregarSonido(mSound2);
+                Intent intent = new Intent(getApplicationContext(),ConfiguracionAgregarSonido.class);
+                startActivity(intent);
+
             }
         });
 
     }
+
 }

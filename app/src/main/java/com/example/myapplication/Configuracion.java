@@ -11,22 +11,24 @@ import android.widget.CompoundButton;
 import android.widget.SeekBar;
 import android.widget.Switch;
 import android.widget.TextView;
-import android.widget.Toast;
-
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.lifecycle.Observer;
 
 import com.example.myapplication.datos.Constantes;
+import com.example.myapplication.logica.Ejercicio_Cinco_Opciones;
 import com.example.myapplication.logica.Ejercicio_Completar;
+import com.example.myapplication.logica.Ejercicio_Completar_Frase_NO_Opciones;
 import com.example.myapplication.logica.Ejercicio_Tres_Opciones;
-import com.google.android.material.snackbar.Snackbar;
+import com.example.myapplication.room_database.palabras.Sound;
+import com.example.myapplication.room_database.palabras.SoundRepository;
 import com.google.android.material.textfield.TextInputLayout;
 
-public class Configuracion extends AppCompatActivity {
-    String[] ruido = {"Ambulancia", "Tráfico", "Multitud de gente", "Recreo de niños"};
+import java.util.ArrayList;
+import java.util.List;
 
+public class Configuracion extends AppCompatActivity {
 
     AutoCompleteTextView spinnerCategoria, spinnerSubCategoria, spinnerRuido, spinnerTipoEjercicio;
     TextInputLayout textInputCategoria, textInputSubcategoria, textInputTipoEjercicio, textInputRuido;
@@ -42,7 +44,7 @@ public class Configuracion extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_configuracion);
         final Toolbar toolbar = findViewById(R.id.toolbar_configuracion);
-        toolbar.setTitle("Configuracion");
+        toolbar.setTitle("Configuración");
         setSupportActionBar(toolbar);
         getSupportActionBar().setHomeButtonEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -55,12 +57,30 @@ public class Configuracion extends AppCompatActivity {
         textInputSubcategoria = findViewById(R.id.textInput_subcategoria);
         textInputTipoEjercicio = findViewById(R.id.textInput_tipoEjercicio);
         adapterCategoria = new ArrayAdapter<>(getApplicationContext(), R.layout.dropdown_menu_popup_item, Constantes.CATEGORIAS);
-        adapterSubCategoria = new ArrayAdapter<>(getApplicationContext(), R.layout.dropdown_menu_popup_item, Constantes.SUBCATEGORIAS);
+        adapterSubCategoria = new ArrayAdapter<>(getApplicationContext(), R.layout.dropdown_menu_popup_item, Constantes.SUBCATEGORIAS_PALABRAS);
         adapterEjercicio = new ArrayAdapter<>(getApplicationContext(), R.layout.dropdown_menu_popup_item, Constantes.TIPOS_EJERCICIOS);
-        adapterRuido = new ArrayAdapter<>(getApplicationContext(), R.layout.dropdown_menu_popup_item, ruido);
         spinnerCategoria.setAdapter(adapterCategoria);
         spinnerTipoEjercicio.setAdapter(adapterEjercicio);
+
+
+
+        final ArrayList<String> ruidosList = new ArrayList<>();
+        adapterRuido = new ArrayAdapter<>(getApplicationContext(), R.layout.dropdown_menu_popup_item, ruidosList);
         spinnerRuido.setAdapter(adapterRuido);
+
+        SoundRepository sr = new SoundRepository(getApplication());
+        sr.getRuidosSounds().observe(this, new Observer<List<Sound>>() {
+            @Override
+            public void onChanged(List<Sound> sounds) {
+                for(int i = 0; i< sounds.size(); i++){
+                    ruidosList.add(sounds.get(i).getNombre_sonido());
+                }
+                adapterRuido.notifyDataSetChanged();
+
+            }
+        });
+
+
 
         spinnerCategoria.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -70,9 +90,16 @@ public class Configuracion extends AppCompatActivity {
 
                     //FONEMA, PALABRA, ORACIONES, CANCIONES, INSTRUMENTOS, ESTILOS_MUSICALES, VOCES_FAMILIARES
                     case (Constantes.PALABRA):
-
                         spinnerSubCategoria.setAdapter(adapterSubCategoria);
                         break;
+
+                    case (Constantes.ORACIONES):
+                        adapterEjercicio = new ArrayAdapter<>(getApplicationContext(), R.layout.dropdown_menu_popup_item, Constantes.TIPOS_EJERCICIOS_ORACIONES);
+                        spinnerTipoEjercicio.setAdapter(adapterEjercicio);
+                        spinnerSubCategoria.dismissDropDown();
+                        confSubDato= Constantes.ORACIONES;
+                        break;
+
                 }
             }
         });
@@ -165,6 +192,17 @@ public class Configuracion extends AppCompatActivity {
                             intent.putExtra("intensidad",confIntensidad);
                             startActivity(intent);
                             break;
+
+                        case Constantes.IDENTIFICAR_CINCO_OPCIONES:
+                            Intent intent3 = new Intent(getApplicationContext(), Ejercicio_Cinco_Opciones.class);
+                            if (!switchRuido.isChecked()) {
+                                confRuido = "Sin Ruido";
+                            }
+                            intent3.putExtra("subDato", confSubDato);
+                            intent3.putExtra("tipoRuido", confRuido);
+                            intent3.putExtra("intensidad",confIntensidad);
+                            startActivity(intent3);
+                            break;
                         case Constantes.ESCRIBIR_LO_QUE_OYO:
                             Intent intent2 = new Intent(getApplicationContext(), Ejercicio_Completar.class);
                             if (!switchRuido.isChecked()) {
@@ -176,10 +214,20 @@ public class Configuracion extends AppCompatActivity {
                             startActivity(intent2);
                             break;
 
+
+                        case Constantes.COMPLETAR_ORACION_SIN_OPCIONES:
+                            Intent intent4 = new Intent(getApplicationContext(), Ejercicio_Completar_Frase_NO_Opciones.class);
+                            if (!switchRuido.isChecked()) {
+                                confRuido = "Sin Ruido";
+                            }
+                            intent4.putExtra("subDato", confSubDato);
+                            intent4.putExtra("tipoRuido", confRuido);
+                            intent4.putExtra("intensidad",confIntensidad);
+                            startActivity(intent4);
+                            break;
+
                     }
                 }
-
-
 
             }
         });
@@ -201,7 +249,7 @@ public class Configuracion extends AppCompatActivity {
             textInputCategoria.setErrorEnabled(false);
         }
 
-        if (spinnerSubCategoria.getText().toString().isEmpty()) {
+        if (spinnerSubCategoria.getText().toString().isEmpty() && !spinnerCategoria.getText().toString().equals(Constantes.ORACIONES)) {
             textInputSubcategoria.setError("Seleccione una subcategoría");
         } else {
             textInputSubcategoria.setErrorEnabled(false);

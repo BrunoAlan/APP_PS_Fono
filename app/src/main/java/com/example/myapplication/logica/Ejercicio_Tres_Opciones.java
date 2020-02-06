@@ -5,7 +5,6 @@ import android.view.View;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageButton;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
@@ -25,8 +24,7 @@ import java.util.Random;
 public class Ejercicio_Tres_Opciones extends AppCompatActivity {
     public SoundRepository sr;
     List<Sound> listaSonidos;
-    int puntos;
-    int cantEjercicios;
+    int puntajeCorrecto, puntajeIncorrecto;
     int opcionCorrecta;
     String ruido;
     float intensidad;
@@ -35,12 +33,16 @@ public class Ejercicio_Tres_Opciones extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.ejercicio_tres_opciones);
-        puntos = 0;
-        cantEjercicios = 0;
+        puntajeCorrecto = 0;
+        puntajeIncorrecto=0;
+
+
+        //DAtos pasados desde la confifuracion
         String subdato = getIntent().getStringExtra("subDato");
         ruido = getIntent().getStringExtra("tipoRuido");
         intensidad = getIntent().getFloatExtra("intensidad", .1f);
         System.out.println(ruido);
+
 
 
         sr = new SoundRepository(getApplication());
@@ -72,14 +74,39 @@ public class Ejercicio_Tres_Opciones extends AppCompatActivity {
                     }
                 });
                 break;
+
+            case Constantes.COLORES:
+                sr.getColoresSounds().observe(this, new Observer<List<Sound>>() {
+                    @Override
+                    public void onChanged(List<Sound> sounds) {
+                        listaSonidos = sounds;
+                        setup();
+                    }
+                });
+                break;
+
+            case Constantes.ORACIONES:
+                sr.getOracionesSounds().observe(this, new Observer<List<Sound>>() {
+                    @Override
+                    public void onChanged(List<Sound> sounds) {
+                        listaSonidos= sounds;
+                        setup();
+                    }
+                });
+                break;
         }
     }
+
+
+
+
 
     void setup() {
         final MaterialButton btn1 = findViewById(R.id.opcion1);
         final MaterialButton btn2 = findViewById(R.id.opcion2);
         final MaterialButton btn3 = findViewById(R.id.opcion3);
-        final TextView puntaje = findViewById(R.id.puntaje);
+        final TextView tvPuntajeCorrecto = findViewById(R.id.puntaje);
+        final TextView tvPuntajeIncorrecto = findViewById(R.id.puntajeIncorrecto);
         final ImageButton btnPlay = findViewById(R.id.imageButton);
 
         final ArrayList tresOpciones = obtenerNumero();//genero 3 numeros aleatorios para poner los dias en los botones
@@ -95,8 +122,14 @@ public class Ejercicio_Tres_Opciones extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (activarSonido()) {
-                    ReproductorDeAudioController rp = new ReproductorDeAudioController();
-                    rp.startSoundWithNoise(listaSonidos.get((Integer) tresOpciones.get(opcionCorrecta)).getRuta_sonido(), R.raw.ruido_personas, intensidad, getApplicationContext());
+                    sr.getRutaSonido(ruido).observe(Ejercicio_Tres_Opciones.this, new Observer<List<Sound>>() {
+                        @Override
+                        public void onChanged(List<Sound> sounds) {
+                            ReproductorDeAudioController rp = new ReproductorDeAudioController();
+                            rp.startSoundWithNoise(listaSonidos.get((Integer) tresOpciones.get(opcionCorrecta)).getRuta_sonido(), sounds.get(0).getRuta_sonido(), intensidad, getApplicationContext());
+                        }
+                    });
+
                 } else {
                     ReproductorDeAudioController rp = new ReproductorDeAudioController();
                     rp.startSoundNoNoise(listaSonidos.get((Integer) tresOpciones.get(opcionCorrecta)).getRuta_sonido(), getApplicationContext());
@@ -107,14 +140,16 @@ public class Ejercicio_Tres_Opciones extends AppCompatActivity {
         btn1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                cantEjercicios++;
+
                 if (listaSonidos.get((Integer) tresOpciones.get(opcionCorrecta)).getNombre_sonido() == btn1.getText()) {
-                    Toast.makeText(getApplicationContext(), "Correcto", Toast.LENGTH_SHORT).show();
-                    modificarPuntaje(puntaje);
+
+                    modificarPuntaje(tvPuntajeCorrecto);
+                    btn1.startAnimation(AnimationUtils.loadAnimation(getApplicationContext(),R.anim.bounce));
                     setup();
                 } else {
+                    modificarPuntaje(tvPuntajeIncorrecto);
                     btn1.startAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.shake_animation));
-                    Toast.makeText(getApplicationContext(), "Incorrecto", Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(getApplicationContext(), "Incorrecto", Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -122,14 +157,16 @@ public class Ejercicio_Tres_Opciones extends AppCompatActivity {
         btn2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                cantEjercicios++;
+
                 if (listaSonidos.get((Integer) tresOpciones.get(opcionCorrecta)).getNombre_sonido() == btn2.getText()) {
-                    Toast.makeText(getApplicationContext(), "Correcto", Toast.LENGTH_SHORT).show();
-                    modificarPuntaje(puntaje);
+                    //Toast.makeText(getApplicationContext(), "Correcto", Toast.LENGTH_SHORT).show();
+                    modificarPuntaje(tvPuntajeCorrecto);
+                    btn2.startAnimation(AnimationUtils.loadAnimation(getApplicationContext(),R.anim.bounce));
                     setup();
                 } else {
+                    modificarPuntaje(tvPuntajeIncorrecto);
                     btn2.startAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.shake_animation));
-                    Toast.makeText(getApplicationContext(), "Incorrecto", Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(getApplicationContext(), "Incorrecto", Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -137,15 +174,17 @@ public class Ejercicio_Tres_Opciones extends AppCompatActivity {
         btn3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                cantEjercicios++;
+
                 System.out.println(btn3.getText() + listaSonidos.get(opcionCorrecta).getNombre_sonido());
                 if (listaSonidos.get((Integer) tresOpciones.get(opcionCorrecta)).getNombre_sonido() == btn3.getText()) {
-                    Toast.makeText(getApplicationContext(), "Correcto", Toast.LENGTH_SHORT).show();
-                    modificarPuntaje(puntaje);
+                    // Toast.makeText(getApplicationContext(), "Correcto", Toast.LENGTH_SHORT).show();
+                    modificarPuntaje(tvPuntajeCorrecto);
+                    btn3.setAnimation(AnimationUtils.loadAnimation(getApplicationContext(),R.anim.bounce));
                     setup();
                 } else {
+                    modificarPuntaje(tvPuntajeIncorrecto);
                     btn3.startAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.shake_animation));
-                    Toast.makeText(getApplicationContext(), "Incorrecto", Toast.LENGTH_SHORT).show();
+                    // Toast.makeText(getApplicationContext(), "Incorrecto", Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -175,8 +214,15 @@ public class Ejercicio_Tres_Opciones extends AppCompatActivity {
     }
 
     void modificarPuntaje(TextView puntaje) {
-        puntos++;
-        String points = Integer.toString(puntos);
+        String points = null;
+        if(puntaje.getId() == R.id.puntaje){
+            puntajeCorrecto++;
+            points = Integer.toString(puntajeCorrecto);
+        }
+        if(puntaje.getId() == R.id.puntajeIncorrecto){
+            puntajeIncorrecto++;
+            points = Integer.toString(puntajeIncorrecto);
+        }
         puntaje.setText(points);
     }
 

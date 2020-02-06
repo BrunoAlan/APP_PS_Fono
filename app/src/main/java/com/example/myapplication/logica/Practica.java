@@ -5,8 +5,6 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
-import android.widget.Spinner;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -37,7 +35,7 @@ public class Practica extends AppCompatActivity implements LifecycleOwner {
         toolbar.setTitle("Práctica");
 
         AutoCompleteTextView mSpinner = findViewById(R.id.spinner);
-        ArrayAdapter<String> mAdapterFilter = new ArrayAdapter<>(getApplicationContext(),R.layout.dropdown_menu_popup_item,Constantes.SUBCATEGORIAS);
+        ArrayAdapter<String> mAdapterFilter = new ArrayAdapter<>(getApplicationContext(), R.layout.dropdown_menu_popup_item, Constantes.FILTRO_PRACTICA);
         mSpinner.setAdapter(mAdapterFilter);
         soundViewModel = ViewModelProviders.of(this).get(SoundViewModel.class);
 
@@ -57,12 +55,22 @@ public class Practica extends AppCompatActivity implements LifecycleOwner {
         });
 
 
-
         mSpinner.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 String categoria = parent.getItemAtPosition(position).toString();
                 switch (categoria) {
+
+                    case (Constantes.TODAS):
+                        soundViewModel.getAllSounds().observe(Practica.this, new Observer<List<Sound>>() {
+                            @Override
+                            public void onChanged(List<Sound> sounds) {
+                                adapter.submitList(sounds);
+                            }
+                        });
+                        break;
+
+
                     case (Constantes.MESES):
                         soundViewModel.getMesesSounds().observe(Practica.this, new Observer<List<Sound>>() {
                             @Override
@@ -77,7 +85,6 @@ public class Practica extends AppCompatActivity implements LifecycleOwner {
                                     @Override
                                     public void onChanged(List<Sound> sounds) {
                                         adapter.submitList(sounds);
-                                        
                                     }
                                 }
                         );
@@ -101,7 +108,23 @@ public class Practica extends AppCompatActivity implements LifecycleOwner {
                         });
                         break;
 
+                    case (Constantes.RUIDO):
+                        soundViewModel.getRuidosSounds().observe(Practica.this, new Observer<List<Sound>>() {
+                            @Override
+                            public void onChanged(List<Sound> sounds) {
+                                adapter.submitList(sounds);
+                            }
+                        });
+                        break;
 
+                    case (Constantes.ORACIONES):
+                        soundViewModel.getOracionesSounds().observe(Practica.this, new Observer<List<Sound>>() {
+                            @Override
+                            public void onChanged(List<Sound> sounds) {
+                                adapter.submitList(sounds);
+                            }
+                        });
+                        break;
                 }
             }
         });
@@ -110,10 +133,10 @@ public class Practica extends AppCompatActivity implements LifecycleOwner {
         adapter.setOnItemClickListener(new SoundsAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(Sound sound) {
-                if(sound.getPersonalizado().equals(Constantes.PERSONALIZADO)){
+                if (sound.getPersonalizado().equals(Constantes.PERSONALIZADO)) {
                     rp.playSonidoPersonalizado(sound.getRuta_sonido());
-                }else {
-                    Toast.makeText(Practica.this, sound.getNombre_sonido(), Toast.LENGTH_SHORT).show();
+                } else {
+                    // Toast.makeText(Practica.this, sound.getNombre_sonido(), Toast.LENGTH_SHORT).show();
                     rp.startSoundNoNoise(sound.getRuta_sonido(), Practica.this);
 
                 }
@@ -125,45 +148,3 @@ public class Practica extends AppCompatActivity implements LifecycleOwner {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-       /*
-
-        SoundsAdapter adapter = new SoundsAdapter(listDatos);
-        adapter.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-//                MediaPlayer mp = MediaPlayer.create(getApplicationContext(),
-//                        listDatos.get(recycler.getChildAdapterPosition(v)).getRuta());
-               // play();
-                startSound(listDatos.get(recycler.getChildAdapterPosition(v)).getRuta_sonido());
-
-
-            }
-        });
-        recycler.setAdapter(adapter);
-    }
-
-
-
-
-
-
-}
-*/

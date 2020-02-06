@@ -12,7 +12,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".AdminitrarSonidos"></activity>
+        <activity android:name=".logica.Ejercicio_Completar_Frase_NO_Opciones"></activity>
+        <activity android:name=".logica.Ejercicio_Cinco_Opciones" />
+        <activity android:name=".AdminitrarSonidos" />
         <activity
             android:name=".AgregarSonido"
             android:theme="@style/AppTheme.PopUpGrabar" />
@@ -24,9 +26,14 @@
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <meta-data
+            android:name="preloaded_fonts"
+            android:resource="@array/preloaded_fonts" />
     </application>
 
 </manifest>

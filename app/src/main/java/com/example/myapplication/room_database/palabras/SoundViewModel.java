@@ -16,6 +16,8 @@ public class SoundViewModel extends AndroidViewModel {
     private LiveData<List<Sound>> numerosSounds;
     private LiveData<List<Sound>> mesesSounds;
     private LiveData<List<Sound>> coloresSounds;
+    private LiveData<List<Sound>> ruidosSounds;
+    private LiveData<List<Sound>> oracionesSounds;
 
 
     public SoundViewModel(@NonNull Application application) {
@@ -26,6 +28,8 @@ public class SoundViewModel extends AndroidViewModel {
         numerosSounds = repository.getNumerosSounds();
         mesesSounds = repository.getMesesSounds();
         coloresSounds = repository.getColoresSounds();
+        ruidosSounds = repository.getRuidosSounds();
+        oracionesSounds = repository.getOracionesSounds();
     }
 
     public void agregarSonido(Sound sound) {
@@ -52,6 +56,10 @@ public class SoundViewModel extends AndroidViewModel {
     public LiveData<List<Sound>> getMesesSounds() { return mesesSounds; }
 
     public LiveData<List<Sound>> getColoresSounds() { return coloresSounds; }
+
+    public LiveData<List<Sound>> getRuidosSounds() { return ruidosSounds; }
+
+    public LiveData<List<Sound>> getOracionesSounds() { return oracionesSounds; }
 
 
 

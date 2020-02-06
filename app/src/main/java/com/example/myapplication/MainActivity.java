@@ -9,7 +9,6 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.viewpager.widget.ViewPager;
 
@@ -84,11 +83,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
         int id = menuItem.getItemId();
-        if (id == R.id.añadirSonido) {
-            Intent intent = new Intent(getApplicationContext(), ConfiguracionAgregarSonido.class);
-            miDrawerLayout.closeDrawer(GravityCompat.START);
-            startActivity(intent);
-        }
         if(id== R.id.administrarSonidos){
             Intent intent = new Intent(getApplicationContext(),AdminitrarSonidos.class);
             startActivity(intent);

@@ -21,7 +21,21 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@drawable/gradient_navigation">
+            android:background="@color/fondoGrabar">
+
+            <Button
+                android:id="@+id/aceptar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp"
+
+                android:layout_marginBottom="8dp"
+                android:text="Aceptar"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toStartOf="parent" />
 
             <Button
                 android:id="@+id/btn_grabar"
@@ -42,7 +56,9 @@
                 app:layout_constraintBottom_toTopOf="@+id/btn_play"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/btn_grabar" />
+                app:layout_constraintTop_toBottomOf="@+id/btn_grabar"
+                android:drawableLeft="@drawable/ic_pause_black_24dp"
+                />
 
             <Button
                 android:id="@+id/btn_play"
@@ -52,15 +68,26 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/btn_parar" />
+                app:layout_constraintTop_toBottomOf="@+id/btn_parar"
+                android:drawableLeft="@drawable/ic_play_arrow_black_24dp"/>
 
-
-
+            <TextView
+                android:background="@color/fondoGrabar"
+                android:id="@+id/textView4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="Grabar nuevo sonido"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:textSize="18dp"
+                android:textStyle="bold"
+                android:textAlignment="center"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp"/>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-
 
     </androidx.cardview.widget.CardView>
 

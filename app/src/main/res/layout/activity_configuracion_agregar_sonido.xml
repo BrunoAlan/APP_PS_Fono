@@ -8,30 +8,28 @@
 
 
     <Button
-        android:id="@+id/btn_conf_seleccionar"
+        android:id="@+id/btn_guardar"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="6dp"
-        android:layout_marginTop="136dp"
-        android:text="Seleccionar"
+        android:layout_marginBottom="272dp"
+        android:text="Guardar"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/btn_conf_grabar"
-        app:layout_constraintTop_toBottomOf="@+id/textInputLayout3" />
+        app:layout_constraintStart_toEndOf="@+id/btn_conf_grabar" />
 
     <Button
         android:id="@+id/btn_conf_grabar"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="6dp"
-        android:layout_marginTop="136dp"
+        android:layout_marginBottom="272dp"
         android:text="Grabar"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/btn_conf_seleccionar"
+        app:layout_constraintEnd_toStartOf="@+id/btn_guardar"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textInputLayout3" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
@@ -47,46 +45,48 @@
 
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/textInputLayout2"
-        app:boxBackgroundColor="@color/colorWhite"
+
+        android:id="@+id/textInputNombre"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="6dp"
+        android:layout_marginLeft="8dp"
         android:layout_marginTop="20dp"
-        android:layout_marginRight="6dp"
+        android:layout_marginRight="8dp"
+        app:boxBackgroundColor="@color/colorWhite"
         app:layout_constraintTop_toBottomOf="@+id/toolbar"
-        tools:layout_editor_absoluteX="0dp"
-        >
+        tools:layout_editor_absoluteX="0dp">
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:inputType="textCapSentences"
+        <EditText
+
+            android:id="@+id/textInput_nombreSonido"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Nombre del nuevo sonido">
+            android:hint="Nombre del nuevo sonido"
+            android:inputType="textCapSentences">
 
-        </com.google.android.material.textfield.TextInputEditText>
+        </EditText>
     </com.google.android.material.textfield.TextInputLayout>
 
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/textInputLayout3"
+        android:id="@+id/textInputCategorias"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="6dp"
         android:layout_marginTop="36dp"
         android:layout_marginRight="6dp"
-        app:layout_constraintTop_toBottomOf="@+id/textInputLayout2"
+        app:layout_constraintTop_toBottomOf="@+id/textInputNombre"
         tools:layout_editor_absoluteX="0dp">
 
-        <AutoCompleteTextView
-            android:id="@+id/filled_exposed_dropdown"
+        <androidx.appcompat.widget.AppCompatAutoCompleteTextView
+            android:id="@+id/spinnerCategorias"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:editable="false"
             android:hint="Categoría sonido"
             tools:layout_editor_absoluteX="-1dp"
-            tools:layout_editor_absoluteY="169dp"
-            android:editable="false"/>
+            tools:layout_editor_absoluteY="169dp" />
     </com.google.android.material.textfield.TextInputLayout>
 
 

@@ -5,6 +5,8 @@ import android.os.AsyncTask;
 
 import androidx.lifecycle.LiveData;
 
+import com.example.myapplication.room_database.SoundDatabase;
+
 import java.util.List;
 
 
@@ -15,6 +17,9 @@ public class SoundRepository {
     private LiveData<List<Sound>> numerosSounds;
     private LiveData<List<Sound>> mesesSounds;
     private LiveData<List<Sound>> coloresSounds;
+    private LiveData<List<Sound>> ruidosSounds;
+    private LiveData<List<Sound>> rutaRuido;
+    private LiveData<List<Sound>> oracionesSounds;
 
 
     public SoundRepository(Application application) {
@@ -25,6 +30,9 @@ public class SoundRepository {
         numerosSounds = soundDao.getListOfNumeros();
         mesesSounds = soundDao.getListOfMeses();
         coloresSounds = soundDao.getListOfColores();
+        ruidosSounds = soundDao.getListOfRuido();
+        oracionesSounds = soundDao.getListOfOraciones();
+
 
     }
 
@@ -55,6 +63,21 @@ public class SoundRepository {
     public LiveData<List<Sound>> getColoresSounds() {
         return coloresSounds;
     }
+
+    public LiveData<List<Sound>> getOracionesSounds() {
+        return oracionesSounds;
+    }
+
+    public LiveData<List<Sound>> getRuidosSounds() {
+        return ruidosSounds;
+    }
+
+    public LiveData<List<Sound>> getRutaSonido(String nombreSonido) {
+        return soundDao.getRutaSonido(nombreSonido);
+    }
+
+
+
 
     private static class eliminarSonidoAsynkTask extends AsyncTask<Sound, Void, Void> {
         private SoundDao soundDao;

@@ -12,10 +12,8 @@ import java.util.List;
 @Dao
 public interface SoundDao {
 
-
     @Query("SELECT * FROM sonidos")
     LiveData<List<Sound>> getSoundList();
-
 
     @Query("SELECT * FROM sonidos WHERE categoria_sonido= 'Números' ")
     LiveData<List<Sound>> getListOfNumeros();
@@ -28,6 +26,15 @@ public interface SoundDao {
 
     @Query("SELECT * FROM sonidos WHERE categoria_sonido='Colores'")
     LiveData<List<Sound>> getListOfColores();
+
+    @Query("SELECT * FROM sonidos WHERE categoria_sonido='Ruido'")
+    LiveData<List<Sound>> getListOfRuido();
+
+    @Query("SELECT * FROM sonidos WHERE categoria_sonido='Oraciones'")
+    LiveData<List<Sound>> getListOfOraciones();
+
+    @Query("SELECT * FROM sonidos WHERE nombre_sonido = :nombreSonido ")
+    LiveData<List<Sound>> getRutaSonido(String nombreSonido);
 
     @Query("DELETE FROM sonidos")
     void borrarTodos();

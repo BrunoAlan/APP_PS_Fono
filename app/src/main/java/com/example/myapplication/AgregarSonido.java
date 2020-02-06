@@ -1,4 +1,6 @@
 package com.example.myapplication;
+
+import android.content.Intent;
 import android.media.MediaPlayer;
 import android.media.MediaRecorder;
 import android.os.Bundle;
@@ -14,21 +16,19 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProviders;
 
-import com.example.myapplication.datos.Constantes;
-import com.example.myapplication.room_database.palabras.Sound;
-import com.example.myapplication.room_database.palabras.SoundDao;
 import com.example.myapplication.room_database.palabras.SoundViewModel;
-
-import org.json.JSONObject;
 
 import java.io.File;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class AgregarSonido extends AppCompatActivity {
     String outputFile;
-    Button grabar, pausar, play;
-    private MediaRecorder mAudioRecorder;
+    String date;
+    Button grabar, pausar, play, aceptar;
     SoundViewModel soundViewModel;
+    private MediaRecorder mAudioRecorder;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,24 +41,29 @@ public class AgregarSonido extends AppCompatActivity {
         getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
         int with = displayMetrics.widthPixels;
         int hight = displayMetrics.heightPixels;
-        getWindow().setLayout((int)(with*.8),(int)(hight*.7));
+        getWindow().setLayout((int) (with * .8), (int) (hight * .7));
 
         WindowManager.LayoutParams params = getWindow().getAttributes();
         params.gravity = Gravity.CENTER;
-        params.x=0;
-        params.y=-20;
+        params.x = 0;
+        params.y = -20;
         getWindow().setAttributes(params);
 
         grabar = findViewById(R.id.btn_grabar);
         pausar = findViewById(R.id.btn_parar);
         play = findViewById(R.id.btn_play);
+        aceptar = findViewById(R.id.aceptar);
 
         pausar.setEnabled(false);
         play.setEnabled(false);
+        aceptar.setEnabled(false);
         checkFolder();
-        outputFile = Environment.getExternalStorageDirectory().getAbsolutePath() + "/FonoApp_Sonidos/archivo.3gp";
+        date = new SimpleDateFormat("yyyy-MM-dd hh-mm-ss").format(new Date());
+        Log.d("fecha", date);
+        final String nombreFile = Environment.getExternalStorageDirectory().getAbsolutePath() + "/FonoApp_Sonidos/" + date + ".3gp";
+        Log.d("nombre file", nombreFile);
+        //outputFile = Environment.getExternalStorageDirectory().getAbsolutePath() + "/FonoApp_Sonidos/archivo.3gp";
 
-        Log.d("ruta", outputFile);
 
         grabar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -69,7 +74,7 @@ public class AgregarSonido extends AppCompatActivity {
                 mAudioRecorder.setAudioEncoder(MediaRecorder.AudioEncoder.AAC);
                 mAudioRecorder.setAudioEncodingBitRate(128000);
                 mAudioRecorder.setAudioSamplingRate(96000);
-                mAudioRecorder.setOutputFile(outputFile);
+                mAudioRecorder.setOutputFile(nombreFile);
                 try {
                     mAudioRecorder.prepare();
                     mAudioRecorder.start();
@@ -93,13 +98,10 @@ public class AgregarSonido extends AppCompatActivity {
                 grabar.setEnabled(true);
                 pausar.setEnabled(false);
                 play.setEnabled(true);
+                aceptar.setEnabled(true);
                 Toast.makeText(AgregarSonido.this, "Audio grabado correctamente", Toast.LENGTH_SHORT).show();
-                Sound mSound = new Sound("test", Constantes.DIAS_SEMANA,outputFile,Constantes.PERSONALIZADO);
-                soundViewModel.agregarSonido(mSound);
+
             }
-
-
-
         });
 
         play.setOnClickListener(new View.OnClickListener() {
@@ -107,7 +109,7 @@ public class AgregarSonido extends AppCompatActivity {
             public void onClick(View v) {
                 MediaPlayer mMediaPlayer = new MediaPlayer();
                 try {
-                    mMediaPlayer.setDataSource(outputFile);
+                    mMediaPlayer.setDataSource(nombreFile);
                     mMediaPlayer.prepare();
                     mMediaPlayer.start();
                 } catch (IOException e) {
@@ -115,6 +117,18 @@ public class AgregarSonido extends AppCompatActivity {
                 }
             }
         });
+
+        aceptar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent();
+                intent.putExtra("Resultado", nombreFile);
+                setResult(RESULT_OK, intent);
+                finish();
+            }
+        });
+
+
     }
 
 

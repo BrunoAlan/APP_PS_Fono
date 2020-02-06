@@ -4,4 +4,5 @@
     <color name="colorPrimaryDark">#003c8f</color>
     <color name="colorAccent">#5e92f3</color>
     <color name="colorWhite">#ffffff</color>
+    <color name="fondoGrabar">#EDEDFA</color>
 </resources>
