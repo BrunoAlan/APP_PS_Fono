@@ -12,7 +12,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".AdministrarResultados"></activity>
+        <activity android:name=".DetalleResultado"></activity>
+        <activity android:name=".AdministrarResultados" />
         <activity android:name=".logica.Ejercicio_Completar_Frase_NO_Opciones" />
         <activity android:name=".logica.Ejercicio_Cinco_Opciones" />
         <activity android:name=".AdminitrarSonidos" />

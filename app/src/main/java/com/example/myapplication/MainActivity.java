@@ -33,6 +33,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     void setup() {
 
+
+
+
         miDrawerLayout = findViewById(R.id.drower_layout);
         mToggle = new ActionBarDrawerToggle(this, miDrawerLayout, R.string.close, R.string.open);
         miDrawerLayout.addDrawerListener(mToggle);

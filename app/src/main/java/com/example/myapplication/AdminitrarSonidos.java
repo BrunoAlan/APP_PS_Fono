@@ -66,7 +66,7 @@ public class AdminitrarSonidos extends AppCompatActivity {
         soundsAdapter.setOnItemClickListener( new SoundsAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(Sound sound) {
-                Toast.makeText(AdminitrarSonidos.this, sound.getNombre_sonido(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(AdminitrarSonidos.this, sound.getId(), Toast.LENGTH_SHORT).show();
             }
         });
 

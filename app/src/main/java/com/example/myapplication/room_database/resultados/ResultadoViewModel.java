@@ -19,9 +19,16 @@ public class ResultadoViewModel extends AndroidViewModel {
     }
 
 
-    public void agregarResultado(Resultado resultado){resultadoRepository.agregarResultado(resultado);}
+    public void agregarResultado(Resultado resultado) {
 
-    public void eliminarResultado(Resultado resultado){resultadoRepository.eliminarResultado(resultado);}
 
-    public LiveData<List<Resultado>> getAllResultadoos() {return allResultadoos;}
+    }
+
+    public void eliminarResultado(Resultado resultado) {
+        resultadoRepository.eliminarResultado(resultado);
+    }
+
+    public LiveData<List<Resultado>> getAllResultadoos() {
+        return allResultadoos;
+    }
 }

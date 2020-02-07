@@ -1,7 +1,7 @@
 package com.example.myapplication;
 
+import android.content.Intent;
 import android.os.Bundle;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -65,7 +65,17 @@ public class AdministrarResultados extends AppCompatActivity {
         resultadosAdapter.setOnItemClickListener(new ResultadosAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(Resultado resultado) {
-                Toast.makeText(AdministrarResultados.this, resultado.getFecha(), Toast.LENGTH_SHORT).show();
+                //Toast.makeText(AdministrarResultados.this, resultado.getId()+"", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(getApplicationContext(), DetalleResultado.class);
+                intent.putExtra("fecha", resultado.getFecha());
+                intent.putExtra("ejercicio", resultado.getTipo_ejercicio());
+                intent.putExtra("categoria", resultado.getCategoria());
+                intent.putExtra("ruido", resultado.getRuido());
+                intent.putExtra("intensidad", resultado.getIntensidad());
+                intent.putExtra("errores", resultado.getErrores());
+                intent.putExtra("resultado", resultado.getResultado());
+                intent.putExtra("volverMenu",false);
+                startActivity(intent);
             }
         });
     }

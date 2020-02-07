@@ -51,7 +51,7 @@ public class ResultadosAdapter extends ListAdapter<Resultado, ResultadosAdapter.
         holder.textViewCategoria.setText(currentResultado.getCategoria());
         holder.textViewEjercicio.setText(currentResultado.getTipo_ejercicio());
         holder.textViewRuido.setText(currentResultado.getRuido());
-        holder.textViewResultados.setText(currentResultado.getResultado());
+        holder.textViewResultados.setText(currentResultado.getResultado()+"/10");
     }
 
     public Resultado getResultadoAt(int position) {

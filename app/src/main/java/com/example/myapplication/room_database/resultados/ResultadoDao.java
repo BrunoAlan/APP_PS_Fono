@@ -11,7 +11,7 @@ import java.util.List;
 @Dao
 public interface ResultadoDao {
 
-    @Query("SELECT * FROM  resultados" )
+    @Query("SELECT * FROM  resultados order by id DESC"   )
     LiveData<List<Resultado>> getAllResultados();
 
     @Query("DELETE FROM resultados")

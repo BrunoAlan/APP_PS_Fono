@@ -1,37 +1,45 @@
 package com.example.myapplication.logica;
 
+import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageButton;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
 
 import com.example.myapplication.Cotrollers.ReproductorDeAudioController;
+import com.example.myapplication.DetalleResultado;
 import com.example.myapplication.R;
 import com.example.myapplication.datos.Constantes;
 import com.example.myapplication.room_database.palabras.Sound;
 import com.example.myapplication.room_database.palabras.SoundRepository;
+import com.example.myapplication.room_database.resultados.Resultado;
+import com.example.myapplication.room_database.resultados.ResultadoRepository;
 import com.google.android.material.button.MaterialButton;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Collections;
+import java.util.Date;
 import java.util.List;
 import java.util.Random;
 
 public class Ejercicio_Tres_Opciones extends AppCompatActivity {
     public SoundRepository sr;
     List<Sound> listaSonidos;
-    int puntajeCorrecto, puntajeIncorrecto,repeticiones;
+    int puntajeCorrecto, puntajeIncorrecto, repeticiones;
     int opcionCorrecta;
     String ruido;
     String modo;
+    String subdato;
+    String errores = "";
     float intensidad;
-
+    double intensidadPorcentual;
 
 
     @Override
@@ -39,29 +47,24 @@ public class Ejercicio_Tres_Opciones extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.ejercicio_tres_opciones);
         puntajeCorrecto = 0;
-        puntajeIncorrecto=0;
-        repeticiones=0;
+        puntajeIncorrecto = 0;
+        repeticiones = 0;
 
 
         //DAtos pasados desde la confifuracion
-        String subdato = getIntent().getStringExtra("subDato");
+        subdato = getIntent().getStringExtra("subDato");
         ruido = getIntent().getStringExtra("tipoRuido");
         intensidad = getIntent().getFloatExtra("intensidad", .1f);
         modo = getIntent().getStringExtra("modo");
-        double intensidadPorcentual = Math.floor(intensidad * 100);
-        System.out.println(ruido);
-        Log.d("intensidad", intensidadPorcentual + "%");
-        Log.d("modo", modo);
-
-
+        intensidadPorcentual = Math.floor(intensidad * 100);
 
         sr = new SoundRepository(getApplication());
-        switch (subdato){
+        switch (subdato) {
             case Constantes.DIAS_SEMANA:
                 sr.getDiasSounds().observe(this, new Observer<List<Sound>>() {
                     @Override
                     public void onChanged(List<Sound> sounds) {
-                        listaSonidos= sounds;
+                        listaSonidos = sounds;
                         setup();
                     }
                 });
@@ -99,16 +102,13 @@ public class Ejercicio_Tres_Opciones extends AppCompatActivity {
                 sr.getOracionesSounds().observe(this, new Observer<List<Sound>>() {
                     @Override
                     public void onChanged(List<Sound> sounds) {
-                        listaSonidos= sounds;
+                        listaSonidos = sounds;
                         setup();
                     }
                 });
                 break;
         }
     }
-
-
-
 
 
     void setup() {
@@ -124,8 +124,6 @@ public class Ejercicio_Tres_Opciones extends AppCompatActivity {
         System.out.println("randoms asd" + tresOpciones);
         Random rand = new Random();
         opcionCorrecta = rand.nextInt(tresOpciones.size());
-        System.out.println(opcionCorrecta);
-        System.out.println("randoms filtrado " + tresOpciones.get(opcionCorrecta));
 
 
         btnPlay.setOnClickListener(new View.OnClickListener() {
@@ -152,9 +150,10 @@ public class Ejercicio_Tres_Opciones extends AppCompatActivity {
             public void onClick(View v) {
                 if (listaSonidos.get((Integer) tresOpciones.get(opcionCorrecta)).getNombre_sonido() == btn1.getText()) {
                     modificarPuntaje(tvPuntajeCorrecto);
-                    btn1.startAnimation(AnimationUtils.loadAnimation(getApplicationContext(),R.anim.bounce));
+                    btn1.startAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.bounce));
                     setup();
                 } else {
+                    errores = errores + listaSonidos.get((Integer) tresOpciones.get(opcionCorrecta)).getNombre_sonido() + "\n";
                     modificarPuntaje(tvPuntajeIncorrecto);
                     btn1.startAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.shake_animation));
                 }
@@ -166,11 +165,11 @@ public class Ejercicio_Tres_Opciones extends AppCompatActivity {
             public void onClick(View v) {
 
                 if (listaSonidos.get((Integer) tresOpciones.get(opcionCorrecta)).getNombre_sonido() == btn2.getText()) {
-
                     modificarPuntaje(tvPuntajeCorrecto);
-                    btn2.startAnimation(AnimationUtils.loadAnimation(getApplicationContext(),R.anim.bounce));
+                    btn2.startAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.bounce));
                     setup();
                 } else {
+                    errores = errores + listaSonidos.get((Integer) tresOpciones.get(opcionCorrecta)).getNombre_sonido() + "\n";
                     modificarPuntaje(tvPuntajeIncorrecto);
                     btn2.startAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.shake_animation));
 
@@ -184,19 +183,16 @@ public class Ejercicio_Tres_Opciones extends AppCompatActivity {
 
                 System.out.println(btn3.getText() + listaSonidos.get(opcionCorrecta).getNombre_sonido());
                 if (listaSonidos.get((Integer) tresOpciones.get(opcionCorrecta)).getNombre_sonido() == btn3.getText()) {
-
                     modificarPuntaje(tvPuntajeCorrecto);
-                    btn3.setAnimation(AnimationUtils.loadAnimation(getApplicationContext(),R.anim.bounce));
+                    btn3.setAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.bounce));
                     setup();
                 } else {
+                    errores = errores + listaSonidos.get((Integer) tresOpciones.get(opcionCorrecta)).getNombre_sonido() + "\n";
                     modificarPuntaje(tvPuntajeIncorrecto);
                     btn3.startAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.shake_animation));
-
                 }
             }
         });
-
-
     }
 
     void setTexts(MaterialButton btn1, MaterialButton btn2, MaterialButton btn3, ArrayList tresOpciones) {
@@ -204,7 +200,6 @@ public class Ejercicio_Tres_Opciones extends AppCompatActivity {
         btn2.setText(listaSonidos.get((Integer) tresOpciones.get(1)).getNombre_sonido());
         btn3.setText(listaSonidos.get((Integer) tresOpciones.get(2)).getNombre_sonido());
     }
-
 
     ArrayList obtenerNumero() {
         ArrayList randoms = new ArrayList<>();
@@ -223,18 +218,33 @@ public class Ejercicio_Tres_Opciones extends AppCompatActivity {
     void modificarPuntaje(TextView puntaje) {
         String points = null;
 
-        if(puntaje.getId() == R.id.puntaje){
+        if (puntaje.getId() == R.id.puntaje) {
             puntajeCorrecto++;
             points = Integer.toString(puntajeCorrecto);
         }
-        if(puntaje.getId() == R.id.puntajeIncorrecto){
+        if (puntaje.getId() == R.id.puntajeIncorrecto) {
             puntajeIncorrecto++;
             points = Integer.toString(puntajeIncorrecto);
         }
         puntaje.setText(points);
 
-        if(modo.equals(Constantes.EVALUACION) && finEjercicio()){
-            Toast.makeText(Ejercicio_Tres_Opciones.this, "Puntaje Correcto" + puntajeCorrecto + " Puntaje Incorrecto " + puntajeIncorrecto, Toast.LENGTH_SHORT).show();
+        if (modo.equals(Constantes.EVALUACION) && finEjercicio()) {
+            //Toast.makeText(Ejercicio_Tres_Opciones.this, "Puntaje Correcto" + puntajeCorrecto + " Puntaje Incorrecto " + puntajeIncorrecto, Toast.LENGTH_SHORT).show();
+            Date date = Calendar.getInstance().getTime();
+            DateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+            String today = formatter.format(date);
+            ResultadoRepository resultadoRepository = new ResultadoRepository(getApplication());
+            Resultado resultado = new Resultado(today, Constantes.IDENTIFICAR_TRES_OPCIONES, subdato, ruido, intensidadPorcentual + "%", errores, puntajeCorrecto + "");
+            resultadoRepository.agregarResultado(resultado);
+            Intent intent = new Intent(getApplicationContext(), DetalleResultado.class);
+            intent.putExtra("fecha", today);
+            intent.putExtra("ejercicio", Constantes.IDENTIFICAR_TRES_OPCIONES);
+            intent.putExtra("categoria", subdato);
+            intent.putExtra("ruido", ruido);
+            intent.putExtra("intensidad", intensidadPorcentual + "%");
+            intent.putExtra("errores", errores);
+            intent.putExtra("resultado", puntajeCorrecto + "");
+            startActivity(intent);
         }
     }
 
@@ -242,9 +252,9 @@ public class Ejercicio_Tres_Opciones extends AppCompatActivity {
         return !ruido.equals("Sin Ruido");
     }
 
-    boolean finEjercicio(){
+    boolean finEjercicio() {
         repeticiones++;
-        return (repeticiones==10);
+        return (repeticiones == 10);
     }
 
 }
