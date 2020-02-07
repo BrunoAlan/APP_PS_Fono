@@ -14,9 +14,9 @@ import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.myapplication.Adapters.SoundsAdapter;
 import com.example.myapplication.Cotrollers.ReproductorDeAudioController;
 import com.example.myapplication.R;
-import com.example.myapplication.SoundsAdapter;
 import com.example.myapplication.datos.Constantes;
 import com.example.myapplication.room_database.palabras.Sound;
 import com.example.myapplication.room_database.palabras.SoundViewModel;

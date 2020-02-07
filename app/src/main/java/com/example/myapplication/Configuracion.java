@@ -2,6 +2,7 @@ package com.example.myapplication;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -35,6 +36,7 @@ public class Configuracion extends AppCompatActivity {
     String confSubDato;
     String confTipoEjercio;
     String confRuido;
+    String modo;
     float confIntensidad = 0;
 
     ArrayAdapter<String> adapterCategoria, adapterRuido, adapterSubCategoria, adapterEjercicio;
@@ -61,6 +63,9 @@ public class Configuracion extends AppCompatActivity {
         adapterEjercicio = new ArrayAdapter<>(getApplicationContext(), R.layout.dropdown_menu_popup_item, Constantes.TIPOS_EJERCICIOS);
         spinnerCategoria.setAdapter(adapterCategoria);
         spinnerTipoEjercicio.setAdapter(adapterEjercicio);
+
+        modo = getIntent().getStringExtra("Modo");
+        Log.d("modo ejercitacion",modo);
 
 
 
@@ -190,6 +195,7 @@ public class Configuracion extends AppCompatActivity {
                             intent.putExtra("subDato", confSubDato);
                             intent.putExtra("tipoRuido", confRuido);
                             intent.putExtra("intensidad",confIntensidad);
+                            intent.putExtra("modo",modo);
                             startActivity(intent);
                             break;
 
@@ -201,6 +207,7 @@ public class Configuracion extends AppCompatActivity {
                             intent3.putExtra("subDato", confSubDato);
                             intent3.putExtra("tipoRuido", confRuido);
                             intent3.putExtra("intensidad",confIntensidad);
+                            intent3.putExtra("modo",modo);
                             startActivity(intent3);
                             break;
                         case Constantes.ESCRIBIR_LO_QUE_OYO:
@@ -211,6 +218,7 @@ public class Configuracion extends AppCompatActivity {
                             intent2.putExtra("subDato", confSubDato);
                             intent2.putExtra("tipoRuido", confRuido);
                             intent2.putExtra("intensidad",confIntensidad);
+                            intent2.putExtra("modo",modo);
                             startActivity(intent2);
                             break;
 
@@ -223,9 +231,9 @@ public class Configuracion extends AppCompatActivity {
                             intent4.putExtra("subDato", confSubDato);
                             intent4.putExtra("tipoRuido", confRuido);
                             intent4.putExtra("intensidad",confIntensidad);
+                            intent4.putExtra("modo",modo);
                             startActivity(intent4);
                             break;
-
                     }
                 }
 

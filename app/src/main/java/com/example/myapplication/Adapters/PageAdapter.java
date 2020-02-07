@@ -1,9 +1,8 @@
-package com.example.myapplication;
+package com.example.myapplication.Adapters;
 
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
-
 
 import com.example.myapplication.fragments.EjercitacionFragment;
 import com.example.myapplication.fragments.EvaluacionFragment;

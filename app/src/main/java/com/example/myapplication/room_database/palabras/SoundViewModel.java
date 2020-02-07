@@ -41,7 +41,6 @@ public class SoundViewModel extends AndroidViewModel {
     }
 
     public LiveData<List<Sound>> getAllSounds() {
-
         return allSounds;
     }
 
@@ -53,14 +52,21 @@ public class SoundViewModel extends AndroidViewModel {
         return numerosSounds;
     }
 
-    public LiveData<List<Sound>> getMesesSounds() { return mesesSounds; }
+    public LiveData<List<Sound>> getMesesSounds() {
+        return mesesSounds;
+    }
 
-    public LiveData<List<Sound>> getColoresSounds() { return coloresSounds; }
+    public LiveData<List<Sound>> getColoresSounds() {
+        return coloresSounds;
+    }
 
-    public LiveData<List<Sound>> getRuidosSounds() { return ruidosSounds; }
+    public LiveData<List<Sound>> getRuidosSounds() {
+        return ruidosSounds;
+    }
 
-    public LiveData<List<Sound>> getOracionesSounds() { return oracionesSounds; }
-
+    public LiveData<List<Sound>> getOracionesSounds() {
+        return oracionesSounds;
+    }
 
 
 }

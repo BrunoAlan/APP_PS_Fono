@@ -12,6 +12,7 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.viewpager.widget.ViewPager;
 
+import com.example.myapplication.Adapters.PageAdapter;
 import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.tabs.TabItem;
 import com.google.android.material.tabs.TabLayout;
@@ -85,6 +86,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         int id = menuItem.getItemId();
         if(id== R.id.administrarSonidos){
             Intent intent = new Intent(getApplicationContext(),AdminitrarSonidos.class);
+            startActivity(intent);
+        }
+        if(id== R.id.consultarResultado){
+            Intent intent = new Intent(getApplicationContext(),AdministrarResultados.class);
             startActivity(intent);
         }
         return false;

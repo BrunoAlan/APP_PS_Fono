@@ -1,10 +1,12 @@
 package com.example.myapplication.logica;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
@@ -24,10 +26,13 @@ import java.util.Random;
 public class Ejercicio_Tres_Opciones extends AppCompatActivity {
     public SoundRepository sr;
     List<Sound> listaSonidos;
-    int puntajeCorrecto, puntajeIncorrecto;
+    int puntajeCorrecto, puntajeIncorrecto,repeticiones;
     int opcionCorrecta;
     String ruido;
+    String modo;
     float intensidad;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,13 +40,18 @@ public class Ejercicio_Tres_Opciones extends AppCompatActivity {
         setContentView(R.layout.ejercicio_tres_opciones);
         puntajeCorrecto = 0;
         puntajeIncorrecto=0;
+        repeticiones=0;
 
 
         //DAtos pasados desde la confifuracion
         String subdato = getIntent().getStringExtra("subDato");
         ruido = getIntent().getStringExtra("tipoRuido");
         intensidad = getIntent().getFloatExtra("intensidad", .1f);
+        modo = getIntent().getStringExtra("modo");
+        double intensidadPorcentual = Math.floor(intensidad * 100);
         System.out.println(ruido);
+        Log.d("intensidad", intensidadPorcentual + "%");
+        Log.d("modo", modo);
 
 
 
@@ -140,16 +150,13 @@ public class Ejercicio_Tres_Opciones extends AppCompatActivity {
         btn1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 if (listaSonidos.get((Integer) tresOpciones.get(opcionCorrecta)).getNombre_sonido() == btn1.getText()) {
-
                     modificarPuntaje(tvPuntajeCorrecto);
                     btn1.startAnimation(AnimationUtils.loadAnimation(getApplicationContext(),R.anim.bounce));
                     setup();
                 } else {
                     modificarPuntaje(tvPuntajeIncorrecto);
                     btn1.startAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.shake_animation));
-                    //Toast.makeText(getApplicationContext(), "Incorrecto", Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -159,14 +166,14 @@ public class Ejercicio_Tres_Opciones extends AppCompatActivity {
             public void onClick(View v) {
 
                 if (listaSonidos.get((Integer) tresOpciones.get(opcionCorrecta)).getNombre_sonido() == btn2.getText()) {
-                    //Toast.makeText(getApplicationContext(), "Correcto", Toast.LENGTH_SHORT).show();
+
                     modificarPuntaje(tvPuntajeCorrecto);
                     btn2.startAnimation(AnimationUtils.loadAnimation(getApplicationContext(),R.anim.bounce));
                     setup();
                 } else {
                     modificarPuntaje(tvPuntajeIncorrecto);
                     btn2.startAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.shake_animation));
-                    //Toast.makeText(getApplicationContext(), "Incorrecto", Toast.LENGTH_SHORT).show();
+
                 }
             }
         });
@@ -177,14 +184,14 @@ public class Ejercicio_Tres_Opciones extends AppCompatActivity {
 
                 System.out.println(btn3.getText() + listaSonidos.get(opcionCorrecta).getNombre_sonido());
                 if (listaSonidos.get((Integer) tresOpciones.get(opcionCorrecta)).getNombre_sonido() == btn3.getText()) {
-                    // Toast.makeText(getApplicationContext(), "Correcto", Toast.LENGTH_SHORT).show();
+
                     modificarPuntaje(tvPuntajeCorrecto);
                     btn3.setAnimation(AnimationUtils.loadAnimation(getApplicationContext(),R.anim.bounce));
                     setup();
                 } else {
                     modificarPuntaje(tvPuntajeIncorrecto);
                     btn3.startAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.shake_animation));
-                    // Toast.makeText(getApplicationContext(), "Incorrecto", Toast.LENGTH_SHORT).show();
+
                 }
             }
         });
@@ -215,6 +222,7 @@ public class Ejercicio_Tres_Opciones extends AppCompatActivity {
 
     void modificarPuntaje(TextView puntaje) {
         String points = null;
+
         if(puntaje.getId() == R.id.puntaje){
             puntajeCorrecto++;
             points = Integer.toString(puntajeCorrecto);
@@ -224,14 +232,19 @@ public class Ejercicio_Tres_Opciones extends AppCompatActivity {
             points = Integer.toString(puntajeIncorrecto);
         }
         puntaje.setText(points);
+
+        if(modo.equals(Constantes.EVALUACION) && finEjercicio()){
+            Toast.makeText(Ejercicio_Tres_Opciones.this, "Puntaje Correcto" + puntajeCorrecto + " Puntaje Incorrecto " + puntajeIncorrecto, Toast.LENGTH_SHORT).show();
+        }
     }
 
     boolean activarSonido() {
-        if (ruido.equals("Sin Ruido")) {
-            return false;
-        } else {
-            return true;
-        }
+        return !ruido.equals("Sin Ruido");
+    }
+
+    boolean finEjercicio(){
+        repeticiones++;
+        return (repeticiones==10);
     }
 
 }

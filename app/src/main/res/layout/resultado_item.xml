@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
-
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
@@ -11,11 +11,11 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginTop="3dp"
-        android:layout_marginBottom="3dp"
+        app:cardCornerRadius="4dp"
+        android:layout_marginTop="6dp"
+        android:layout_marginBottom="6dp"
         android:layout_marginLeft="3dp"
         android:layout_marginRight="3dp"
-        app:cardCornerRadius="4dp"
         >
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -32,10 +32,10 @@
                 android:text="Categoria"
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView15" />
+                app:layout_constraintTop_toBottomOf="@+id/tvEjercicio" />
 
             <TextView
-                android:id="@+id/textView19"
+                android:id="@+id/tvCategoria"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
@@ -45,7 +45,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/textView18" />
 
             <TextView
-                android:id="@+id/textView16"
+                android:id="@+id/tvRuido"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
@@ -66,7 +66,7 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/textView13"
+                android:id="@+id/tvFecha"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
@@ -84,10 +84,10 @@
                 android:text="Ejercicio"
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView13" />
+                app:layout_constraintTop_toBottomOf="@+id/tvFecha" />
 
             <TextView
-                android:id="@+id/textView15"
+                android:id="@+id/tvEjercicio"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
@@ -105,10 +105,10 @@
                 android:text="Ruido"
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView19" />
+                app:layout_constraintTop_toBottomOf="@+id/tvCategoria" />
 
             <TextView
-                android:id="@+id/textView20"
+                android:id="@+id/tvResultado"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="32dp"
@@ -126,4 +126,4 @@
     </androidx.cardview.widget.CardView>
 
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>

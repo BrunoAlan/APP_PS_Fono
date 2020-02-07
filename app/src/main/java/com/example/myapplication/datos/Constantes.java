@@ -44,5 +44,7 @@ public abstract class Constantes {
 
     public static final String [] FILTRO_PRACTICA = {TODAS,DIAS_SEMANA,NUMEROS,COLORES,ANIMALES,NOMBRES,ROPA,COMIDA,LUGARES,MESES, ORACIONES, VOCES_FAMILIARES, ESTILOS_MUSICALES, CANCIONES, INSTRUMENTOS, RUIDO};
 
+    public static final String EJERCITACION = "Ejercitación";
+    public static final String EVALUACION = "Evaluación";
 
 }

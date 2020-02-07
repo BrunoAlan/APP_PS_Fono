@@ -11,6 +11,7 @@ import androidx.fragment.app.Fragment;
 
 import com.example.myapplication.Configuracion;
 import com.example.myapplication.R;
+import com.example.myapplication.datos.Constantes;
 
 
 /**
@@ -34,6 +35,7 @@ public class EjercitacionFragment extends Fragment implements View.OnClickListen
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getActivity(), Configuracion.class);
+                intent.putExtra("Modo", Constantes.EJERCITACION);
                 startActivity(intent);
             }
         });

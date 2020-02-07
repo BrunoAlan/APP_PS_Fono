@@ -1,4 +1,4 @@
-package com.example.myapplication;
+package com.example.myapplication.Adapters;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,20 +10,17 @@ import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.ListAdapter;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.myapplication.R;
 import com.example.myapplication.room_database.palabras.Sound;
 
 
 public class SoundsAdapter extends ListAdapter<Sound, SoundsAdapter.SoundHolder> {
 
-    private OnItemClickListener listener;
-
-    public SoundsAdapter() {
-        super(DIFF_CALLBACK);
-    }
     private static final DiffUtil.ItemCallback<Sound> DIFF_CALLBACK = new DiffUtil.ItemCallback<Sound>() {
         @Override
         public boolean areItemsTheSame(@NonNull Sound oldItem, @NonNull Sound newItem) {
-            return oldItem.getId() == newItem.getId();        }
+            return oldItem.getId() == newItem.getId();
+        }
 
         @Override
         public boolean areContentsTheSame(@NonNull Sound oldItem, @NonNull Sound newItem) {
@@ -33,6 +30,11 @@ public class SoundsAdapter extends ListAdapter<Sound, SoundsAdapter.SoundHolder>
                     oldItem.getRuta_sonido().equals(newItem.getRuta_sonido());
         }
     };
+    private OnItemClickListener listener;
+
+    public SoundsAdapter() {
+        super(DIFF_CALLBACK);
+    }
 
     @NonNull
     @Override
@@ -44,11 +46,9 @@ public class SoundsAdapter extends ListAdapter<Sound, SoundsAdapter.SoundHolder>
 
     @Override
     public void onBindViewHolder(@NonNull SoundHolder holder, int position) {
-        Sound currentSound =getItem(position);
+        Sound currentSound = getItem(position);
         holder.textViewNombre.setText(currentSound.getNombre_sonido());
     }
-
-
 
 
     public Sound getSoundAt(int position) {
