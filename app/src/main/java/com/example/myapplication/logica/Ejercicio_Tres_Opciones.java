@@ -51,7 +51,7 @@ public class Ejercicio_Tres_Opciones extends AppCompatActivity {
         repeticiones = 0;
 
 
-        //DAtos pasados desde la confifuracion
+        //Datos pasados desde la configuración
         subdato = getIntent().getStringExtra("subDato");
         ruido = getIntent().getStringExtra("tipoRuido");
         intensidad = getIntent().getFloatExtra("intensidad", .1f);
@@ -121,7 +121,6 @@ public class Ejercicio_Tres_Opciones extends AppCompatActivity {
 
         final ArrayList tresOpciones = obtenerNumero();//genero 3 numeros aleatorios para poner los dias en los botones
         setTexts(btn1, btn2, btn3, tresOpciones);
-        System.out.println("randoms asd" + tresOpciones);
         Random rand = new Random();
         opcionCorrecta = rand.nextInt(tresOpciones.size());
 

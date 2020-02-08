@@ -10,13 +10,12 @@ import androidx.room.RoomDatabase;
 import androidx.sqlite.db.SupportSQLiteDatabase;
 
 import com.example.myapplication.datos.Constantes;
-import com.example.myapplication.room_database.oraciones.Oracion;
 import com.example.myapplication.room_database.palabras.Sound;
 import com.example.myapplication.room_database.palabras.SoundDao;
 import com.example.myapplication.room_database.resultados.Resultado;
 import com.example.myapplication.room_database.resultados.ResultadoDao;
 
-@Database(entities = {Sound.class, Oracion.class, Resultado.class}, exportSchema = false, version = 3)
+@Database(entities = {Sound.class,  Resultado.class}, exportSchema = false, version = 1)
 public abstract class SoundDatabase extends RoomDatabase {
     private static final String DB_NAME = "app_db";
     private static SoundDatabase instance;
@@ -108,16 +107,6 @@ public abstract class SoundDatabase extends RoomDatabase {
             soundDao.agregarSonido(new Sound("No por mucho madrugar, se amanece más temprano", Constantes.ORACIONES, "no por mucho madrugar.mp3", Constantes.NO_PERSONALIZADO));
             soundDao.agregarSonido(new Sound("No hay mal que por bien no venga", Constantes.ORACIONES, "no hay mal que.mp3", Constantes.NO_PERSONALIZADO));
             soundDao.agregarSonido(new Sound("En casa de herrero, cuchillo de palo", Constantes.ORACIONES, "en casa de herrero.mp3", Constantes.NO_PERSONALIZADO));
-
-
-            resultadoDao.agregarResultado(new Resultado("05/02/2020", Constantes.COMPLETAR_ORACION_CON_OPCIONES, Constantes.ORACIONES, "Sin Ruido", "0", "2", "8"));
-            resultadoDao.agregarResultado(new Resultado("05/02/2020", Constantes.ESCRIBIR_LO_QUE_OYO, Constantes.DIAS_SEMANA, "Multitud de personas", "60%", "1", "9"));
-            resultadoDao.agregarResultado(new Resultado("05/02/2020", Constantes.COMPLETAR_ORACION_CON_OPCIONES, Constantes.ORACIONES, "Sin Ruido", "0", "2", "8"));
-            resultadoDao.agregarResultado(new Resultado("05/02/2020", Constantes.ESCRIBIR_LO_QUE_OYO, Constantes.DIAS_SEMANA, "Multitud de personas", "60%", "1", "9"));
-            resultadoDao.agregarResultado(new Resultado("05/02/2020", Constantes.COMPLETAR_ORACION_CON_OPCIONES, Constantes.ORACIONES, "Sin Ruido", "0", "2", "8"));
-            resultadoDao.agregarResultado(new Resultado("05/02/2020", Constantes.ESCRIBIR_LO_QUE_OYO, Constantes.DIAS_SEMANA, "Multitud de personas", "60%", "1", "9"));
-            resultadoDao.agregarResultado(new Resultado("05/02/2020", Constantes.COMPLETAR_ORACION_CON_OPCIONES, Constantes.ORACIONES, "Sin Ruido", "0", "2", "8"));
-            resultadoDao.agregarResultado(new Resultado("05/02/2020", Constantes.ESCRIBIR_LO_QUE_OYO, Constantes.DIAS_SEMANA, "Multitud de personas", "60%", "1", "9"));
 
             return null;
         }

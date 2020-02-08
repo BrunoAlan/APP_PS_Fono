@@ -21,6 +21,7 @@ import com.example.myapplication.datos.Constantes;
 import com.example.myapplication.logica.Ejercicio_Cinco_Opciones;
 import com.example.myapplication.logica.Ejercicio_Completar;
 import com.example.myapplication.logica.Ejercicio_Completar_Frase_NO_Opciones;
+import com.example.myapplication.logica.Ejercicio_Completar_Frase_Tres_Opciones;
 import com.example.myapplication.logica.Ejercicio_Tres_Opciones;
 import com.example.myapplication.room_database.palabras.Sound;
 import com.example.myapplication.room_database.palabras.SoundRepository;
@@ -233,6 +234,19 @@ public class Configuracion extends AppCompatActivity {
                             intent4.putExtra("intensidad",confIntensidad);
                             intent4.putExtra("modo",modo);
                             startActivity(intent4);
+                            break;
+
+
+                        case Constantes.COMPLETAR_ORACION_CON_OPCIONES:
+                            Intent intent5 = new Intent(getApplicationContext(), Ejercicio_Completar_Frase_Tres_Opciones.class);
+                            if (!switchRuido.isChecked()) {
+                                confRuido = "Sin Ruido";
+                            }
+                            intent5.putExtra("subDato", confSubDato);
+                            intent5.putExtra("tipoRuido", confRuido);
+                            intent5.putExtra("intensidad",confIntensidad);
+                            intent5.putExtra("modo",modo);
+                            startActivity(intent5);
                             break;
                     }
                 }
