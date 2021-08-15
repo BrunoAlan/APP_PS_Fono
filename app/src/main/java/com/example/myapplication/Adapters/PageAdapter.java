@@ -6,7 +6,6 @@ import androidx.fragment.app.FragmentPagerAdapter;
 
 import com.example.myapplication.fragments.EjercitacionFragment;
 import com.example.myapplication.fragments.EvaluacionFragment;
-import com.example.myapplication.fragments.PracticaFragment;
 
 
 public class PageAdapter extends FragmentPagerAdapter {
@@ -21,10 +20,8 @@ public class PageAdapter extends FragmentPagerAdapter {
     public Fragment getItem(int position) {
         switch (position){
             case 0:
-                return new PracticaFragment();
-            case 1:
                 return new EjercitacionFragment();
-            case 2:
+            case 1:
                 return new EvaluacionFragment();
             default:
                 return null;

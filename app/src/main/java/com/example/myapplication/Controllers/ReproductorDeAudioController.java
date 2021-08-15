@@ -1,4 +1,4 @@
-package com.example.myapplication.Cotrollers;
+package com.example.myapplication.Controllers;
 
 import android.content.Context;
 import android.content.res.AssetFileDescriptor;

@@ -46,7 +46,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         getSupportActionBar().setHomeButtonEnabled(true);
 
         final TabLayout tabLayout = findViewById(R.id.tablayout);
-        TabItem tabChats = findViewById(R.id.tabChats);
         TabItem tabStatus = findViewById(R.id.tabStatus);
         TabItem tabCalls = findViewById(R.id.tabCalls);
         final ViewPager viewPager = findViewById(R.id.viewPager);

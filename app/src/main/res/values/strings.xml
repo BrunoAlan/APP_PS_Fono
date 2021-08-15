@@ -17,4 +17,16 @@
 
     <string name="open">Open</string>
     <string name="close">Close</string>
+    <string name="common_label_ok">Continuar</string>
+    <string name="correct1">¡Correcto!</string>
+    <string name="correct2">¡Genial!</string>
+    <string name="correct3">¡Seguí así!</string>
+    <string name="correct4">¡Muy bien!</string>
+    <string name="correct5">¡Perfecto!</string>
+    <string name="correct6">Bravo.</string>
+    <string name="correct7">¡Estupendo!</string>
+    <string name="correct8">Excelente.</string>
+    <string name="incorrect1">Incorrecto.</string>
+    <string name="incorrect2">Probá con otro.</string>
+    <string name="incorrect3">Volvé a intentarlo.</string>
 </resources>

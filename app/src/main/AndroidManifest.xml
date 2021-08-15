@@ -42,9 +42,6 @@
             android:name=".Configuracion"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".logica.Practica"
-            android:screenOrientation="portrait" />
-        <activity
             android:name=".logica.Ejercicio_Completar"
             android:screenOrientation="portrait" />
         <activity

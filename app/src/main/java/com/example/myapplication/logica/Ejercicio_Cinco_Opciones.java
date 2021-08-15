@@ -7,12 +7,16 @@ import android.view.animation.AnimationUtils;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
 
-import com.example.myapplication.Cotrollers.ReproductorDeAudioController;
+import com.example.myapplication.Controllers.ReproductorDeAudioController;
 import com.example.myapplication.DetalleResultado;
 import com.example.myapplication.R;
+import com.example.myapplication.common.utils.UtilsCommon;
+import com.example.myapplication.common.utils.UtilsSound;
+import com.example.myapplication.databinding.EjercicioCincoOpcionesBinding;
 import com.example.myapplication.datos.Constantes;
 import com.example.myapplication.room_database.palabras.Sound;
 import com.example.myapplication.room_database.palabras.SoundRepository;
@@ -32,7 +36,7 @@ import java.util.Random;
 public class Ejercicio_Cinco_Opciones extends AppCompatActivity {
     public SoundRepository sr;
     List<Sound> listaSonidos;
-    int puntajeCorrecto, puntajeIncorrecto, repeticiones;
+    int puntajeCorrecto, puntajeIncorrecto, repeticiones, incorrectCounterStage = 0, maxRepetitions = 10;
     int opcionCorrecta;
     String ruido;
     String modo;
@@ -40,11 +44,14 @@ public class Ejercicio_Cinco_Opciones extends AppCompatActivity {
     String errores = "";
     float intensidad;
     double intensidadPorcentual;
+    private ArrayList cincoOpciones;
+    private EjercicioCincoOpcionesBinding binding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.ejercicio_cinco_opciones);
+        binding = EjercicioCincoOpcionesBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
         puntajeCorrecto = 0;
         puntajeIncorrecto = 0;
         repeticiones = 0;
@@ -55,7 +62,6 @@ public class Ejercicio_Cinco_Opciones extends AppCompatActivity {
         intensidad = getIntent().getFloatExtra("intensidad", .1f);
         modo = getIntent().getStringExtra("modo");
         intensidadPorcentual = Math.floor(intensidad * 100);
-
 
 
         sr = new SoundRepository(getApplication());
@@ -110,7 +116,7 @@ public class Ejercicio_Cinco_Opciones extends AppCompatActivity {
         final TextView tvPuntajeIncorrecto = findViewById(R.id.puntajeIncorrecto);
         final ImageButton btnPlay = findViewById(R.id.imageButton);
 
-        final ArrayList cincoOpciones = obtenerNumero();//genero 3 numeros aleatorios para poner los dias en los botones
+        cincoOpciones = obtenerNumero();//genero 3 numeros aleatorios para poner los dias en los botones
         setTexts(btn1, btn2, btn3, btn4, btn5, cincoOpciones);
         Random rand = new Random();
         opcionCorrecta = rand.nextInt(cincoOpciones.size());
@@ -247,22 +253,35 @@ public class Ejercicio_Cinco_Opciones extends AppCompatActivity {
 
         if (puntaje.getId() == R.id.puntaje) {
             puntajeCorrecto++;
+            incorrectCounterStage=0;
             points = Integer.toString(puntajeCorrecto);
-        }
-        if (puntaje.getId() == R.id.puntajeIncorrecto) {
+            UtilsSound.announceAnswerSound(binding.getRoot(), true);
+            int correctAnswerRes = getRandomCorrectAnswerText();
+            UtilsCommon.showSnackbar(binding.getRoot(), getString(correctAnswerRes));
+        } else if (puntaje.getId() == R.id.puntajeIncorrecto) {
             puntajeIncorrecto++;
+            incorrectCounterStage++;
             points = Integer.toString(puntajeIncorrecto);
+            UtilsSound.announceAnswerSound(binding.getRoot(), false);
+            if (incorrectCounterStage > 2) {
+                incorrectCounterStage = 0;
+                UtilsCommon.displayAlertMessage(binding.getRoot(),
+                        "¡Te has equivocado más de 2 veces!",
+                        "La respuesta correcta era: \"" + listaSonidos.get((Integer) cincoOpciones.get(opcionCorrecta)).getNombre_sonido() + "\""
+                +"\nSigamos con el siguiente.");
+                setup();
+            } else{
+                int incorrectAnswerRes = getRandomIncorrectAnswerText();
+                UtilsCommon.showSnackbar(binding.getRoot(), getString(incorrectAnswerRes));
+            }
         }
         puntaje.setText(points);
 
-        if (modo.equals(Constantes.EVALUACION) && finEjercicio()) {
+        if (finEjercicio()) {
             //Toast.makeText(Ejercicio_Tres_Opciones.this, "Puntaje Correcto" + puntajeCorrecto + " Puntaje Incorrecto " + puntajeIncorrecto, Toast.LENGTH_SHORT).show();
             Date date = Calendar.getInstance().getTime();
             DateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
             String today = formatter.format(date);
-            ResultadoRepository resultadoRepository = new ResultadoRepository(getApplication());
-            Resultado resultado = new Resultado(today, Constantes.IDENTIFICAR_CINCO_OPCIONES, subdato, ruido, intensidadPorcentual + "%", errores, puntajeCorrecto + "");
-            resultadoRepository.agregarResultado(resultado);
             Intent intent = new Intent(getApplicationContext(), DetalleResultado.class);
             intent.putExtra("fecha", today);
             intent.putExtra("ejercicio", Constantes.IDENTIFICAR_CINCO_OPCIONES);
@@ -275,13 +294,37 @@ public class Ejercicio_Cinco_Opciones extends AppCompatActivity {
         }
     }
 
+    private int getRandomIncorrectAnswerText() {
+        ArrayList<Integer> arrayList = new ArrayList<>();
+        arrayList.add(R.string.incorrect1);
+        arrayList.add(R.string.incorrect2);
+        arrayList.add(R.string.incorrect3);
+        Random rand = new Random();
+        int index = rand.nextInt(arrayList.size());
+        return arrayList.get(index);
+    }
+
+    private int getRandomCorrectAnswerText() {
+        ArrayList<Integer> arrayList = new ArrayList<>();
+        arrayList.add(R.string.correct1);
+        arrayList.add(R.string.correct2);
+        arrayList.add(R.string.correct3);
+        arrayList.add(R.string.correct4);
+        arrayList.add(R.string.correct5);
+        arrayList.add(R.string.correct6);
+        arrayList.add(R.string.correct7);
+        arrayList.add(R.string.correct8);
+        Random rand = new Random();
+        int index = rand.nextInt(arrayList.size());
+        return arrayList.get(index);
+    }
+
     boolean activarSonido() {
         return !ruido.equals("Sin Ruido");
     }
 
     boolean finEjercicio() {
         repeticiones++;
-        return (repeticiones == 10);
+        return (repeticiones == maxRepetitions);
     }
-
 }
