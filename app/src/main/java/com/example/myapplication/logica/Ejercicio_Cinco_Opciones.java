@@ -37,12 +37,8 @@ import java.util.Random;
 public class Ejercicio_Cinco_Opciones extends AppCompatActivity {
     public SoundRepository sr;
     List<Sound> listaSonidos;
-    int puntajeCorrecto, puntajeIncorrecto, repeticiones, incorrectCounterStage = 0, maxRepetitions = 10;
-    int opcionCorrecta;
-    String ruido;
-    String modo;
-    String subdato;
-    String errores = "";
+    int puntajeCorrecto, puntajeIncorrecto, repeticiones, incorrectCounterStage = 0, maxRepetitions = 10, opcionCorrecta, wrongAnswersLimit = 2;
+    String ruido, modo, subdato, errores = "";
     float intensidad;
     private ArrayList cincoOpciones;
     private ReproductorDeAudioController mReproductorDeAudioController;
@@ -276,12 +272,13 @@ public class Ejercicio_Cinco_Opciones extends AppCompatActivity {
             incorrectCounterStage++;
             points = Integer.toString(puntajeIncorrecto);
             UtilsSound.announceAnswerSound(binding.getRoot(), false);
-            if (incorrectCounterStage > 2) {
+            if (incorrectCounterStage >= wrongAnswersLimit) {
                 incorrectCounterStage = 0;
                 UtilsCommon.displayAlertMessage(binding.getRoot(),
-                        "¡Te has equivocado más de 2 veces!",
+                        "¡Te has equivocado más de "+wrongAnswersLimit+" veces!",
                         "La respuesta correcta era: \"" + listaSonidos.get((Integer) cincoOpciones.get(opcionCorrecta)).getNombre_sonido() + "\""
                 +"\nPasemos al siguiente.");
+                ReproductorDeAudioController.getmInstance().startSoundNoNoise(listaSonidos.get((Integer) cincoOpciones.get(opcionCorrecta)).getRuta_sonido(), getApplicationContext());
                 setup();
             } else{
                 int incorrectAnswerRes = getRandomIncorrectAnswerText();
