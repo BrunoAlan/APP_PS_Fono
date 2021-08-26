@@ -13,58 +13,54 @@
         android:layout_height="wrap_content"
         android:src="@drawable/ic_baseline_settings_24"
         android:background="?attr/selectableItemBackgroundBorderless"
-        android:layout_marginEnd="@dimen/common_padding_default"
         android:layout_marginTop="@dimen/common_padding_default"
         android:tint="@color/colorAccent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"/>
 
-
-    <TextView
-        android:id="@+id/textView9"
+    <ImageView
+        android:id="@+id/icWrong"
         android:layout_width="wrap_content"
-        android:layout_height="45dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="@dimen/common_padding_large"
-        android:text="Incorrectas"
-        android:textSize="24sp"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_wrong"
+        android:layout_marginStart="@dimen/common_padding_medium"
+        app:layout_constraintBottom_toBottomOf="@id/btnSettings"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="@+id/btnSettings"/>
 
 
     <TextView
         android:id="@+id/puntajeIncorrecto"
         android:layout_width="wrap_content"
-
         android:layout_height="44dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="@dimen/common_padding_large"
-        android:text="0"
+        android:text=": 0"
         android:textSize="30sp"
-        app:layout_constraintStart_toEndOf="@+id/textView9"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintStart_toEndOf="@id/icWrong"
+        app:layout_constraintBottom_toBottomOf="@+id/icWrong"
+        app:layout_constraintTop_toTopOf="@id/icWrong"
+        />
 
-    <TextView
-        android:id="@+id/textView5"
+
+    <androidx.constraintlayout.utils.widget.ImageFilterView
+        android:id="@+id/icCorrect"
         android:layout_width="wrap_content"
-        android:layout_height="45dp"
-        android:layout_marginTop="@dimen/common_padding_large"
-        android:layout_marginEnd="8dp"
-        android:text="Correctas"
-        android:textSize="24sp"
-        app:layout_constraintEnd_toStartOf="@+id/puntaje"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/common_padding_medium"
+        android:src="@drawable/ic_correct"
+        app:layout_constraintBottom_toBottomOf="@+id/btnSettings"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/btnSettings" />
 
     <TextView
         android:id="@+id/puntaje"
         android:layout_width="wrap_content"
         android:layout_height="44dp"
-        android:layout_marginTop="@dimen/common_padding_large"
-        android:layout_marginEnd="16dp"
-        android:text="0"
+        android:text="0: "
         android:textSize="30sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintEnd_toStartOf="@+id/icCorrect"
+        app:layout_constraintTop_toTopOf="@id/icCorrect"
+        app:layout_constraintBottom_toBottomOf="@id/icCorrect"/>
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/opcion1"
@@ -132,7 +128,7 @@
 
     <TextView
         android:id="@+id/textView2"
-        android:layout_width="0dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
@@ -141,7 +137,6 @@
         android:textSize="18sp"
         app:layout_constraintBottom_toTopOf="@+id/opcion1"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageButton" />
 
@@ -156,7 +151,6 @@
         android:stateListAnimator="@null"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.157" />
