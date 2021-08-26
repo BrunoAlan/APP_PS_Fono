@@ -5,4 +5,24 @@
     <color name="colorAccent">#5e92f3</color>
     <color name="colorWhite">#ffffff</color>
     <color name="fondoGrabar">#EDEDFA</color>
+
+    <!-- Material Theme Colors -->
+    <color name="color_primary">#1565c0</color>
+    <color name="color_primary_light">#5e92f3</color>
+    <color name="color_primary_variant">#003c8f</color>
+    <color name="color_secondary">#424242</color>
+    <color name="color_secondary_light">#6d6d6d</color>
+    <color name="color_secondary_variant">#1b1b1b</color>
+
+    <color name="color_background">#fafafa</color>
+    <color name="color_surface">#ffffff</color>
+    <color name="color_error">#d50000</color>
+
+    <color name="color_on_primary">#ffffff</color>
+    <color name="color_on_secondary">#ffffff</color>
+    <color name="color_on_background">#000</color>
+    <color name="color_on_surface">#000</color>
+    <color name="color_on_error">#fff</color>
+
+
 </resources>

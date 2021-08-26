@@ -8,6 +8,28 @@ import java.io.IOException;
 
 public class ReproductorDeAudioController {
 
+    float intensidad;
+
+    private static class SingletonHolder {
+        private static final ReproductorDeAudioController INSTANCE = new ReproductorDeAudioController();
+    }
+
+    public static ReproductorDeAudioController getmInstance(){
+        return SingletonHolder.INSTANCE;
+    }
+
+    public float getIntensidad() {
+        return intensidad;
+    }
+
+    public void setIntensidad(float intensidad) {
+        this.intensidad = intensidad;
+    }
+
+    public double getIntensidadPorcentual(){
+        return Math.floor(intensidad * 100);
+    }
+
     public void startSoundNoNoise(String filename, Context context) {
         AssetFileDescriptor afd = null;
         try {

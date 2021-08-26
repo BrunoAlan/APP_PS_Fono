@@ -29,11 +29,5 @@
         <item name="color">@color/colorWhite</item>
     </style>
 
-    <!-- DialogFragment -->
-    <style name="DialogFragmentTheme" parent="Theme.AppCompat.Light.Dialog.Alert">
-        <!--buttons color-->
-        <item name="colorAccent">@color/colorAccent</item>
-        <!--dialog background-->
-        <item name="android:windowBackground">@drawable/background_dialog</item>
-    </style>
+
 </resources>

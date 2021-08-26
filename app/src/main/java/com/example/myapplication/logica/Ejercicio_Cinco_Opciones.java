@@ -2,6 +2,7 @@ package com.example.myapplication.logica;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageButton;
@@ -43,8 +44,8 @@ public class Ejercicio_Cinco_Opciones extends AppCompatActivity {
     String subdato;
     String errores = "";
     float intensidad;
-    double intensidadPorcentual;
     private ArrayList cincoOpciones;
+    private ReproductorDeAudioController mReproductorDeAudioController;
     private EjercicioCincoOpcionesBinding binding;
 
     @Override
@@ -60,10 +61,17 @@ public class Ejercicio_Cinco_Opciones extends AppCompatActivity {
         subdato = getIntent().getStringExtra("subDato");
         ruido = getIntent().getStringExtra("tipoRuido");
         intensidad = getIntent().getFloatExtra("intensidad", .1f);
+        mReproductorDeAudioController = ReproductorDeAudioController.getmInstance();
+        mReproductorDeAudioController.setIntensidad(intensidad);
+
         modo = getIntent().getStringExtra("modo");
-        intensidadPorcentual = Math.floor(intensidad * 100);
 
-
+        binding.btnSettings.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                UtilsCommon.displayNoiseSettingsAlert(binding.getRoot());
+            }
+        });
         sr = new SoundRepository(getApplication());
         switch (subdato) {
             case Constantes.DIAS_SEMANA:
@@ -130,7 +138,12 @@ public class Ejercicio_Cinco_Opciones extends AppCompatActivity {
                         @Override
                         public void onChanged(List<Sound> sounds) {
                             ReproductorDeAudioController rp = new ReproductorDeAudioController();
-                            rp.startSoundWithNoise(listaSonidos.get((Integer) cincoOpciones.get(opcionCorrecta)).getRuta_sonido(), sounds.get(0).getRuta_sonido(), intensidad, getApplicationContext());
+                            rp.startSoundWithNoise(
+                                    listaSonidos.get((Integer) cincoOpciones.get(opcionCorrecta)).getRuta_sonido(),
+                                    sounds.get(0).getRuta_sonido(),
+                                    mReproductorDeAudioController.getIntensidad(),
+                                    getApplicationContext()
+                            );
                         }
                     });
                 } else {
@@ -268,7 +281,7 @@ public class Ejercicio_Cinco_Opciones extends AppCompatActivity {
                 UtilsCommon.displayAlertMessage(binding.getRoot(),
                         "¡Te has equivocado más de 2 veces!",
                         "La respuesta correcta era: \"" + listaSonidos.get((Integer) cincoOpciones.get(opcionCorrecta)).getNombre_sonido() + "\""
-                +"\nSigamos con el siguiente.");
+                +"\nPasemos al siguiente.");
                 setup();
             } else{
                 int incorrectAnswerRes = getRandomIncorrectAnswerText();
@@ -287,7 +300,7 @@ public class Ejercicio_Cinco_Opciones extends AppCompatActivity {
             intent.putExtra("ejercicio", Constantes.IDENTIFICAR_CINCO_OPCIONES);
             intent.putExtra("categoria", subdato);
             intent.putExtra("ruido", ruido);
-            intent.putExtra("intensidad", intensidadPorcentual + "%");
+            intent.putExtra("intensidad", mReproductorDeAudioController.getIntensidadPorcentual() + "%");
             intent.putExtra("errores", errores);
             intent.putExtra("resultado", puntajeCorrecto + "");
             startActivity(intent);

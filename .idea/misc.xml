@@ -4,10 +4,16 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Android/Android projects/UTN/APP_PS_Fono/app/src/main/res/drawable/background_dialog.xml" value="0.3828125" />
+        <entry key="..\:/Android/Android projects/UTN/APP_PS_Fono/app/src/main/res/drawable/ic_baseline_settings_24.xml" value="0.22135416666666666" />
+        <entry key="..\:/Android/Android projects/UTN/APP_PS_Fono/app/src/main/res/drawable/icon_play.xml" value="0.22135416666666666" />
+        <entry key="..\:/Android/Android projects/UTN/APP_PS_Fono/app/src/main/res/layout/activity_administrar_resultados.xml" value="0.20520833333333333" />
         <entry key="..\:/Android/Android projects/UTN/APP_PS_Fono/app/src/main/res/layout/activity_configuracion.xml" value="0.20520833333333333" />
+        <entry key="..\:/Android/Android projects/UTN/APP_PS_Fono/app/src/main/res/layout/activity_detalle_resultado.xml" value="0.20520833333333333" />
         <entry key="..\:/Android/Android projects/UTN/APP_PS_Fono/app/src/main/res/layout/activity_main.xml" value="0.29981884057971014" />
         <entry key="..\:/Android/Android projects/UTN/APP_PS_Fono/app/src/main/res/layout/activity_practica.xml" value="0.20520833333333333" />
-        <entry key="..\:/Android/Android projects/UTN/APP_PS_Fono/app/src/main/res/layout/ejercicio_cinco_opciones.xml" value="0.20520833333333333" />
+        <entry key="..\:/Android/Android projects/UTN/APP_PS_Fono/app/src/main/res/layout/dialog_game_settings.xml" value="0.33" />
+        <entry key="..\:/Android/Android projects/UTN/APP_PS_Fono/app/src/main/res/layout/ejercicio_cinco_opciones.xml" value="0.33" />
+        <entry key="..\:/Android/Android projects/UTN/APP_PS_Fono/app/src/main/res/layout/ejercicio_tres_opciones.xml" value="0.29438405797101447" />
       </map>
     </option>
   </component>
