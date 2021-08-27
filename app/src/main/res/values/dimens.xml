@@ -16,4 +16,5 @@
     <dimen name="common_dialog_horizontal">24dp</dimen>
     <dimen name="common_item_height">56dp</dimen>
     <dimen name="common_dialog_button">8dp</dimen>
+    <dimen name="common_padding_small">8dp</dimen>
 </resources>

@@ -36,6 +36,10 @@ public class Ejercicio_Cinco_Opciones extends AppCompatActivity {
     int puntajeCorrecto, puntajeIncorrecto, repeticiones, incorrectCounterStage = 0, maxRepetitions = 10, opcionCorrecta, wrongAnswersLimit = 2;
     String ruido, modo, subdato, errores = "";
     float intensidad;
+    private ArrayList<String>
+            wAnswersArray = new ArrayList<>(),
+            cAnswersArray = new ArrayList<>(),
+            cAnswersSoundPathArray = new ArrayList<>();
     private ArrayList cincoOpciones;
     private ReproductorDeAudioController mReproductorDeAudioController;
     private EjercicioCincoOpcionesBinding binding;
@@ -154,6 +158,9 @@ public class Ejercicio_Cinco_Opciones extends AppCompatActivity {
                     btn1.startAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.bounce));
                     setup();
                 } else {
+                    wAnswersArray.add(btn1.getText().toString());
+                    cAnswersArray.add(listaSonidos.get((Integer) cincoOpciones.get(opcionCorrecta)).getNombre_sonido());
+                    cAnswersSoundPathArray.add(listaSonidos.get((Integer) cincoOpciones.get(opcionCorrecta)).getRuta_sonido());
                     errores = errores + listaSonidos.get((Integer) cincoOpciones.get(opcionCorrecta)).getNombre_sonido() + "\n";
                     modificarPuntaje(tvPuntajeIncorrecto);
                     btn1.startAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.shake_animation));
@@ -164,12 +171,14 @@ public class Ejercicio_Cinco_Opciones extends AppCompatActivity {
         btn2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 if (listaSonidos.get((Integer) cincoOpciones.get(opcionCorrecta)).getNombre_sonido() == btn2.getText()) {
                     modificarPuntaje(tvPuntajeCorrecto);
                     btn2.startAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.bounce));
                     setup();
                 } else {
+                    wAnswersArray.add(btn1.getText().toString());
+                    cAnswersArray.add(listaSonidos.get((Integer) cincoOpciones.get(opcionCorrecta)).getNombre_sonido());
+                    cAnswersSoundPathArray.add(listaSonidos.get((Integer) cincoOpciones.get(opcionCorrecta)).getRuta_sonido());
                     errores = errores + listaSonidos.get((Integer) cincoOpciones.get(opcionCorrecta)).getNombre_sonido() + "\n";
                     modificarPuntaje(tvPuntajeIncorrecto);
                     btn2.startAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.shake_animation));
@@ -186,6 +195,9 @@ public class Ejercicio_Cinco_Opciones extends AppCompatActivity {
                     btn3.startAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.bounce));
                     setup();
                 } else {
+                    wAnswersArray.add(btn1.getText().toString());
+                    cAnswersArray.add(listaSonidos.get((Integer) cincoOpciones.get(opcionCorrecta)).getNombre_sonido());
+                    cAnswersSoundPathArray.add(listaSonidos.get((Integer) cincoOpciones.get(opcionCorrecta)).getRuta_sonido());
                     errores = errores + listaSonidos.get((Integer) cincoOpciones.get(opcionCorrecta)).getNombre_sonido() + "\n";
                     modificarPuntaje(tvPuntajeIncorrecto);
                     btn3.startAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.shake_animation));
@@ -202,6 +214,9 @@ public class Ejercicio_Cinco_Opciones extends AppCompatActivity {
                     btn4.startAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.bounce));
                     setup();
                 } else {
+                    wAnswersArray.add(btn1.getText().toString());
+                    cAnswersArray.add(listaSonidos.get((Integer) cincoOpciones.get(opcionCorrecta)).getNombre_sonido());
+                    cAnswersSoundPathArray.add(listaSonidos.get((Integer) cincoOpciones.get(opcionCorrecta)).getRuta_sonido());
                     errores = errores + listaSonidos.get((Integer) cincoOpciones.get(opcionCorrecta)).getNombre_sonido() + "\n";
                     modificarPuntaje(tvPuntajeIncorrecto);
                     btn4.startAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.shake_animation));
@@ -219,6 +234,9 @@ public class Ejercicio_Cinco_Opciones extends AppCompatActivity {
                     btn5.startAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.bounce));
                     setup();
                 } else {
+                    wAnswersArray.add(btn1.getText().toString());
+                    cAnswersArray.add(listaSonidos.get((Integer) cincoOpciones.get(opcionCorrecta)).getNombre_sonido());
+                    cAnswersSoundPathArray.add(listaSonidos.get((Integer) cincoOpciones.get(opcionCorrecta)).getRuta_sonido());
                     errores = errores + listaSonidos.get((Integer) cincoOpciones.get(opcionCorrecta)).getNombre_sonido() + "\n";
                     modificarPuntaje(tvPuntajeIncorrecto);
                     btn5.startAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.shake_animation));
@@ -258,7 +276,7 @@ public class Ejercicio_Cinco_Opciones extends AppCompatActivity {
 
         if (puntaje.getId() == R.id.puntaje) {
             puntajeCorrecto++;
-            incorrectCounterStage=0;
+            incorrectCounterStage = 0;
             points = Integer.toString(puntajeCorrecto);
             UtilsSound.announceAnswerSound(binding.getRoot(), true);
             int correctAnswerRes = getRandomCorrectAnswerText();
@@ -271,12 +289,12 @@ public class Ejercicio_Cinco_Opciones extends AppCompatActivity {
             if (incorrectCounterStage >= wrongAnswersLimit) {
                 incorrectCounterStage = 0;
                 UtilsCommon.displayAlertMessage(binding.getRoot(),
-                        "¡Te has equivocado más de "+wrongAnswersLimit+" veces!",
+                        "¡Te has equivocado más de " + wrongAnswersLimit + " veces!",
                         "La respuesta correcta era: \"" + listaSonidos.get((Integer) cincoOpciones.get(opcionCorrecta)).getNombre_sonido() + "\""
-                +"\nPasemos al siguiente.");
+                                + "\nPasemos al siguiente.");
                 ReproductorDeAudioController.getmInstance().startSoundNoNoise(listaSonidos.get((Integer) cincoOpciones.get(opcionCorrecta)).getRuta_sonido(), getApplicationContext());
                 setup();
-            } else{
+            } else {
                 int incorrectAnswerRes = getRandomIncorrectAnswerText();
                 UtilsCommon.showSnackbar(binding.getRoot(), getString(incorrectAnswerRes));
             }
@@ -296,6 +314,9 @@ public class Ejercicio_Cinco_Opciones extends AppCompatActivity {
             intent.putExtra("intensidad", mReproductorDeAudioController.getIntensidadPorcentual() + "%");
             intent.putExtra("errores", errores);
             intent.putExtra("resultado", puntajeCorrecto + "");
+            intent.putStringArrayListExtra("wAnswers", wAnswersArray);
+            intent.putStringArrayListExtra("cAnswers", cAnswersArray);
+            intent.putStringArrayListExtra("cAnswersSoundPathArray", cAnswersSoundPathArray);
             startActivity(intent);
         }
     }

@@ -5,6 +5,10 @@ import android.os.Bundle;
 import android.util.Log;
 import android.widget.TextView;
 
+import com.evrencoskun.tableview.TableView;
+
+import java.util.ArrayList;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
@@ -37,6 +41,9 @@ public class DetalleResultado extends AppCompatActivity {
         String intensidad = getIntent().getStringExtra("intensidad");
         String errores = getIntent().getStringExtra("errores");
         String resultado = getIntent().getStringExtra("resultado");
+        ArrayList<String> wAnswersArray = getIntent().getStringArrayListExtra("wAnswers");
+        ArrayList<String> cAnswersArray = getIntent().getStringArrayListExtra("cAnswers");
+        ArrayList<String> cAnswersSoundPathArray = getIntent().getStringArrayListExtra("cAnswersSoundPathArray");
         volverMenu = getIntent().getBooleanExtra("volverMenu", true);
 
         Log.d("resultado pasado", fecha + ejercicio + categoria + ruido + intensidad + errores + resultado);
@@ -57,6 +64,10 @@ public class DetalleResultado extends AppCompatActivity {
         textViewIntensidad.setText(intensidad);
         textViewErrores.setText(errores);
         textViewResultados.setText(resultado+"/10");
+
+        TableView tableView = findViewById(R.id.tlWrongAnswers);
+       // tableView.setrow
+
     }
 
     @Override
