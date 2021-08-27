@@ -188,7 +188,7 @@ public class Configuracion extends AppCompatActivity {
             public void onClick(View v) {
                 if (validate()){
                     switch (confTipoEjercio) {
-                        case Constantes.IDENTIFICAR_TRES_OPCIONES:
+                        case Constantes.J_IDENTIFICAR_TRES_OPCIONES:
                             Intent intent = new Intent(getApplicationContext(), Ejercicio_Tres_Opciones.class);
                             if (!switchRuido.isChecked()) {
                                 confRuido = "Sin Ruido";
@@ -200,7 +200,7 @@ public class Configuracion extends AppCompatActivity {
                             startActivity(intent);
                             break;
 
-                        case Constantes.IDENTIFICAR_CINCO_OPCIONES:
+                        case Constantes.J_IDENTIFICAR_CINCO_OPCIONES:
                             Intent intent3 = new Intent(getApplicationContext(), Ejercicio_Cinco_Opciones.class);
                             if (!switchRuido.isChecked()) {
                                 confRuido = "Sin Ruido";
@@ -211,7 +211,7 @@ public class Configuracion extends AppCompatActivity {
                             intent3.putExtra("modo",modo);
                             startActivity(intent3);
                             break;
-                        case Constantes.ESCRIBIR_LO_QUE_OYO:
+                        case Constantes.J_ESCRIBIR_LO_QUE_OYO:
                             Intent intent2 = new Intent(getApplicationContext(), Ejercicio_Completar.class);
                             if (!switchRuido.isChecked()) {
                                 confRuido = "Sin Ruido";

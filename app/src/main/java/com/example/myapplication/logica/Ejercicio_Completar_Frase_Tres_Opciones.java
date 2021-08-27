@@ -254,7 +254,7 @@ public class Ejercicio_Completar_Frase_Tres_Opciones extends AppCompatActivity {
             DateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
             String today = formatter.format(date);
             ResultadoRepository resultadoRepository = new ResultadoRepository(getApplication());
-            Resultado resultado = new Resultado(today, Constantes.IDENTIFICAR_TRES_OPCIONES, subdato, ruido, intensidadPorcentual + "%", errores, puntajeCorrecto + "");
+            Resultado resultado = new Resultado(today, Constantes.J_IDENTIFICAR_TRES_OPCIONES, subdato, ruido, intensidadPorcentual + "%", errores, puntajeCorrecto + "");
             resultadoRepository.agregarResultado(resultado);
             Intent intent = new Intent(getApplicationContext(), DetalleResultado.class);
             intent.putExtra("fecha", today);

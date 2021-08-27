@@ -7,26 +7,26 @@
     <string name="tab_text_3">Evaluación</string>
     <string name="consigna_practica">En esta sección podrá practicar con todos los sonidos de la aplicacion.
     </string>
-    <string name="consigna_ejercitacion">Configure que categoría desea practicar, el tipo de ejercicio y el ruido.
-    No se te evaluará en esta sección</string>
-    <string name="consigna_evaluacion">Realice una evaluación. Configure que categoría desea evaluar,
+    <string name="consigna_ejercitacion">Configure qué categoría desea practicar, el tipo de ejercicio y el ruido.
+    No se le evaluará en esta sección. </string>
+    <string name="consigna_evaluacion">Realice una evaluación. Configure qué categoría desea evaluar,
     seleccione el tipo de "Ruido" y su intensidad. Los resultados serán almacenados para que pueda
-    ver su progreso</string>
+    ver su progreso. </string>
     <string name="title_activity_configuracion">Configuracion</string>
-    <string name="solicitar_permiso">Se necesitan permisos para porder grabar los sonidos personalizados</string>
+    <string name="solicitar_permiso">Se necesitan permisos para porder grabar los sonidos personalizados. </string>
 
     <string name="open">Open</string>
     <string name="close">Close</string>
     <string name="common_label_ok">Continuar</string>
     <string name="correct1">¡Correcto!</string>
     <string name="correct2">¡Genial!</string>
-    <string name="correct3">¡Seguí así!</string>
+    <string name="correct3">¡Siga así!</string>
     <string name="correct4">¡Muy bien!</string>
     <string name="correct5">¡Perfecto!</string>
     <string name="correct6">Bravo.</string>
     <string name="correct7">¡Estupendo!</string>
     <string name="correct8">Excelente.</string>
     <string name="incorrect1">Incorrecto.</string>
-    <string name="incorrect2">Probá con otro.</string>
-    <string name="incorrect3">Volvé a intentarlo.</string>
+    <string name="incorrect2">Pruebe con otro.</string>
+    <string name="incorrect3">Vuelva a intentarlo.</string>
 </resources>

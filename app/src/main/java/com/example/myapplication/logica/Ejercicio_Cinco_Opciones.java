@@ -2,13 +2,11 @@ package com.example.myapplication.logica;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
 
@@ -21,8 +19,6 @@ import com.example.myapplication.databinding.EjercicioCincoOpcionesBinding;
 import com.example.myapplication.datos.Constantes;
 import com.example.myapplication.room_database.palabras.Sound;
 import com.example.myapplication.room_database.palabras.SoundRepository;
-import com.example.myapplication.room_database.resultados.Resultado;
-import com.example.myapplication.room_database.resultados.ResultadoRepository;
 import com.google.android.material.button.MaterialButton;
 
 import java.text.DateFormat;
@@ -294,7 +290,7 @@ public class Ejercicio_Cinco_Opciones extends AppCompatActivity {
             String today = formatter.format(date);
             Intent intent = new Intent(getApplicationContext(), DetalleResultado.class);
             intent.putExtra("fecha", today);
-            intent.putExtra("ejercicio", Constantes.IDENTIFICAR_CINCO_OPCIONES);
+            intent.putExtra("ejercicio", Constantes.J_IDENTIFICAR_CINCO_OPCIONES);
             intent.putExtra("categoria", subdato);
             intent.putExtra("ruido", ruido);
             intent.putExtra("intensidad", mReproductorDeAudioController.getIntensidadPorcentual() + "%");

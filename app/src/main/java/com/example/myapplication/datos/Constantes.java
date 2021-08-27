@@ -17,16 +17,18 @@ public abstract class Constantes {
     public static final String[] CATEGORIAS = { PALABRA, ORACIONES, CANCIONES, INSTRUMENTOS, ESTILOS_MUSICALES, VOCES_FAMILIARES};
 
     //TIPOS DE EJERCICIOS
-    public static final String IDENTIFICAR_TRES_OPCIONES = "Identificar entre 3 opciones";
-    public static final String IDENTIFICAR_CINCO_OPCIONES = "Identificar entre 5 opciones";
-    public static final String ESCRIBIR_LO_QUE_OYO = "Escribir lo que oyó";
-    public static final String [] TIPOS_EJERCICIOS ={IDENTIFICAR_TRES_OPCIONES,IDENTIFICAR_CINCO_OPCIONES,ESCRIBIR_LO_QUE_OYO};
+    public static final String J_DISCRIMINAR = "Discriminar";
+    public static final String J_IDENTIFICAR_TRES_OPCIONES = "Identificar entre 3 opciones";
+    public static final String J_IDENTIFICAR_CINCO_OPCIONES = "Identificar entre 5 opciones";
+    public static final String J_TODA_LA_CATEGORIA = "Identificar entre 5 opciones";
+    public static final String J_ESCRIBIR_LO_QUE_OYO = "Escribir lo que oyó";
+    public static final String [] TIPOS_EJERCICIOS ={J_DISCRIMINAR, J_IDENTIFICAR_TRES_OPCIONES, J_IDENTIFICAR_CINCO_OPCIONES, J_ESCRIBIR_LO_QUE_OYO, J_TODA_LA_CATEGORIA};
 
     //TIPOS DE EJERCICIOS ORACIONES
 
     public static final String COMPLETAR_ORACION_SIN_OPCIONES = "Completar oración sin opciones";
     public static final String COMPLETAR_ORACION_CON_OPCIONES = "Completar oración con opciones";
-    public static final String [] TIPOS_EJERCICIOS_ORACIONES ={IDENTIFICAR_TRES_OPCIONES,IDENTIFICAR_CINCO_OPCIONES,ESCRIBIR_LO_QUE_OYO, COMPLETAR_ORACION_CON_OPCIONES, COMPLETAR_ORACION_SIN_OPCIONES};
+    public static final String [] TIPOS_EJERCICIOS_ORACIONES ={J_IDENTIFICAR_TRES_OPCIONES, J_IDENTIFICAR_CINCO_OPCIONES, J_ESCRIBIR_LO_QUE_OYO, COMPLETAR_ORACION_CON_OPCIONES, COMPLETAR_ORACION_SIN_OPCIONES};
 
     //SUBCATEGORIA PALABRAS
     public static final String TODAS = "Todo";

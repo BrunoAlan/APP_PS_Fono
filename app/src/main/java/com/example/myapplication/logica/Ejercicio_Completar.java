@@ -166,11 +166,11 @@ public class Ejercicio_Completar extends AppCompatActivity {
             DateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
             String today = formatter.format(date);
             ResultadoRepository resultadoRepository = new ResultadoRepository(getApplication());
-            Resultado resultado = new Resultado(today, Constantes.ESCRIBIR_LO_QUE_OYO, subdato, ruido, intensidadPorcentual + "%", errores, puntajeCorrecto + "");
+            Resultado resultado = new Resultado(today, Constantes.J_ESCRIBIR_LO_QUE_OYO, subdato, ruido, intensidadPorcentual + "%", errores, puntajeCorrecto + "");
             resultadoRepository.agregarResultado(resultado);
             Intent intent = new Intent(getApplicationContext(), DetalleResultado.class);
             intent.putExtra("fecha", today);
-            intent.putExtra("ejercicio", Constantes.ESCRIBIR_LO_QUE_OYO);
+            intent.putExtra("ejercicio", Constantes.J_ESCRIBIR_LO_QUE_OYO);
             intent.putExtra("categoria", subdato);
             intent.putExtra("ruido", ruido);
             intent.putExtra("intensidad", intensidadPorcentual + "%");
