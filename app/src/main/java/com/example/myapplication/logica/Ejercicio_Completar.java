@@ -12,7 +12,7 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
 
-import com.example.myapplication.Controllers.ReproductorDeAudioController;
+import com.example.myapplication.controllers.ReproductorDeAudioController;
 import com.example.myapplication.DetalleResultado;
 import com.example.myapplication.R;
 import com.example.myapplication.datos.Constantes;

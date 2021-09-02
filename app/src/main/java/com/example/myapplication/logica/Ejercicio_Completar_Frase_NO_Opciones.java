@@ -11,7 +11,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
 
-import com.example.myapplication.Controllers.ReproductorDeAudioController;
+import com.example.myapplication.controllers.ReproductorDeAudioController;
 import com.example.myapplication.R;
 import com.example.myapplication.room_database.palabras.Sound;
 import com.example.myapplication.room_database.palabras.SoundRepository;

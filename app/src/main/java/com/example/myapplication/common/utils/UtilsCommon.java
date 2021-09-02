@@ -1,12 +1,10 @@
 package com.example.myapplication.common.utils;
 
-import android.content.Context;
 import android.content.DialogInterface;
-import android.util.Log;
 import android.view.View;
 import android.widget.SeekBar;
 
-import com.example.myapplication.Controllers.ReproductorDeAudioController;
+import com.example.myapplication.controllers.ReproductorDeAudioController;
 import com.example.myapplication.R;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.snackbar.Snackbar;
