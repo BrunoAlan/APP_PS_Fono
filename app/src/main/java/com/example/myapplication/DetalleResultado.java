@@ -2,15 +2,14 @@ package com.example.myapplication;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.TextView;
-
-import com.evrencoskun.tableview.TableView;
-
+import com.example.myapplication.common.entities.OptionAnswer;
+import com.example.myapplication.databinding.ActivityDetalleResultadoBinding;
 import java.util.ArrayList;
-
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import ir.androidexception.datatable.model.DataTableHeader;
+import ir.androidexception.datatable.model.DataTableRow;
 
 public class DetalleResultado extends AppCompatActivity {
 
@@ -24,10 +23,14 @@ public class DetalleResultado extends AppCompatActivity {
     TextView textViewErrores;
     TextView textViewResultados;
 
+    private ArrayList<OptionAnswer> mOptionAnswerList = new ArrayList<>();
+    private ActivityDetalleResultadoBinding mBinding;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_detalle_resultado);
+        mBinding = ActivityDetalleResultadoBinding.inflate(getLayoutInflater());
+        setContentView(mBinding.getRoot());
 
         final Toolbar toolbar = findViewById(R.id.toolbar_detalle_resultado);
         setSupportActionBar(toolbar);
@@ -39,22 +42,17 @@ public class DetalleResultado extends AppCompatActivity {
         String categoria = getIntent().getStringExtra("categoria");
         String ruido = getIntent().getStringExtra("ruido");
         String intensidad = getIntent().getStringExtra("intensidad");
-        String errores = getIntent().getStringExtra("errores");
         String resultado = getIntent().getStringExtra("resultado");
-        ArrayList<String> wAnswersArray = getIntent().getStringArrayListExtra("wAnswers");
-        ArrayList<String> cAnswersArray = getIntent().getStringArrayListExtra("cAnswers");
-        ArrayList<String> cAnswersSoundPathArray = getIntent().getStringArrayListExtra("cAnswersSoundPathArray");
+
         volverMenu = getIntent().getBooleanExtra("volverMenu", true);
 
-        Log.d("resultado pasado", fecha + ejercicio + categoria + ruido + intensidad + errores + resultado);
-
+        mOptionAnswerList = (ArrayList<OptionAnswer>) getIntent().getSerializableExtra(getString(R.string.error_resume));
 
         textViewFecha = findViewById(R.id.tvFecha);
         textViewEjercicio = findViewById(R.id.tvEjercicio);
         textViewCategoria = findViewById(R.id.tvCategoria);
         textViewRuido = findViewById(R.id.tvRuido);
         textViewIntensidad = findViewById(R.id.tvIntensidad);
-        textViewErrores = findViewById(R.id.tvErrores);
         textViewResultados = findViewById(R.id.tvResultado);
 
         textViewFecha.setText(fecha);
@@ -62,12 +60,41 @@ public class DetalleResultado extends AppCompatActivity {
         textViewCategoria.setText(categoria);
         textViewRuido.setText(ruido);
         textViewIntensidad.setText(intensidad);
-        textViewErrores.setText(errores);
-        textViewResultados.setText(resultado+"/10");
+        textViewResultados.setText(resultado + "/10");
 
-        TableView tableView = findViewById(R.id.tlWrongAnswers);
-       // tableView.setrow
+        setupDataTable();
 
+    }
+
+    private void setupDataTable() {
+        DataTableHeader header = new DataTableHeader.Builder()
+                .item("Error 1", 1)
+                .item("Error 2", 1)
+                .item("Respuesta", 1)
+                .build();
+
+        ArrayList<DataTableRow> rows = new ArrayList<>();
+        for (OptionAnswer optionAnswer : mOptionAnswerList) {
+            ArrayList<String> valueList = new ArrayList<>();
+            if (optionAnswer.getErrorQuiantity()==0) {
+                valueList.add("--");
+                valueList.add("--");
+            }else valueList.addAll(optionAnswer.getErrorList());
+            if (optionAnswer.getErrorQuiantity()==1)
+                valueList.add("--");
+            valueList.add(optionAnswer.getCorrectAnswer());
+            DataTableRow row = new DataTableRow.Builder()
+                    .value(valueList.get(0))
+                    .value(valueList.get(1))
+                    .value(valueList.get(2))
+                    .build();
+
+            rows.add(row);
+        }
+
+        mBinding.errorDataTable.setHeader(header);
+        mBinding.errorDataTable.setRows(rows);
+        mBinding.errorDataTable.inflate(getApplicationContext());
     }
 
     @Override
@@ -76,7 +103,7 @@ public class DetalleResultado extends AppCompatActivity {
             finish();
             Intent intent = new Intent(DetalleResultado.this, MainActivity.class);
             startActivity(intent);
-        }else{
+        } else {
             finish();
         }
     }

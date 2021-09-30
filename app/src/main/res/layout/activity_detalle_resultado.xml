@@ -22,18 +22,15 @@
     <ScrollView
         android:id="@+id/scrollView2"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/toolbar_detalle_resultado"
-        tools:layout_editor_absoluteX="0dp">
+        app:layout_constraintBottom_toBottomOf="parent">
 
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="16dp"
-            android:paddingBottom="16dp">
-
-
+            android:layout_height="wrap_content">
             <TextView
                 android:id="@+id/textView12"
                 android:layout_width="wrap_content"
@@ -186,36 +183,32 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/tvIntensidad" />
 
-            <TextView
-                android:id="@+id/tvErrores"
+            <ir.androidexception.datatable.DataTable
+                android:id="@+id/errorDataTable"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginEnd="16dp"
-                android:layout_marginBottom="32dp"
-                android:inputType="textMultiLine"
-                android:text="Juan \n pedro"
-                android:textSize="18sp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
+                android:layout_marginHorizontal="@dimen/common_padding_default"
+                app:header_gravity="center"
+                app:row_gravity="center"
+                app:header_vertical_padding="16dp"
+                app:header_horizontal_padding="0dp"
+                app:row_vertical_padding="8dp"
+                app:header_text_size="8sp"
+                app:row_text_size="7sp"
+                app:row_text_color="#000"
+                app:header_text_color="#000"
+                app:row_background_color="#fff"
+                app:header_background_color="#fff"
+                app:persian_number="false"
+                app:corner_radius="8dp"
+                app:direction="ltr"
+                app:shadow="8dp"
+                android:layout_marginTop="@dimen/common_padding_default"
+                android:layout_marginBottom="@dimen/common_padding_medium"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView11"
-                app:layout_constraintVertical_bias="0.058" />
-            <androidx.cardview.widget.CardView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/common_padding_default"
-                app:layout_constraintTop_toBottomOf="@+id/tvErrores"
-                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent">
-                <com.evrencoskun.tableview.TableView
-                    android:id="@+id/tlWrongAnswers"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"/>
-            </androidx.cardview.widget.CardView>
+                app:layout_constraintBottom_toBottomOf="parent"/>
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </ScrollView>

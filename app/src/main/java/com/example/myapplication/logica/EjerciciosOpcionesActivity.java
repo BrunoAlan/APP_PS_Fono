@@ -3,7 +3,9 @@ package com.example.myapplication.logica;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.animation.AnimationUtils;
+
 import androidx.appcompat.app.AppCompatActivity;
+
 import com.example.myapplication.common.adapters.OnOptionClickListener;
 import com.example.myapplication.common.adapters.OptionsAdapter;
 import com.example.myapplication.common.entities.OptionAnswer;
@@ -12,7 +14,7 @@ import com.example.myapplication.DetalleResultado;
 import com.example.myapplication.R;
 import com.example.myapplication.common.utils.UtilsCommon;
 import com.example.myapplication.common.utils.UtilsSound;
-import com.example.myapplication.databinding.EjercicioCincoOpcionesBinding;
+import com.example.myapplication.databinding.ActivityEjerciciosOpcionesBinding;
 import com.example.myapplication.datos.Constantes;
 import com.example.myapplication.room_database.palabras.Sound;
 import com.example.myapplication.room_database.palabras.SoundRepository;
@@ -27,13 +29,14 @@ import java.util.Date;
 import java.util.List;
 import java.util.Random;
 
-public class Ejercicio_Cinco_Opciones extends AppCompatActivity implements OnOptionClickListener {
+public class EjerciciosOpcionesActivity extends AppCompatActivity implements OnOptionClickListener {
     public SoundRepository sr;
     private List<Sound> listaSonidos;
     private int puntajeCorrecto;
     private int puntajeIncorrecto;
     private int repeticiones;
     private int incorrectCounterStage = 0;
+    private int optionsQuantity = 0;
     private final int maxRepetitions = 10;
     private int opcionCorrecta;
     private final int wrongAnswersLimit = 2;
@@ -43,12 +46,12 @@ public class Ejercicio_Cinco_Opciones extends AppCompatActivity implements OnOpt
     private ArrayList<Integer> optionList;
     private OptionsAdapter mAdapter;
     private ReproductorDeAudioController mReproductorDeAudioController;
-    private EjercicioCincoOpcionesBinding mBinding;
+    private ActivityEjerciciosOpcionesBinding mBinding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mBinding = EjercicioCincoOpcionesBinding.inflate(getLayoutInflater());
+        mBinding = ActivityEjerciciosOpcionesBinding.inflate(getLayoutInflater());
         setContentView(mBinding.getRoot());
         puntajeCorrecto = 0;
         puntajeIncorrecto = 0;
@@ -57,6 +60,7 @@ public class Ejercicio_Cinco_Opciones extends AppCompatActivity implements OnOpt
         //Datos pasados desde la configuración
         subdato = getIntent().getStringExtra("subDato");
         ruido = getIntent().getStringExtra("tipoRuido");
+
         float intensidad = getIntent().getFloatExtra("intensidad", .1f);
         mReproductorDeAudioController = ReproductorDeAudioController.getmInstance();
         mReproductorDeAudioController.setIntensidad(intensidad);
@@ -90,11 +94,19 @@ public class Ejercicio_Cinco_Opciones extends AppCompatActivity implements OnOpt
                 });
                 break;
         }
+
     }
 
     void setup() {
         mOptions.clear();
-        optionList = obtenerNumero(5);
+        String tipoEjercicio = getIntent().getStringExtra(getString(R.string.tipo_ejercicio));
+        if (tipoEjercicio.equals(Constantes.J_IDENTIFICAR_TRES_OPCIONES))
+            optionsQuantity = 3;
+        else if (tipoEjercicio.equals(Constantes.J_IDENTIFICAR_CINCO_OPCIONES))
+            optionsQuantity = 5;
+        else  if (tipoEjercicio.equals(Constantes.J_TODA_LA_CATEGORIA))
+            optionsQuantity = listaSonidos.size();
+        optionList = obtenerNumero(optionsQuantity);
         setTexts(optionList);
         mAdapter = new OptionsAdapter(mOptions, this);
         mBinding.recyclerView.setAdapter(mAdapter);
@@ -107,7 +119,7 @@ public class Ejercicio_Cinco_Opciones extends AppCompatActivity implements OnOpt
 
         mBinding.btnPlay.setOnClickListener(v -> {
             if (activarSonido()) {
-                sr.getRutaSonido(ruido).observe(Ejercicio_Cinco_Opciones.this, sounds -> {
+                sr.getRutaSonido(ruido).observe(this, sounds -> {
                     ReproductorDeAudioController rp = new ReproductorDeAudioController();
                     rp.startSoundWithNoise(
                             listaSonidos.get(optionList.get(opcionCorrecta)).getRuta_sonido(),
@@ -118,7 +130,7 @@ public class Ejercicio_Cinco_Opciones extends AppCompatActivity implements OnOpt
                 });
             } else {
                 ReproductorDeAudioController rp = new ReproductorDeAudioController();
-                rp.startSoundNoNoise(listaSonidos.get( optionList.get(opcionCorrecta)).getRuta_sonido(), getApplicationContext());
+                rp.startSoundNoNoise(listaSonidos.get(optionList.get(opcionCorrecta)).getRuta_sonido(), getApplicationContext());
             }
         });
 
@@ -128,7 +140,6 @@ public class Ejercicio_Cinco_Opciones extends AppCompatActivity implements OnOpt
         for (int i = 0; i < optionList.size(); i++)
             mOptions.add(listaSonidos.get(optionList.get(i)).getNombre_sonido());
     }
-
 
     private ArrayList<Integer> obtenerNumero(int optionQuantity) {
         ArrayList<Integer> randoms = new ArrayList<>();
@@ -160,9 +171,9 @@ public class Ejercicio_Cinco_Opciones extends AppCompatActivity implements OnOpt
                 incorrectCounterStage = 0;
                 UtilsCommon.displayAlertMessage(mBinding.getRoot(),
                         "¡Te has equivocado más de " + wrongAnswersLimit + " veces!",
-                        "La respuesta correcta era: \"" + listaSonidos.get( optionList.get(opcionCorrecta)).getNombre_sonido() + "\""
+                        "La respuesta correcta era: \"" + listaSonidos.get(optionList.get(opcionCorrecta)).getNombre_sonido() + "\""
                                 + "\nPasemos al siguiente.");
-                ReproductorDeAudioController.getmInstance().startSoundNoNoise(listaSonidos.get( optionList.get(opcionCorrecta)).getRuta_sonido(), getApplicationContext());
+                ReproductorDeAudioController.getmInstance().startSoundNoNoise(listaSonidos.get(optionList.get(opcionCorrecta)).getRuta_sonido(), getApplicationContext());
                 setup();
             } else {
                 int incorrectAnswerRes = getRandomIncorrectAnswerText();
@@ -229,9 +240,9 @@ public class Ejercicio_Cinco_Opciones extends AppCompatActivity implements OnOpt
             btnOption.startAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.bounce));
             setup();
         } else {
-            OptionAnswer optionAnswer = mOptionAnswersList.get(mOptionAnswersList.size()-1);
+            OptionAnswer optionAnswer = mOptionAnswersList.get(mOptionAnswersList.size() - 1);
             optionAnswer.addError(btnOption.getText().toString());
-            mOptionAnswersList.set(mOptionAnswersList.size()-1,optionAnswer);
+            mOptionAnswersList.set(mOptionAnswersList.size() - 1, optionAnswer);
             errores = errores + listaSonidos.get(optionList.get(opcionCorrecta)).getNombre_sonido() + "\n";
             modificarPuntaje(false);
             btnOption.startAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.shake_animation));

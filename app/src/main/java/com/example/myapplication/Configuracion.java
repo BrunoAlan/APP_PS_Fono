@@ -23,6 +23,7 @@ import com.example.myapplication.logica.Ejercicio_Completar;
 import com.example.myapplication.logica.Ejercicio_Completar_Frase_NO_Opciones;
 import com.example.myapplication.logica.Ejercicio_Completar_Frase_Tres_Opciones;
 import com.example.myapplication.logica.Ejercicio_Tres_Opciones;
+import com.example.myapplication.logica.EjerciciosOpcionesActivity;
 import com.example.myapplication.room_database.palabras.Sound;
 import com.example.myapplication.room_database.palabras.SoundRepository;
 import com.google.android.material.textfield.TextInputLayout;
@@ -187,30 +188,20 @@ public class Configuracion extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (validate()){
-                    switch (confTipoEjercio) {
-                        case Constantes.J_IDENTIFICAR_TRES_OPCIONES:
-                            Intent intent = new Intent(getApplicationContext(), Ejercicio_Tres_Opciones.class);
-                            if (!switchRuido.isChecked()) {
-                                confRuido = "Sin Ruido";
-                            }
-                            intent.putExtra("subDato", confSubDato);
-                            intent.putExtra("tipoRuido", confRuido);
-                            intent.putExtra("intensidad",confIntensidad);
-                            intent.putExtra("modo",modo);
-                            startActivity(intent);
-                            break;
+                    Intent intent = new Intent(getApplicationContext(), EjerciciosOpcionesActivity.class);
+                    if (!switchRuido.isChecked()) confRuido = "Sin Ruido";
 
-                        case Constantes.J_IDENTIFICAR_CINCO_OPCIONES:
-                            Intent intent3 = new Intent(getApplicationContext(), Ejercicio_Cinco_Opciones.class);
-                            if (!switchRuido.isChecked()) {
-                                confRuido = "Sin Ruido";
-                            }
-                            intent3.putExtra("subDato", confSubDato);
-                            intent3.putExtra("tipoRuido", confRuido);
-                            intent3.putExtra("intensidad",confIntensidad);
-                            intent3.putExtra("modo",modo);
-                            startActivity(intent3);
-                            break;
+                    if (confTipoEjercio.equals(Constantes.J_IDENTIFICAR_TRES_OPCIONES)
+                    || confTipoEjercio.equals(Constantes.J_IDENTIFICAR_CINCO_OPCIONES)
+                    || confTipoEjercio.equals(Constantes.J_TODA_LA_CATEGORIA)){
+                        intent.putExtra("subDato", confSubDato);
+                        intent.putExtra("tipoRuido", confRuido);
+                        intent.putExtra("intensidad",confIntensidad);
+                        intent.putExtra(getString(R.string.tipo_ejercicio),confTipoEjercio);
+                        startActivity(intent);
+                    }
+                    switch (confTipoEjercio) {
+
                         case Constantes.J_ESCRIBIR_LO_QUE_OYO:
                             Intent intent2 = new Intent(getApplicationContext(), Ejercicio_Completar.class);
                             if (!switchRuido.isChecked()) {

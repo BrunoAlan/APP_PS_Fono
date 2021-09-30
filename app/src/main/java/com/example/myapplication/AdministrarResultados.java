@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.myapplication.adapters.ResultadosAdapter;
+import com.example.myapplication.common.adapters.ResultadosAdapter;
 import com.example.myapplication.room_database.resultados.Resultado;
 import com.example.myapplication.room_database.resultados.ResultadoViewModel;
 

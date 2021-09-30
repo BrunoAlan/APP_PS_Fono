@@ -13,7 +13,7 @@ import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.myapplication.adapters.SoundsAdapter;
+import com.example.myapplication.common.adapters.SoundsAdapter;
 import com.example.myapplication.room_database.palabras.Sound;
 import com.example.myapplication.room_database.palabras.SoundViewModel;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;

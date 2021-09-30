@@ -29,4 +29,7 @@
     <string name="incorrect1">Incorrecto.</string>
     <string name="incorrect2">Pruebe con otro.</string>
     <string name="incorrect3">Vuelva a intentarlo.</string>
+    <string name="error_resume">resumen_errores</string>
+    <string name="excersice_helper">Pulse Play y elija la opción que oyó</string>
+    <string name="tipo_ejercicio">tipo_ejercicio</string>
 </resources>
